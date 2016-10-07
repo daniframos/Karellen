@@ -254,6 +254,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\KarellenHelpers.cs" />
     <Compile Include="Identity\Manager\GrupoIdentityManager.cs" />
     <Compile Include="Identity\Manager\UsuarioIdentityManager.cs" />
     <Compile Include="Identity\Modelo\GrupoIdentity.cs" />

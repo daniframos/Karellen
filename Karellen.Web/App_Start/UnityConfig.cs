@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using System;
 
-namespace Karellen.Web.App_Start
+namespace Karellen.Web
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.
