@@ -203,8 +203,8 @@
     <Content Include="Content\bootstrap\dist\js\bootstrap.js" />
     <Content Include="Content\chosen\chosen.css" />
     <Content Include="Content\chosen\chosen.jquery.js" />
-    <Content Include="Content\eonasdan-bootstrap-datetimepicker\build\css\bootstrap-datetimepicker.css" />
-    <Content Include="Content\eonasdan-bootstrap-datetimepicker\build\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\datetimepicker\build\css\bootstrap-datetimepicker.css" />
+    <Content Include="Content\datetimepicker\build\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\jquery-ajax-unobtrusive\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\jquery-pjax\jquery.pjax.js" />
