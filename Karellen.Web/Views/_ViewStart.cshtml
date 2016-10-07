@@ -1,0 +1,5 @@
+﻿@{
+    var ehHome = ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToString().ToLower() == "home";
+
+    Layout = ehHome ? "~/Views/Shared/_Home.cshtml": "~/Views/Shared/_Layout.cshtml";
+}

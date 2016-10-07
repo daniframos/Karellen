@@ -1,0 +1,9 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <ul class="nav navbar-nav nav-tabs">
+        @if (User.IsInRole("Administrador"))
+        {
+            <li>@Html.ActionLink("Log", "index", "log", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        }
+    </ul>
+}

@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    var nomeUsuario = Session["NomeUsuario"] as string;
+}
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Conta", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-user"></span>
+                    @nomeUsuario <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Gerenciar sua conta", "gerenciar", "conta")</li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Sair</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Entrar", "login", "conta", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+

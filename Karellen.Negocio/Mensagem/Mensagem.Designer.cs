@@ -22,7 +22,7 @@ namespace Karellen.Negocio.Mensagem {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Mensagem {
+    public class Mensagem {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Karellen.Negocio.Mensagem {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Karellen.Negocio.Mensagem.Mensagem", typeof(Mensagem).Assembly);
@@ -51,7 +51,7 @@ namespace Karellen.Negocio.Mensagem {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Login ou senha inválido.
         /// </summary>
-        internal static string MN005 {
+        public static string MN005 {
             get {
                 return ResourceManager.GetString("MN005", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Email inválido.
         /// </summary>
-        internal static string MN010 {
+        public static string MN010 {
             get {
                 return ResourceManager.GetString("MN010", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Usuario Identity não corresponde a nenhum usuário.
         /// </summary>
-        internal static string MN011 {
+        public static string MN011 {
             get {
                 return ResourceManager.GetString("MN011", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to As senhas não são iguais.
         /// </summary>
-        internal static string MN012 {
+        public static string MN012 {
             get {
                 return ResourceManager.GetString("MN012", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Conta criada com sucesso.
         /// </summary>
-        internal static string MN013 {
+        public static string MN013 {
             get {
                 return ResourceManager.GetString("MN013", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Criação de conta - Karellen.
         /// </summary>
-        internal static string MN015 {
+        public static string MN015 {
             get {
                 return ResourceManager.GetString("MN015", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Obrigado por criar uma conta no Karellen. Para acessar, acesse o link abaixo.
         /// </summary>
-        internal static string MN016 {
+        public static string MN016 {
             get {
                 return ResourceManager.GetString("MN016", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Houve um problema ao pegar suas credenciais. Por favor,crie uma conta local e adicione  seu login social.
         /// </summary>
-        internal static string MN017 {
+        public static string MN017 {
             get {
                 return ResourceManager.GetString("MN017", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Já existe uma conta com este email. Por favor, entre com sua conta usando este email e/ou adicione o login social.
         /// </summary>
-        internal static string MN018 {
+        public static string MN018 {
             get {
                 return ResourceManager.GetString("MN018", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to O tamanho máximo do título é de 30 caracteres.
         /// </summary>
-        internal static string MN019 {
+        public static string MN019 {
             get {
                 return ResourceManager.GetString("MN019", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Ocorrência criada com sucesso.
         /// </summary>
-        internal static string MN020 {
+        public static string MN020 {
             get {
                 return ResourceManager.GetString("MN020", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Informações atualizadas com sucesso.
         /// </summary>
-        internal static string MN021 {
+        public static string MN021 {
             get {
                 return ResourceManager.GetString("MN021", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Karellen.Negocio.Mensagem {
         /// <summary>
         ///   Looks up a localized string similar to Alterado com sucesso.
         /// </summary>
-        internal static string MN022 {
+        public static string MN022 {
             get {
                 return ResourceManager.GetString("MN022", resourceCulture);
             }

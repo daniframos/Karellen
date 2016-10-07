@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem vindo ao Karellen - Karellen</title>
+    <link rel="shortcut icon" href="~/Content/karellen/img/favicon.ico" type="image/x-icon" />
+    @Styles.Render("~/css")
+    @RenderSection("css", required: false)
+</head>
+<body>
+    <div id="body">
+        <div id="tocrop">
+            <div id="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="intro-text">
+                                <span class="name">KARELLEN</span>
+                                <hr class="star-light">
+                                <span class="skills">Feito por cidadãos. Para cidadãos.</span>
+                            </div>
+                        </div>
+                    </div>
+                    @RenderBody()
+                </div>
+            </div>
+            
+            <!-- About Section -->
+            <section class="success" id="about">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center" id="sobre">
+                            <h2>SOBRE</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <p class="homeinfo">Karellen é o sistema para apontamento de ocorrências criminais. Dado um mapa, você poderá apontar onde aconteceu ocorrencias, bem como visualizar dados estatisticos, compara-los com dados do governo, entre muito mais.</p>
+                        </div>
+                        <div class="col-lg-8 col-lg-offset-2 text-center">
+                            <a href="@Url.Action("login", "conta")" class="btn btn-lg btn-outline btn-primary btn-facaparte">
+                                <i class="fa fa-sign-in"></i> Faça Parte
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center">
+                <div class="footer-above">
+                    <div class="container">
+                        <div class="row">
+                            <div class="footer-col col-md-6">
+                                <h3>Espalhe a palavra</h3>
+                                <a href="https://www.facebook.com/profile.php?id=100013298985823" target="_blank" type="submit" class="btn btn-lg btn-facebook first-letter" id="homefacebook" name="provider" value="Facebook">
+                                    <i class="fa fa-facebook visible-xs"></i>
+                                    <span class="hidden-xs" style="">facebook</span>
+                                </a>
+                                &nbsp;
+                                <a href="https://plus.google.com/u/0/110801123493378357317" target="_blank" type="submit" class="btn btn-lg btn-google first-letter" id="homegoogle" name="provider" value="Google">
+                                    <i class="fa fa-facebook visible-xs"></i>
+                                    <span class="hidden-xs" style="">google</span>
+                                </a>
+                            </div>
+                            <div class="footer-col col-md-6">
+                                <h3>Sobre o Projeto</h3>
+                                <p>Karellen é o projeto de Conclusão de Curso de <a href="http://github.com/kkrico"><em>Daniel Ramos</em></a> e <em>Lucas Coelho</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-below">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                Copyright &copy; Karellen @DateTime.Now.Year
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

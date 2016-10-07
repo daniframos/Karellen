@@ -1,0 +1,31 @@
+{
+  "name": "Karellen",
+  "authors": [
+    "Daniel Ramos <ramos.danielferreira@outlook.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "karellen.azurewebsites.net",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.4",
+    "font-awesome": "4.6.1",
+    "nprogress": "^0.2.0",
+    "leaflet": "0.7.7",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.42",
+    "leaflet-draw": "https://github.com/Leaflet/Leaflet.draw.git#^0.3.2",
+    "jquery-validation-unobtrusive": "https://github.com/aspnet/jquery-validation-unobtrusive.git#^3.2.6",
+    "jquery-ajax-unobtrusive": "https://github.com/aspnet/jquery-ajax-unobtrusive.git#^3.2.4",
+    "chosen": "^1.6.2",
+    "jquery-pjax": "^1.9.6"
+  }
+}

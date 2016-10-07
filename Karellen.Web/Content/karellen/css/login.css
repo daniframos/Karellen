@@ -1,0 +1,88 @@
+﻿@media (min-width: 768px) {
+    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+    }
+}
+
+.login .auth {
+    text-align: center;
+    line-height: 300%;
+}
+
+.login .btnsocial button {
+    color: white;
+}
+
+.login .btnsocial a:hover {
+    color: white;
+    opacity: 1;
+}
+
+.login .btnsocial .btn-facebook {
+    background: #3b5998;
+}
+
+.login .btnsocial .btn-google {
+    background: #c32f10;
+}
+
+
+.login .loginOr {
+    position: relative;
+    font-size: 1.5em;
+    color: #aaa;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+    .login .loginOr .hrOr {
+        background-color: #cdcdcd;
+        height: 1px;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .login .loginOr .spanOr {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: -0.6em;
+        margin-left: -1.5em;
+        background-color: white;
+        width: 3em;
+        text-align: center;
+    }
+
+.login .loginForm .input-group.i {
+    width: 2em;
+}
+
+.login .loginForm .help-block {
+    color: red;
+}
+
+
+@media (min-width: 768px) {
+    .login .omb_forgotPwd {
+        text-align: right;
+        margin-top: 10px;
+    }
+}
+
+hr {
+    display: none;
+}
+
+    hr ~ footer {
+        display: none;
+    }
+
+.link {
+    color: #337ab7;
+    cursor: pointer;
+}
+.link:hover {
+    text-decoration: underline;
+}

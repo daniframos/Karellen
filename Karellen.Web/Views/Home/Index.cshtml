@@ -1,0 +1,16 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Ir para o mapa", "index", "app", null, new {@class = "btn btn-default btn-lg btn-primary btn-go"})
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Entrar", "login", "conta", null, new { @class = "btn btn-default btn-lg btn-primary btn-go" })
+        </div>
+    </div>
+}

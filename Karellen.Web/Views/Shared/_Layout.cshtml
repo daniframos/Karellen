@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/Content/karellen/img/favicon.ico" type="image/x-icon" />
+    <title>@ViewBag.Title - Karellen</title>
+    @Styles.Render("~/css")
+    @RenderSection("css", required: false)
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Karellen", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    @Html.Partial("_MenuPartial")
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @Html.Partial("_Navegacao")
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+<noscript>
+    <div class="alert alert-danger" role="alert" style="margin-top: 52px; margin-bottom: 0px; text-align: center;">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span> Javascript não habilitado. Este site não funcionará corretamente
+        <br>Portanto, se algo estiver quebrado e/ou você ler spoiler de Game Of Thrones não é culpa nossa :)
+    </div>
+</noscript>
+    <div class="body-content container" id="body">
+            @RenderBody()
+    </div>
+    @Scripts.Render("~/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
