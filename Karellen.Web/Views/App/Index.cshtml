@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Ocorrências";
+    var mensagem = ViewBag.Mensagem as string;
+}
+
+<div id="sidewrapper">
+    <div class="sidebar">
+        <div class="heading">
+        </div>
+        @if (!string.IsNullOrEmpty(mensagem))
+            {
+            <div class="alert alert-success" role="alert" style="margin:2em">
+                @mensagem
+            </div>
+        }
+        <div class="heading">
+            <h1>Ocorrências</h1>
+            <a href="@Url.Action("nova", "ocorrencia")" id="btn-novaocorrencia" class="btn btn-success btn-large" role="button"
+               data-title="Nova Ocorrência" data-pjax data-callback="HabilitarEdicao">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div id="listings" class="listings"></div>
+    </div>
+</div>
+
+<div id="mapa" class="map"></div>
+
+@section scripts {
+    <script src="~/Content/karellen/js/App/index.js" type="text/javascript"></script>
+    <script src="~/Content/karellen/js/Global/navegacao.js" type="text/javascript"></script>
+    <script>
+
+        $(function() {
+            App.GetGeoJson("http://localhost:55033/ocorrencia/coordenadas", function(data, res, mapa) {
+                debugger;
+            });
+        });
+    </script>
+}

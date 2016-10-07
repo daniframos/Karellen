@@ -1,6 +1,11 @@
-using System;
+using Karellen.Data.Infraestrutura.UnitOfWork;
+using Karellen.Data.Interface.UnitOfWork;
+using Karellen.Web.Identity.Modelo;
+using Karellen.Web.Identity.Servico;
+using Karellen.Web.Identity.Store;
+using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
+using System;
 
 namespace Karellen.Web.App_Start
 {
@@ -32,11 +37,16 @@ namespace Karellen.Web.App_Start
         /// change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.</remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
-            // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
-            // container.LoadConfiguration();
-
-            // TODO: Register your types here
-            // container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager(), new InjectionConstructor("KarellenConnectionString"));
+            container.RegisterType<IIdentityMessageService, EmailIdentityServico>();
+            container.RegisterType<IUserStore<UsuarioIdentity, int>, UsuarioIdentityStore>(new TransientLifetimeManager());
+            container.RegisterType<IRoleStore<GrupoIdentity, int>, GrupoIdentityStore>(new TransientLifetimeManager());
+            container.RegisterType<IQueryableRoleStore<GrupoIdentity, int>, GrupoIdentityStore>(new TransientLifetimeManager());
+            container.RegisterTypes(
+                AllClasses.FromLoadedAssemblies(),
+                WithMappings.FromMatchingInterface,
+                WithName.Default,
+                WithLifetime.Transient);
         }
     }
 }

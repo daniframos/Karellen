@@ -1,0 +1,106 @@
+﻿@using Karellen.Web.Helper
+@model Karellen.Web.Models.Ocorrencia.NovaOcorrenciaVM
+@{
+    ViewBag.Title = "Nova Ocorrência";
+}
+
+<div id="sidewrapper">
+    <div class="sidebar">
+        <div class="heading">
+        </div>
+        <div class="heading">
+            <h1>Nova Ocorrência</h1>
+        </div>
+        <div id="listingsocorrencia" class="listings">
+            @using (Html.BeginForm("Nova", "Ocorrencia", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(m => m.Latitude)
+                @Html.HiddenFor(m => m.Longitude)
+                @Html.HiddenFor(m => m.SessaoId)
+
+                <div class="form-horizontal form-espacado">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label", placeholder = "O Título da ocorrência" })
+                            @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.DataAcontecimento, htmlAttributes: new { @class = "control-label" })
+                            <div class='input-group date' id='datetimepicker1'>
+                                @Html.EditorFor(model => model.DataAcontecimento, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                <span class="input-group-addon" id="datetimepicker">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Detalhes, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Detalhes, new { @class = "form-control", rows = 10 })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="control-label">Sexo da vítima: *</label>
+
+                            @Html.RadioButtonFor(model => model.SexoVitima, "Feminino")
+                            Feminino
+
+                            @Html.RadioButtonFor(model => model.SexoVitima, "Masculino")
+                            Masculino
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.TemBoletimOCorrencia, htmlAttributes: new { @class = "control-label" })
+                            @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "true")<span> Sim</span>
+                            @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "false")<span> Não</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.TipoOcorrencias, htmlAttributes: new { @class = "control-label" })<span> *</span>
+                            @Html.OcorrenciasFor(model => model.TipoOcorrencias, new { @class = "chosen-select", data_placeholder = "Escolha o tipo de ocorrência" });
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: center">
+                            <label class="control-label">Autor: </label>
+                            @Html.OcorrenciaAnonimaFor(model => model.OcorrenciaAnonima, User.Identity.IsAuthenticated, usuarioNome: Session["NomeUsuario"] as string)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12" style="text-align: center">
+                            <input type="submit" value="Criar" class="btn btn-default btn-lg btn-primary" id="btn-submit" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="mapa" class="map"></div>
+
+@section scripts {
+    <script src="~/Content/karellen/js/App/index.js" type="text/javascript"></script>
+    <script src="~/Content/karellen/js/Global/navegacao.js" type="text/javascript"></script>
+    <script>
+        $(function() {
+            App.HabilitarEdicao();
+        })
+    </script>
+}

@@ -1,0 +1,89 @@
+﻿@using Karellen.Web.Models.Conta
+@model Karellen.Web.Models.Conta.RegistrarVM
+@section css {
+    <link rel="stylesheet" href="~/Content/karellen/css/login.css" />
+}
+
+@{
+    ViewBag.Title = "Registrar";
+    var mensagem = ViewBag.Mensagem;
+}
+
+<div class="login" id="login">
+    
+    @if (!string.IsNullOrEmpty(mensagem))
+    {
+        <div class="row omb_row-sm-offset-3" id="mensagemtopo">
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="alert alert-success" role="alert">
+                    @mensagem
+                </div>
+            </div>
+
+        </div>
+    }
+
+    <h3 class="auth">
+        Faça @Html.ActionLink("Login", "login", "conta", null, new {data_target = "#login", data_title = "Login"})
+        ou Cadastre-se
+    </h3>
+
+    @Html.Partial("LoginExternoPartial", new LoginExternoVM())
+
+    <div class="row omb_row-sm-offset-3 loginOr">
+        <div class="col-xs-12 col-sm-6">
+            <hr class="hrOr">
+            <span class="spanOr">ou</span>
+        </div>
+    </div>
+
+    <div class="row omb_row-sm-offset-3 form-criarconta form">
+        <div class="col-xs-12 col-sm-6">
+            @using (Html.BeginForm("Registrar", "Conta", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+            {
+                @Html.AntiForgeryToken()
+                <hr/>
+                @Html.ValidationSummary()
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Nome, new {@class = "col-md-3 control-label"})
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.Nome, new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SobreNome, new {@class = "col-md-3 control-label"})
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.SobreNome, new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new {@class = "col-md-3 control-label"})
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Senha, new {@class = "col-md-3 control-label"})
+                    <div class="col-md-9">
+                        @Html.PasswordFor(m => m.Senha, new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SenhaConfirmada, new {@class = "col-md-3 control-label"})
+                    <div class="col-md-9">
+                        @Html.PasswordFor(m => m.SenhaConfirmada, new {@class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="help-block"></div>
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Registrar"/>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>

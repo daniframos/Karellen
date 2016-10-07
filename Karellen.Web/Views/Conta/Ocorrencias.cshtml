@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Ocorrencias";
+}
+
+<h2>Suas Ocorrencias</h2>
+
+<div class="container">
+    <div class="col-md-4">
+        <div class="page-header"><h2>Bem vindo, @Session["NomeUsuario"]</h2></div>
+        <img src="http://graph.facebook.com/100013298985823/picture?type=normal" />
+    </div>
+    <div class="col-md-8">
+        <div class="page-header">
+            <ul class="nav nav-tabs">
+                <li role="presentation">@Html.ActionLink("Seus Dados", "gerenciar", "conta")</li>
+                <li role="presentation" class="active">@Html.ActionLink("Ocorrências", "ocorrencias", "conta")</li>
+                <li role="presentation"><a href="#">Messages</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
