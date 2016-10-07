@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,7 +48,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Util\Atributo\DescricaoAtributo.cs" />
+    <Compile Include="Util\AutoMapper\LogProfile.cs" />
+    <Compile Include="Util\AutoMapper\OcorrenciaProfile.cs" />
+    <Compile Include="Util\DTO\LogDTO.cs" />
+    <Compile Include="Util\DTO\OcorrenciaDTO.cs" />
+    <Compile Include="Util\Extensao\EnumExtensao.cs" />
+    <Compile Include="Interface\IAppServico.cs" />
+    <Compile Include="Interface\ILogServico.cs" />
+    <Compile Include="Interface\IOcorrenciaServico.cs" />
+    <Compile Include="Mensagem\Enum\EnumMensagem.cs" />
+    <Compile Include="Mensagem\Mensagem.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mensagem.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Operacao\OperacaoResultado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servico\AppServico.cs" />
+    <Compile Include="Servico\LogServico.cs" />
+    <Compile Include="Servico\OcorrenciaServico.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mensagem\Mensagem.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mensagem.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Karellen.Data\Karellen.Data.csproj">
+      <Project>{6dbf0d22-8788-4175-8ef0-bd813622fb0c}</Project>
+      <Name>Karellen.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
