@@ -1,17 +1,11 @@
-﻿
-@{
-    ViewBag.Title = "RedeSocial";
-}
+﻿@model dynamic
 
-@model Karellen.Web.Models.Conta.GerenciarVM
 @{
-    var mensagem = ViewBag.Mensagem as string;
-    ViewBag.Title = "Rede Social";
+    ViewBag.Title = "Segurança";
 }
-
 
 <div id="sidewrapper">
-    <h1>Bem Vindo, @Session["NomeUsuario"]</h1>
+    <h1>Bem Vindo (a), @Session["NomeUsuario"]</h1>
     <hr>
     <div class="row">
         <div class="col-md-3">
@@ -19,7 +13,7 @@
                 <img src="http://graph.facebook.com/100013298985823/picture?type=normal" class="profile" />
             </div>
             <hr />
-            @Html.Partial("_MenuConta", "redesocial")
+            @Html.Partial("_MenuConta", "seguranca")
             <div class="panel panel-default text-center">
                 <div class="panel-heading">
                     <span class="fa-stack fa-5x">
@@ -37,32 +31,30 @@
         <!-- edit form column -->
         <div class="col-md-9 personal-info">
 
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.ValidationSummary()
 
-            @if (!string.IsNullOrEmpty(mensagem))
-            {
-                <div class="alert alert-success" role="alert" style="margin:2em">
-                    @mensagem
-                </div>
-            }
+
+            @if (Model == null || Model.Senha == null)
+                {
+                    <div class="alert alert-info" role="alert">
+                        Você não possui uma conta local.
+                        Caso queira entrar sem precisar de conta local, insira uma nova senha abaixo
+                    </div>
+                }
 
             <div class="row">
                 <div class="col-lg-3"></div>
                 <div class="col-md-9">
-                    <h3 style="display: inline-block">Suas Redes Sociais</h3>
-                    <button class="btn btn-xs btn-primary" id="btnedit" style="margin-bottom: 0.5em; display: inline-block;">Editar</button>
+                    <h3 style="display: inline-block">Seus Dados de Segurança</h3>
+                    <button class="btn btn-xs btn-primary" id="btnedit">Editar</button>
                 </div>
             </div>
             <br />
-            @using (Html.BeginForm("redesocial", "conta", FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("gerenciar", "conta", FormMethod.Post, new { @class = "form-horizontal" }))
             {
-                
+                @Html.AntiForgeryToken()
             }
 
         </div>
     </div>
 </div>
-
-@section scripts {
-    <script src="~/Content/karellen/js/Global/navegacao.js" type="text/javascript"></script>
-}

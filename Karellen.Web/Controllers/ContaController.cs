@@ -222,7 +222,7 @@ namespace Karellen.Web.Controllers
 
         public ActionResult Seguranca()
         {
-            throw new NotImplementedException();
+            return View("seguranca");
         }
 
         [HttpGet]

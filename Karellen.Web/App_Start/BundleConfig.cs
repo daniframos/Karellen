@@ -22,7 +22,6 @@ namespace Karellen.Web
                 .Include("~/Content/bootstrap/dist/js/bootstrap.js")
                 .Include("~/Content/moment/moment.js")
                 .Include("~/Content/moment/locale/pt-br.js")
-                .Include("~/Content/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js")
                 .Include("~/Content/datetimepicker/build/js/bootstrap-datetimepicker.min.js")
                 .Include("~/Content/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js")
                 .Include("~/Content/chosen/chosen.jquery.js")

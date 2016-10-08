@@ -161,8 +161,4 @@
     <value>Informações atualizadas com sucesso</value>
     <comment>Quando o cidadão atualiza os próprios dados</comment>
   </data>
-  <data name="MN022" xml:space="preserve">
-    <value>Alterado com sucesso</value>
-    <comment>Quando uma entidade é alterada, a mensagem mostrada ao usuário</comment>
-  </data>
 </root>

@@ -10,7 +10,7 @@ namespace Karellen.Negocio.Mensagem.Enum
         Erro,
         [DescricaoAtributo("MN020", typeof(Mensagem))]
         OcorrenciaCriada,
-        [DescricaoAtributo("MN022", typeof(Mensagem))]
+        [DescricaoAtributo("MN021", typeof(Mensagem))]
         Alterado
     }
 }

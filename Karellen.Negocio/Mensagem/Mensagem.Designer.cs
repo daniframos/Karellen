@@ -167,14 +167,5 @@ namespace Karellen.Negocio.Mensagem {
                 return ResourceManager.GetString("MN021", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Alterado com sucesso.
-        /// </summary>
-        public static string MN022 {
-            get {
-                return ResourceManager.GetString("MN022", resourceCulture);
-            }
-        }
     }
 }
