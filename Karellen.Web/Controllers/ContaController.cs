@@ -104,17 +104,6 @@ namespace Karellen.Web.Controllers
             return View("Registrar");
         }
 
-        private string GerarMensagemEmail(string nomeRemetente)
-        {
-            var arquivo = System.IO.File
-                                   .ReadAllText(HttpContext.Server.MapPath("~/App_Data/email.html"));
-            var mensagem = arquivo.Replace("{NOME}", nomeRemetente);
-            mensagem = mensagem.Replace("{MENSAGEM}", Mensagem.MN016);
-            mensagem = mensagem.Replace("{URL}", Url.Action("Login", "Conta", new { }, Request.Url.Scheme));
-
-            return mensagem;
-        }
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -180,22 +169,21 @@ namespace Karellen.Web.Controllers
         [HttpGet]
         public ActionResult Gerenciar(EnumMensagem? mensagem)
         {
-            if (mensagem != null)
-                ViewBag.Mensagem = mensagem.GetDescricao();
-
             var usuario = _userManager.FindById(User.Identity.GetUserId<int>());
             var model = Mapper.Map<UsuarioIdentity, GerenciarVM>(usuario);
 
-            ViewBag.TemSenhaLocal = BuscarSenhaLocal();
+            if (mensagem == EnumMensagem.Erro)
+            {
+                ModelState.AddModelError("", mensagem.GetDescricao());
+                return View("gerenciar", model);
+            }
+
+            if (mensagem != null)
+                ViewBag.Mensagem = mensagem.GetDescricao();
+
+            ViewBag.TemSenhaLocal = TemSenhaLocal();
 
             return View("gerenciar", model);
-        }
-
-        private bool BuscarSenhaLocal()
-        {
-            var user = _userManager.FindById(Convert.ToInt32(User.Identity.GetUserId()));
-
-            return user.PasswordHash != null;
         }
 
         [HttpPost]
@@ -215,11 +203,17 @@ namespace Karellen.Web.Controllers
             return RedirectToAction("gerenciar", new {mensagem = EnumMensagem.Alterado });
         }
 
+        [HttpGet]
         public ActionResult RedeSocial()
         {
+            var logins = _userManager.GetLogins(User.Identity.GetUserId<int>());
+            if (logins != null)
+                ViewBag.Logins = logins.Select(l => l.LoginProvider.ToLower()).ToList();
+
             return View("RedeSocial");
         }
 
+        [HttpGet]
         public ActionResult Seguranca()
         {
             return View("seguranca");
@@ -229,6 +223,47 @@ namespace Karellen.Web.Controllers
         public ActionResult Ocorrencias()
         {
             return View("ocorrencias");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AssociarLogin(string provider)
+        {
+            // Request a redirect to the external login provider to link a login for the current user
+            return new ChallengeResult(provider, Url.Action("AssociarLoginCallback", "Conta"), User.Identity.GetUserId());
+        }
+
+        [ChildActionOnly]
+        public ActionResult ListaLoginExterno()
+        {
+            var linkedAccounts = _userManager.GetLogins(Convert.ToInt32(User.Identity.GetUserId()));
+            ViewBag.ShowRemoveButton = TemSenhaLocal() || linkedAccounts.Count > 1;
+            return (ActionResult)PartialView("_LoginExternoRemover", linkedAccounts);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Desassociar(string loginProvider, string providerKey)
+        {
+            var result = await _userManager.RemoveLoginAsync(Convert.ToInt32(User.Identity.GetUserId()), new UserLoginInfo(loginProvider, providerKey));
+            var mensagem = result.Succeeded ? EnumMensagem.Alterado : EnumMensagem.Erro;
+
+            return RedirectToAction("Gerenciar", new { mensagem = mensagem });
+        }
+
+        public async Task<ActionResult> AssociarLoginCallback()
+        {
+            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
+            if (loginInfo == null)
+            {
+                return RedirectToAction("Gerenciar", new { Mensagem = EnumMensagem.Erro });
+            }
+            var result = await _userManager.AddLoginAsync(Convert.ToInt32(User.Identity.GetUserId()), loginInfo.Login);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Gerenciar",new {Mensagem = EnumMensagem.Alterado});
+            }
+            return RedirectToAction("Gerenciar", new { Mensagem = EnumMensagem.Erro });
         }
 
         #region Helpers
@@ -249,18 +284,6 @@ namespace Karellen.Web.Controllers
             var identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }
-
-        private bool HasPassword()
-        {
-            var user = _userManager.FindById(Convert.ToInt32(User.Identity.GetUserId()));
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
-        }
-
-
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
@@ -372,6 +395,25 @@ namespace Karellen.Web.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private bool TemSenhaLocal()
+        {
+            var user = _userManager.FindById(Convert.ToInt32(User.Identity.GetUserId()));
+
+            return user.PasswordHash != null;
+        }
+
+        private string GerarMensagemEmail(string nomeRemetente)
+        {
+            var arquivo = System.IO.File
+                                   .ReadAllText(HttpContext.Server.MapPath("~/App_Data/email.html"));
+            var mensagem = arquivo.Replace("{NOME}", nomeRemetente);
+            mensagem = mensagem.Replace("{MENSAGEM}", Mensagem.MN016);
+            mensagem = mensagem.Replace("{URL}", Url.Action("Login", "Conta", new { }, Request.Url.Scheme));
+
+            return mensagem;
+        }
+
         #endregion
     }
 }

@@ -1,0 +1,31 @@
+﻿@model ICollection<Microsoft.AspNet.Identity.UserLoginInfo>
+@if (Model.Count > 0)
+{
+    using (Html.BeginForm("desassociar", "conta", null, FormMethod.Post, new { @class = "login-form", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+            <div class="row omb_row-sm-offset-3 btnsocial form-sociallogin">
+
+                @foreach (var account in Model)
+                {
+
+
+                    var providerName = account.LoginProvider.ToLower();
+                    var id = "home" + providerName;
+
+                    var buttonType = ViewBag.ShowRemoveButton ? "submit" : "button";
+
+
+                    @Html.Hidden("loginProvider", account.LoginProvider)
+                    @Html.Hidden("providerKey", account.ProviderKey)
+                    <div class="col-xs-6 col-sm-3">
+                        <button type="@buttonType" class="btn btn-lg btn-block btn-@providerName first-letter" id="@id" name="provider" value="@providerName">
+                            <i class="fa fa-@providerName visible-xs"></i>
+                            <span class="hidden-xs">@providerName</span>
+                        </button>
+                    </div>
+                }
+            </div>
+     }
+}

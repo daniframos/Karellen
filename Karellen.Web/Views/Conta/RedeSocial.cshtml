@@ -3,6 +3,7 @@
     ViewBag.Title = "RedeSocial";
 }
 
+@using Karellen.Web.Models.Conta
 @model Karellen.Web.Models.Conta.GerenciarVM
 @{
     var mensagem = ViewBag.Mensagem as string;
@@ -16,9 +17,9 @@
     <div class="row">
         <div class="col-md-3">
             <div class="text-center">
-                <img src="http://graph.facebook.com/100013298985823/picture?type=normal" class="profile" />
+                <img src="http://graph.facebook.com/100013298985823/picture?type=normal" class="profile"/>
             </div>
-            <hr />
+            <hr/>
             @Html.Partial("_MenuConta", "redesocial")
             <div class="panel panel-default text-center">
                 <div class="panel-heading">
@@ -37,11 +38,11 @@
         <!-- edit form column -->
         <div class="col-md-9 personal-info">
 
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(false, "", new {@class = "text-danger"})
 
             @if (!string.IsNullOrEmpty(mensagem))
             {
-                <div class="alert alert-success" role="alert" style="margin:2em">
+                <div class="alert alert-success" role="alert" style="margin: 2em">
                     @mensagem
                 </div>
             }
@@ -50,15 +51,22 @@
                 <div class="col-lg-3"></div>
                 <div class="col-md-9">
                     <h3 style="display: inline-block">Suas Redes Sociais</h3>
-                    <button class="btn btn-xs btn-primary" id="btnedit" style="margin-bottom: 0.5em; display: inline-block;">Editar</button>
                 </div>
             </div>
-            <br />
-            @using (Html.BeginForm("redesocial", "conta", FormMethod.Post, new { @class = "form-horizontal" }))
-            {
-                
-            }
-
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Para Adicionar</h4>
+                    @Html.Partial("_LoginExternoAssociar", new LoginExternoVM {Action = "AssociarLogin", ReturnUrl = ViewBag.ReturnUrl})
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Para Remover</h4>
+                    @Html.Action("ListaLoginExterno")
+                </div>
+            </div>
         </div>
     </div>
 </div>

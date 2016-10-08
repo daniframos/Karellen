@@ -320,7 +320,6 @@
     <Content Include="Views\App\Index.cshtml" />
     <Content Include="Views\Conta\Gerenciar.cshtml" />
     <Content Include="Views\Conta\Login.cshtml" />
-    <Content Include="Views\Conta\LoginExternoPartial.cshtml" />
     <Content Include="Views\Conta\Ocorrencias.cshtml" />
     <Content Include="Views\Conta\Registrar.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
@@ -328,10 +327,11 @@
     <Content Include="Views\Conta\RedeSocial.cshtml" />
     <Content Include="Views\Conta\_MenuConta.cshtml" />
     <Content Include="Views\Conta\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Conta\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Conta\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Conta\_LoginExternoAssociar.cshtml" />
     <Content Include="Views\Conta\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Conta\Seguranca.cshtml" />
+    <Content Include="Views\Conta\_LoginExterno.cshtml" />
+    <Content Include="Views\Conta\_LoginExternoRemover.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

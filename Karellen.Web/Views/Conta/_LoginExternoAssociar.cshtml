@@ -1,0 +1,27 @@
+﻿@using Microsoft.Owin.Security
+@model Karellen.Web.Models.Conta.LoginExternoVM
+
+@{
+    var logins = ViewBag.Logins as List<string>;
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+
+    string action = Model.Action;
+    string returnUrl = Model.ReturnUrl;
+    using (Html.BeginForm(action, "conta", new { ReturnUrl = returnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+    {
+                @Html.AntiForgeryToken()
+                <div class="row omb_row-sm-offset-3 btnsocial form-sociallogin">
+                    @foreach (AuthenticationDescription p in loginProviders.Where(p => logins.All(l => l != p.Caption.ToLower())))
+                    {
+                        var providerName = p.Caption.ToLower();
+                        var id = "home" + providerName;
+                        <div class="col-xs-6 col-sm-3">
+                            <button type="submit" class="btn btn-lg btn-block btn-@providerName first-letter" id="@id" name="provider" value="@p.AuthenticationType">
+                                <i class="fa fa-@providerName visible-xs"></i>
+                                <span class="hidden-xs">@providerName</span>
+                            </button>
+                        </div>
+                    }
+                </div>   
+    }
+}
