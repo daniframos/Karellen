@@ -7,11 +7,11 @@ namespace Karellen.Web.Filtro
     public class UsuarioFiltro : IAuthenticationFilter
     {
         private readonly string _nomeUsuario = "NomeUsuario";
-        private readonly UsuarioIdentityManager _usuarioManger;
+        private readonly UsuarioIdentityManager _usuarioIdentityManager;
 
-        public UsuarioFiltro(UsuarioIdentityManager usuarioManager)
+        public UsuarioFiltro(UsuarioIdentityManager usuarioIdentityManager)
         {
-            _usuarioManger = usuarioManager;
+            this._usuarioIdentityManager = usuarioIdentityManager;
         }
 
         public void OnAuthentication(AuthenticationContext filterContext)
@@ -26,7 +26,7 @@ namespace Karellen.Web.Filtro
             }
 
             var userName = filterContext.Principal.Identity.Name;
-            var u = _usuarioManger.FindByName(userName);
+            var u = _usuarioIdentityManager.FindByName(userName);
 
             filterContext.HttpContext.Session[_nomeUsuario] = u.Nome;
         }

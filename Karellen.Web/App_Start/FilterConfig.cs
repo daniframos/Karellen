@@ -1,8 +1,6 @@
-﻿using Karellen.Data.Infraestrutura.UnitOfWork;
-using Karellen.Web.Filtro;
+﻿using Karellen.Web.Filtro;
 using Karellen.Web.Identity.Manager;
-using Karellen.Web.Identity.Servico;
-using Karellen.Web.Identity.Store;
+using Microsoft.Practices.Unity;
 using System.Web.Mvc;
 
 namespace Karellen.Web
@@ -11,7 +9,8 @@ namespace Karellen.Web
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new UsuarioFiltro(new UsuarioIdentityManager(new UsuarioIdentityStore(new UnitOfWork("KarellenConnectionString")), new EmailIdentityServico())));
+            var container = UnityConfig.GetConfiguredContainer() as UnityContainer;
+            filters.Add(new UsuarioFiltro(container.Resolve<UsuarioIdentityManager>()));
         }
     }
 }

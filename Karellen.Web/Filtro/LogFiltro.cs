@@ -1,4 +1,5 @@
 ﻿using Karellen.Negocio.Interface;
+using Microsoft.Practices.Unity;
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -7,14 +8,9 @@ namespace Karellen.Web.Filtro
 {
     public class Log: ActionFilterAttribute
     {
-        private readonly IOcorrenciaServico _servico;
-        public string IdOperacao { get; set; }
-
-        public Log()
-        {
-            _servico = DependencyResolver.Current.GetService<IOcorrenciaServico>();
-            IdOperacao = "IdOperacao";
-        }
+        private const string IdOperacao = "IdOperacao";
+        [Dependency]
+        public IOcorrenciaServico Servico { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -28,7 +24,7 @@ namespace Karellen.Web.Filtro
             var local = filterContext.RequestContext.HttpContext.Request.UrlReferrer.ToString();
             var sessaoId = new Guid(filterContext.RequestContext.HttpContext.Request.Form.GetValues("SessaoId").FirstOrDefault());
             // TODO: Salvar
-            filterContext.HttpContext.Session[IdOperacao] = _servico.SalvarOperacao(userAgent, usuario, browser, ip, local, sessaoId, null, null);
+            filterContext.HttpContext.Session[IdOperacao] = Servico.SalvarOperacao(userAgent, usuario, browser, ip, local, sessaoId, null, null);
         }      
     }
 }

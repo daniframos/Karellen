@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.Practices.Unity;
 
 namespace Karellen.Web.Controllers
 {
