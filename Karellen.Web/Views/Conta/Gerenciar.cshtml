@@ -33,7 +33,7 @@
         <!-- edit form column -->
         <div class="col-md-9 personal-info">
 
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.ValidationSummary()
 
             @if (!string.IsNullOrEmpty(mensagem))
             {
@@ -64,31 +64,31 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Nome, new { @class = "col-lg-3 control-label" })
                     <div class="col-lg-8">
-                        @Html.EditorFor(model => model.Nome, new { htmlattributes = new { @class = "form-control", disabled = true } })
+                        @Html.EditorFor(model => model.Nome, new { htmlattributes = new { @class = "form-control" } })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Sobrenome, new { @class = "col-lg-3 control-label" })
                     <div class="col-lg-8">
-                        @Html.EditorFor(model => model.Sobrenome, new { htmlattributes = new { @class = "form-control", disabled = true } })
+                        @Html.EditorFor(model => model.Sobrenome, new { htmlattributes = new { @class = "form-control"  } })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Email, new { @class = "col-lg-3 control-label" })
                     <div class="col-lg-8">
-                        @Html.EditorFor(model => model.Email, new { htmlattributes = new { @class = "form-control", disabled = true } })
+                        @Html.EditorFor(model => model.Email, new { htmlattributes = new { @class = "form-control"  } })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Cidade, new { @class = "col-lg-3 control-label" })
                     <div class="col-lg-8">
-                        @Html.EditorFor(model => model.Cidade, new { htmlattributes = new { @class = "form-control", disabled = true } })
+                        @Html.EditorFor(model => model.Cidade, new { htmlattributes = new { @class = "form-control"  } })
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-8" style="text-align: center">
-                        <input type="submit" class="btn btn-default btn-lg btn-primary" value="Salvar" disabled>
+                        <input type="submit" class="btn btn-default btn-lg btn-primary" value="Salvar">
                     </div>
                 </div>
             }

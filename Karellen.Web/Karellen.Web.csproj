@@ -217,7 +217,6 @@
     <Content Include="Content\jquery-ajax-unobtrusive\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\jquery-pjax\jquery.pjax.js" />
     <Content Include="Content\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
-    <Content Include="Content\jquery-validation\dist\jquery.validate.js" />
     <Content Include="Content\jquery\dist\jquery.js" />
     <Content Include="Content\karellen\css\login.css" />
     <Content Include="Content\karellen\css\site.css" />
@@ -329,6 +328,10 @@
     <Content Include="Views\Ocorrencia\Nova.cshtml" />
     <Content Include="Views\Conta\RedeSocial.cshtml" />
     <Content Include="Views\Conta\_MenuConta.cshtml" />
+    <Content Include="Views\Conta\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Conta\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Conta\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Conta\_SetPasswordPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,26 @@
+﻿@using Microsoft.Owin.Security
+@model ProjecaoPalestras.Web.Models.LoginExternoViewModel
+
+<h4>@Model.Mensagem</h4>
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+
+    string action = Model.Action;
+    string returnUrl = Model.ReturnUrl;
+    using (Html.BeginForm(action, "conta", new { ReturnUrl = returnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="socialLoginList">
+            <p>
+                @foreach (AuthenticationDescription p in loginProviders)
+                {
+                    <button type="submit" class="btn btn-default btn-social btn-@p.Caption.ToLower()" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Entre com sua conta @p.Caption">
+                        <span class="fa fa-@(p.Caption == "Microsoft"? "windows": p.Caption.ToLower())"></span>
+                        @p.AuthenticationType
+                    </button>
+                }
+            </p>
+        </div>
+    }
+}
