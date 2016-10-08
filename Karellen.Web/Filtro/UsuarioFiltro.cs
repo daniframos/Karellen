@@ -6,12 +6,12 @@ namespace Karellen.Web.Filtro
 {
     public class UsuarioFiltro : IAuthenticationFilter
     {
-        private readonly string _nomeUsuario = "NomeUsuario";
-        private readonly UsuarioIdentityManager _usuarioIdentityManager;
+        private readonly UsuarioIdentityManager _manager;
+        private const string NomeUsuario = "NomeUsuario";
 
-        public UsuarioFiltro(UsuarioIdentityManager usuarioIdentityManager)
+        public UsuarioFiltro(UsuarioIdentityManager manager)
         {
-            this._usuarioIdentityManager = usuarioIdentityManager;
+            _manager = manager;
         }
 
         public void OnAuthentication(AuthenticationContext filterContext)
@@ -20,19 +20,20 @@ namespace Karellen.Web.Filtro
 
             if (filterContext.HttpContext.Session != null)
             {
-                var nomeUsuario = filterContext.HttpContext.Session[_nomeUsuario] as string;
+                var nome = filterContext.HttpContext.Session[NomeUsuario] as string;
 
-                if (!string.IsNullOrEmpty(nomeUsuario)) return;
+                if (!string.IsNullOrEmpty(nome)) return;
             }
 
             var userName = filterContext.Principal.Identity.Name;
-            var u = _usuarioIdentityManager.FindByName(userName);
+            var u = _manager.FindByName(userName);
 
-            filterContext.HttpContext.Session[_nomeUsuario] = u.Nome;
+            filterContext.HttpContext.Session[NomeUsuario] = u.Nome;
         }
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
+            
         }
     }
 }

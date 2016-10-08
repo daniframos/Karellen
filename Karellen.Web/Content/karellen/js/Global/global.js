@@ -37,10 +37,10 @@
             });
         };
 
-        _private.AssinarEdit = function() {
-            $("#btnedit").click(function() {
+        _private.AssinarEdit = function () {
+            $("#sidewrapper").on("click", "#btnedit", function () {
                 $("form input[disabled]").removeAttr("disabled");
-            })
+            });
         };
 
         $public.SuportaAjax = function () {

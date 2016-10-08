@@ -16,5 +16,15 @@ namespace Karellen.Web.Models.Conta
         [Display(Name = @"Email")]
         public string Email { get; set; }
         public string Cidade { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = @"Senha")]
+        public string Senha { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = @"Confirme a senha")]
+        [Compare("Senha", ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MN012")]
+        public string SenhaConfirmada { get; set; }
     }
 }

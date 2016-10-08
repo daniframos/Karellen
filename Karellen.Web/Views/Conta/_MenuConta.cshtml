@@ -1,0 +1,9 @@
+﻿@model string
+<div class="list-group">
+    @Html.ActionLink("Dados Pessoais", "gerenciar", "conta", null,
+        new { @class = "list-group-item " + (Model == "gerenciar" ? "active" : string.Empty), data_tile = "Dados Pessoais", data_pjax = true })
+    @Html.ActionLink("Rede Social", "redesocial", "conta", null,
+        new { @class = "list-group-item " + (Model == "redesocial" ? "active" : string.Empty), data_tile = "Dados Pessoais", data_pjax = true })
+    @Html.ActionLink("Estatisticas", "redesocial", "conta", null,
+        new { @class = "list-group-item " + (Model == "estatistica" ? "active" : string.Empty), data_tile = "Dados Pessoais", data_pjax = true })
+</div>

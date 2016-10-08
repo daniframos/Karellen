@@ -191,6 +191,11 @@ namespace Karellen.Web.Controllers
             return RedirectToAction("gerenciar", new {mensagem = EnumMensagem.Alterado });
         }
 
+        public ActionResult RedeSocial()
+        {
+            return View("RedeSocial");
+        }
+
         [HttpGet]
         public ActionResult Ocorrencias()
         {

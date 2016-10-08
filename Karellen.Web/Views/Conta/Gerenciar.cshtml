@@ -1,26 +1,21 @@
 ﻿@model Karellen.Web.Models.Conta.GerenciarVM
+
 @{
     var mensagem = ViewBag.Mensagem as string;
     ViewBag.Title = "Gerenciar";
 }
 
 
-<h1>Bem Vindo, @Session["NomeUsuario"]</h1>
+<div id="sidewrapper">
+    <h1>Bem Vindo, @Session["NomeUsuario"]</h1>
     <hr>
     <div class="row">
         <div class="col-md-3">
             <div class="text-center">
-                <img src="http://graph.facebook.com/100013298985823/picture?type=normal" class="profile"/>
+                <img src="http://graph.facebook.com/100013298985823/picture?type=normal" class="profile" />
             </div>
             <hr />
-            <div class="list-group">    
-                @Html.ActionLink("Dados Pessoais", "gerenciar", "conta", new {@class = "list-group-item active" })
-                @Html.ActionLink("Rede Social", "redesocial", "conta", new { @class = "list-group-item" })
-                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item">Morbi leo risus</a>
-                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item">Vestibulum at eros</a>
-            </div>
+            @Html.Partial("_MenuConta", "gerenciar")
             <div class="panel panel-default text-center">
                 <div class="panel-heading">
                     <span class="fa-stack fa-5x">
@@ -37,13 +32,21 @@
 
         <!-- edit form column -->
         <div class="col-md-9 personal-info">
-            
+
             @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-            
+
             @if (!string.IsNullOrEmpty(mensagem))
             {
-                <div class="alert alert-success" role="alert" style="margin:2em">
+                <div class="alert alert-success" role="alert">
                     @mensagem
+                </div>
+            }
+            
+            @if (Model == null || Model.Senha == null)
+            {
+                <div class="alert alert-info" role="alert">
+                    Você não possui uma conta local.
+                    Caso queira entrar sem precisar de conta local, insira uma nova senha abaixo
                 </div>
             }
 
@@ -51,17 +54,17 @@
                 <div class="col-lg-3"></div>
                 <div class="col-md-9">
                     <h3 style="display: inline-block">Sobre você</h3>
-                    <button class="btn btn-xs btn-primary" id="btnedit" style="margin-bottom: 0.5em; display: inline-block;">Editar</button>
+                    <button class="btn btn-xs btn-primary" id="btnedit">Editar</button>
                 </div>
             </div>
-            <br/>
+            <br />
             @using (Html.BeginForm("gerenciar", "conta", FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="form-group">
                     @Html.LabelFor(model => model.Nome, new { @class = "col-lg-3 control-label" })
                     <div class="col-lg-8">
-                        @Html.EditorFor(model => model.Nome, new { htmlattributes = new { @class = "form-control", disabled = true}})
+                        @Html.EditorFor(model => model.Nome, new { htmlattributes = new { @class = "form-control", disabled = true } })
                     </div>
                 </div>
                 <div class="form-group">
@@ -83,12 +86,29 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    @Html.LabelFor(model => model.Senha, new { @class = "col-lg-3 control-label" })
+                    <div class="col-lg-8">
+                        @Html.EditorFor(model => model.Senha, new { htmlattributes = new { @class = "form-control", disabled = true } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SenhaConfirmada, new { @class = "col-lg-3 control-label" })
+                    <div class="col-lg-8">
+                        @Html.EditorFor(model => model.SenhaConfirmada, new { htmlattributes = new { @class = "form-control", disabled = true } })
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-8" style="text-align: center">
                         <input type="submit" class="btn btn-default btn-lg btn-primary" value="Salvar" disabled>
                     </div>
                 </div>
             }
-                
+
         </div>
     </div>
+</div>
+
+@section scripts {
+    <script src="~/Content/karellen/js/Global/navegacao.js" type="text/javascript"></script>
+}

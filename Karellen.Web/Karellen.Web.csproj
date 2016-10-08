@@ -325,6 +325,8 @@
     <Content Include="Views\Conta\Registrar.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
     <Content Include="Views\Ocorrencia\Nova.cshtml" />
+    <Content Include="Views\Conta\RedeSocial.cshtml" />
+    <Content Include="Views\Conta\_MenuConta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

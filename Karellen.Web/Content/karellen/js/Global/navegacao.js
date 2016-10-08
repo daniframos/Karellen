@@ -13,7 +13,9 @@
                 return;
 
             var fn = $(elemento).data("callback");
-            App[fn]();
+            if (typeof (fn) == ! "undefined") {
+                App[fn]();
+            }
         })
     }
 });

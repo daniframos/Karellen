@@ -367,3 +367,8 @@ footer .footer-below {
 #circleocorrencia {
     color: #51843e;
 }
+
+#btnedit {
+    margin-bottom: 1.0em; 
+    display: inline-block;
+}

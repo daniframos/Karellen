@@ -8,9 +8,9 @@ namespace Karellen.Web.Filtro
 {
     public class Log: ActionFilterAttribute
     {
-        private const string IdOperacao = "IdOperacao";
         [Dependency]
         public IOcorrenciaServico Servico { get; set; }
+        private const string IdOperacao = "IdOperacao";
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
