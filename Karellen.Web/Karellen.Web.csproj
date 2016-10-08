@@ -232,6 +232,11 @@
     <Content Include="Content\leaflet-draw\dist\images\spritesheet.svg" />
     <Content Include="Content\leaflet-draw\dist\leaflet.draw.css" />
     <Content Include="Content\leaflet-draw\dist\leaflet.draw.js" />
+    <Content Include="Content\leaflet\dist\images\layers-2x.png" />
+    <Content Include="Content\leaflet\dist\images\layers.png" />
+    <Content Include="Content\leaflet\dist\images\marker-icon-2x.png" />
+    <Content Include="Content\leaflet\dist\images\marker-icon.png" />
+    <Content Include="Content\leaflet\dist\images\marker-shadow.png" />
     <Content Include="Content\leaflet\dist\leaflet.css" />
     <Content Include="Content\leaflet\dist\leaflet.js" />
     <Content Include="Content\moment\locale\pt-br.js" />
@@ -242,6 +247,11 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\layers-2x.png" />
+    <Content Include="images\layers.png" />
+    <Content Include="images\marker-icon-2x.png" />
+    <Content Include="images\marker-icon.png" />
+    <Content Include="images\marker-shadow.png" />
     <Content Include="images\spritesheet-2x.png" />
     <Content Include="images\spritesheet.png" />
     <Content Include="images\spritesheet.svg" />
