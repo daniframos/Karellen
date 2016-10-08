@@ -257,6 +257,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\OcorrenciaController.cs" />
     <Compile Include="Filtro\LogFiltro.cs" />
     <Compile Include="Filtro\UsuarioFiltro.cs" />
     <Compile Include="Global.asax.cs">
