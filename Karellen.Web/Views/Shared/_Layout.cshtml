@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var urlRoot = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + Url.Content("~");
+    urlRoot = !string.IsNullOrWhiteSpace(urlRoot) && urlRoot.EndsWith("/") ? urlRoot.Remove(urlRoot.Length - 1) : urlRoot;
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -41,6 +45,14 @@
             @RenderBody()
     </div>
     @Scripts.Render("~/js")
+    <script type="text/javascript">
+    
+        $(function () {
+            if (App.SuportaAjax()) {
+                App.Init(@urlRoot);
+            }
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

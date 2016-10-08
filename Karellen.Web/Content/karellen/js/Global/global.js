@@ -1,12 +1,4 @@
-﻿$(function () {
-
-    if (App.SuportaAjax()) {
-        App.Init();
-    }
-});
-
-
-(function ($) {
+﻿(function ($) {
     "use strict";
 
     var app = (function ($) {
@@ -16,13 +8,11 @@
         // Private
 
         _private.ConfigurarAjax = function () {
-            $(document)
-                .ajaxStart(function () {
+            $(document).ajaxStart(function () {
                     NProgress.start();
                 });
 
-            $(document)
-                .ajaxStop(function () {
+            $(document).ajaxStop(function () {
                     NProgress.done();
                 });
 
@@ -33,12 +23,12 @@
             $(".chosen-select").chosen({ no_results_text: "Nada encontrado", width: "100%" });
         };
 
-        _private.TraduzirDraw = function () {
+        _private.ConfigurarDraw = function () {
             L.drawLocal.draw.handlers.marker.tooltip.start = "Click no mapa para inserir o local da ocorrência";
             L.drawLocal.draw.toolbar.buttons.marker = "Insira o local da ocorrência";
             L.drawLocal.edit.toolbar.buttons.edit = "Editar";
             L.drawLocal.edit.toolbar.buttons.remove = "Remover";
-
+            L.Icon.Default.imagePath = _private.url + "/images";
         };
 
         _private.ConfigurarDateTimePicker = function () {
@@ -57,21 +47,18 @@
             return window.history.length > 0;
         };
 
-        $public.Init = function () {
+        $public.Init = function (url) {
+            _private.url = url;
             _private.ConfigurarAjax();
-            _private.TraduzirDraw();
+            _private.ConfigurarDraw();
             _private.ConfigurarChosen();
             _private.AssinarEdit();
         };
 
-        $public.Url = function (url) {
-            _private.Url = url;
-        };
-
-        $public.GetGeoJson = function (url, callback) {
+        $public.GetGeoJson = function (local, callback) {
 
             var options = {
-                url: typeof (url) === "undefined" ? _private.Url : url,
+                url: _private.url + local,
                 method: 'GET'
             };
 
