@@ -7,7 +7,7 @@
 
 
 <div id="sidewrapper">
-    <h1>Bem Vindo, @Session["NomeUsuario"]</h1>
+    <h1>Bem Vindo (a), @Session["NomeUsuario"]</h1>
     <hr>
     <div class="row">
         <div class="col-md-3">
@@ -42,13 +42,13 @@
                 </div>
             }
             
-            @if (Model == null || Model.Senha == null)
+            @*@if (Model == null || Model.Senha == null)
             {
                 <div class="alert alert-info" role="alert">
                     Você não possui uma conta local.
                     Caso queira entrar sem precisar de conta local, insira uma nova senha abaixo
                 </div>
-            }
+            }*@
 
             <div class="row">
                 <div class="col-lg-3"></div>
@@ -76,25 +76,13 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Email, new { @class = "col-lg-3 control-label" })
                     <div class="col-lg-8">
-                        @Html.EditorFor(model => model.Sobrenome, new { htmlattributes = new { @class = "form-control", disabled = true } })
+                        @Html.EditorFor(model => model.Email, new { htmlattributes = new { @class = "form-control", disabled = true } })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Cidade, new { @class = "col-lg-3 control-label" })
                     <div class="col-lg-8">
                         @Html.EditorFor(model => model.Cidade, new { htmlattributes = new { @class = "form-control", disabled = true } })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Senha, new { @class = "col-lg-3 control-label" })
-                    <div class="col-lg-8">
-                        @Html.EditorFor(model => model.Senha, new { htmlattributes = new { @class = "form-control", disabled = true } })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.SenhaConfirmada, new { @class = "col-lg-3 control-label" })
-                    <div class="col-lg-8">
-                        @Html.EditorFor(model => model.SenhaConfirmada, new { htmlattributes = new { @class = "form-control", disabled = true } })
                     </div>
                 </div>
                 <div class="form-group">

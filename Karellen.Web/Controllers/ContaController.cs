@@ -1,4 +1,5 @@
-﻿using Karellen.Negocio.Mensagem;
+﻿using AutoMapper;
+using Karellen.Negocio.Mensagem;
 using Karellen.Negocio.Mensagem.Enum;
 using Karellen.Negocio.Util.Extensao;
 using Karellen.Web.Identity.Manager;
@@ -182,12 +183,35 @@ namespace Karellen.Web.Controllers
             if (mensagem != null)
                 ViewBag.Mensagem = mensagem.GetDescricao();
 
-            return View("gerenciar");
+            var usuario = _userManager.FindById(User.Identity.GetUserId<int>());
+            var model = Mapper.Map<UsuarioIdentity, GerenciarVM>(usuario);
+
+            ViewBag.TemSenhaLocal = BuscarSenhaLocal();
+
+            return View("gerenciar", model);
+        }
+
+        private bool BuscarSenhaLocal()
+        {
+            var user = _userManager.FindById(Convert.ToInt32(User.Identity.GetUserId()));
+
+            return user.PasswordHash != null;
         }
 
         [HttpPost]
-        public ActionResult Gerenciar()
+        public ActionResult Gerenciar(GerenciarVM model)
         {
+            if (!ModelState.IsValid) return View(model);
+
+            var usuarioIdentity = _userManager.FindById(Convert.ToInt32(User.Identity.GetUserId()));
+            var usuario = Mapper.Map<GerenciarVM, UsuarioIdentity>(model);
+
+            usuario.PasswordHash = usuarioIdentity.PasswordHash;
+            usuario.UserName = usuarioIdentity.UserName;
+            usuario.Id = usuarioIdentity.Id;
+            Session["NomeUsuario"] = model.Nome;
+
+            var updateAsync = _userManager.UpdateAsync(usuario);
             return RedirectToAction("gerenciar", new {mensagem = EnumMensagem.Alterado });
         }
 
@@ -196,12 +220,16 @@ namespace Karellen.Web.Controllers
             return View("RedeSocial");
         }
 
+        public ActionResult Seguranca()
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpGet]
         public ActionResult Ocorrencias()
         {
             return View("ocorrencias");
         }
-
 
         #region Helpers
         // Used for XSRF protection when adding external logins

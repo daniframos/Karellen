@@ -77,9 +77,25 @@
     <Compile Include="Mapeamento\LoginExternoEntityMapping.cs" />
     <Compile Include="Mapeamento\OcorrenciaEntityMapping.cs" />
     <Compile Include="Mapeamento\UsuarioEntityMapping.cs" />
+    <Compile Include="Migrations\201610072053339_InitialCreate.cs" />
+    <Compile Include="Migrations\201610072053339_InitialCreate.Designer.cs">
+      <DependentUpon>201610072053339_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610081421387_initial.cs" />
+    <Compile Include="Migrations\201610081421387_initial.Designer.cs">
+      <DependentUpon>201610081421387_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201610072053339_InitialCreate.resx">
+      <DependentUpon>201610072053339_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610081421387_initial.resx">
+      <DependentUpon>201610081421387_initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

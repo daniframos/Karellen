@@ -20,6 +20,7 @@ namespace Karellen.Data.Entidade
                 }
             }
         }
+        public virtual string Cidade { get; set; }
 
         #region Propriedades de navegação
         public virtual ICollection<LoginExterno> Logins

@@ -235,6 +235,8 @@ namespace Karellen.Web.Identity.Store
         private void popularUsuario(Usuario user, UsuarioIdentity identityUser)
         {
             user.Id = identityUser.Id;
+            user.Cidade = identityUser.Cidade;
+            user.Nome = identityUser.Nome;
             user.UserName = identityUser.UserName;
             user.SenhaHash = identityUser.PasswordHash;
             user.Email = identityUser.Email;

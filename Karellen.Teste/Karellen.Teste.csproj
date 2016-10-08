@@ -103,6 +103,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AutoMapper\GerenciarProfileTests.cs" />
     <Compile Include="AutoMapper\GrupoProfileTests.cs" />
     <Compile Include="AutoMapper\OcorrenciaProfileTests.cs" />
     <Compile Include="AutoMapper\UsuarioProfileTests.cs" />

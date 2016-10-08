@@ -10,5 +10,6 @@ namespace Karellen.Web.Identity.Modelo
         public virtual string UserName { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual string Email { get; set; }
+        public virtual string Cidade { get; set; }
     }
 }

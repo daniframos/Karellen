@@ -265,6 +265,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="AutoMapper\GerenciarProfile.cs" />
     <Compile Include="AutoMapper\GrupoProfile.cs" />
     <Compile Include="AutoMapper\LogProfile.cs" />
     <Compile Include="AutoMapper\OcorrenciaProfile.cs" />
@@ -292,6 +293,7 @@
     <Compile Include="Models\Conta\LoginExternoVM.cs" />
     <Compile Include="Models\Conta\LoginVM.cs" />
     <Compile Include="Models\Conta\RegistrarVM.cs" />
+    <Compile Include="Models\Conta\SenhaVM.cs" />
     <Compile Include="Models\Log\LogVM.cs" />
     <Compile Include="Models\Ocorrencia\NovaOcorrenciaVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

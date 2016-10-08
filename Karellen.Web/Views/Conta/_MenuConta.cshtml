@@ -6,4 +6,6 @@
         new { @class = "list-group-item " + (Model == "redesocial" ? "active" : string.Empty), data_tile = "Dados Pessoais", data_pjax = true })
     @Html.ActionLink("Estatisticas", "redesocial", "conta", null,
         new { @class = "list-group-item " + (Model == "estatistica" ? "active" : string.Empty), data_tile = "Dados Pessoais", data_pjax = true })
+    @Html.ActionLink("Segurança", "seguranca", "conta", null,
+        new { @class = "list-group-item " + (Model == "seguranca" ? "active" : string.Empty), data_tile = "Dados Pessoais", data_pjax = true })
 </div>

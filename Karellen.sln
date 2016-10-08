@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karellen.Negocio", "Karelle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karellen.Web", "Karellen.Web\Karellen.Web.csproj", "{283C9E8E-2D8B-40C1-A559-07D9D269DD8C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0578CE7F-AB4F-40B2-9641-C9FB6DF76D7F}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\AtualizaBase.sql = Scripts\AtualizaBase.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
