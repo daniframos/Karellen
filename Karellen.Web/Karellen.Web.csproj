@@ -221,7 +221,7 @@
     <Content Include="Content\jquery\dist\jquery.js" />
     <Content Include="Content\karellen\css\login.css" />
     <Content Include="Content\karellen\css\site.css" />
-    <Content Include="Content\karellen\img\bg.png" />
+    <Content Include="Content\karellen\img\bg.jpg" />
     <Content Include="Content\karellen\img\favicon.ico" />
     <Content Include="Content\karellen\js\App\index.js" />
     <Content Include="Content\karellen\js\Global\global.js" />

@@ -124,7 +124,7 @@
             _private.drawItens = drawItens;
 
             _private.mapa.addControl(drawControl);
-            _private.TraduzirDraw();
+            _private.ConfigurarDraw();
 
 
             _private.mapa.on("draw:created", function (event) {
@@ -162,7 +162,7 @@
                     _private.drawItens = drawItens;
 
                     _private.mapa.addControl(drawControl);
-                    _private.TraduzirDraw();
+                    _private.ConfigurarDraw();
                 }
 
                 drawItens.addLayer(layer);
