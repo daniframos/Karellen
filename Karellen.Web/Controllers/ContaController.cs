@@ -181,8 +181,6 @@ namespace Karellen.Web.Controllers
             if (mensagem != null)
                 ViewBag.Mensagem = mensagem.GetDescricao();
 
-            ViewBag.TemSenhaLocal = TemSenhaLocal();
-
             return View("gerenciar", model);
         }
 
@@ -216,6 +214,8 @@ namespace Karellen.Web.Controllers
         [HttpGet]
         public ActionResult Seguranca()
         {
+            ViewBag.TemSenhaLocal = TemSenhaLocal();
+
             return View("seguranca");
         }
 
@@ -239,6 +239,47 @@ namespace Karellen.Web.Controllers
             var linkedAccounts = _userManager.GetLogins(Convert.ToInt32(User.Identity.GetUserId()));
             ViewBag.ShowRemoveButton = TemSenhaLocal() || linkedAccounts.Count > 1;
             return (ActionResult)PartialView("_LoginExternoRemover", linkedAccounts);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Senha(SenhaVM model)
+        {
+            ViewBag.TemSenhaLocal = TemSenhaLocal();
+            ViewBag.ReturnUrl = Url.Action("Gerenciar");
+            if (ViewBag.temSenhaLocal)
+            {
+                if (ModelState.IsValid)
+                {
+                    var result = await _userManager.ChangePasswordAsync(Convert.ToInt32(User.Identity.GetUserId()), model.SenhaAntiga, model.NovaSenha);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Gerenciar", new { Mensagem = EnumMensagem.Alterado });
+                    }
+                    ModelState.AddModelError("" , result.Errors.First());
+                }
+            }
+            else
+            {
+                // User does not have a password so remove any validation errors caused by a missing OldPassword field
+                ModelState state = ModelState["SenhaAntiga"];
+                if (state != null)
+                {
+                    state.Errors.Clear();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    IdentityResult result = await _userManager.AddPasswordAsync(Convert.ToInt32(User.Identity.GetUserId()), model.NovaSenha);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Gerenciar", new { Mensagem = EnumMensagem.Alterado });
+                    }
+                    ModelState.AddModelError("", result.Errors.First());
+                }
+            }
+
+            return View("seguranca");
         }
 
         [HttpPost]

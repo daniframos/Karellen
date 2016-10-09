@@ -1,0 +1,31 @@
+﻿@model Karellen.Web.Models.Conta.SenhaVM
+
+@using (Html.BeginForm("senha", "conta", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SenhaAntiga, new { @class = "col-lg-3 control-label" })
+        <div class="col-lg-8">
+            @Html.PasswordFor(m => m.SenhaAntiga, new { @class = "form-control", disabled = true })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NovaSenha, new { @class = "col-lg-3 control-label" })
+        <div class="col-lg-8">
+            @Html.PasswordFor(m => m.NovaSenha, new { @class = "form-control", disabled = true })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.SenhaConfirmada, new { @class = "col-lg-3 control-label" })
+        <div class="col-lg-8">
+            @Html.PasswordFor(m => m.SenhaConfirmada, new { @class = "form-control", disabled = true })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-8" style="text-align: center">
+            <input type="submit" class="btn btn-default btn-lg btn-primary" value="Salvar" disabled>
+        </div>
+    </div>
+}

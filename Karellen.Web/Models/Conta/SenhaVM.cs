@@ -7,12 +7,17 @@ namespace Karellen.Web.Models.Conta
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = @"Senha")]
-        public string Senha { get; set; }
+        [Display(Name = @"Senha Atual")]
+        public string SenhaAntiga { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = @"Nova Senha")]
+        public string NovaSenha { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = @"Confirme a senha")]
-        [Compare("Senha", ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MN012")]
+        [Display(Name = @"Confirme a nova senha")]
+        [Compare("NovaSenha", ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MN012")]
         public string SenhaConfirmada { get; set; }
     }
 }

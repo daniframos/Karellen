@@ -1,7 +1,9 @@
-﻿@model dynamic
+﻿@using Karellen.Web.Models.Conta
+@model Karellen.Web.Models.Conta.SenhaVM
 
 @{
     ViewBag.Title = "Segurança";
+    var temSenha = (bool)ViewBag.TemSenhaLocal;
 }
 
 <div id="sidewrapper">
@@ -33,8 +35,7 @@
 
             @Html.ValidationSummary()
 
-
-            @if (Model == null || Model.Senha == null)
+            @if (!temSenha)
                 {
                     <div class="alert alert-info" role="alert">
                         Você não possui uma conta local.
@@ -50,11 +51,7 @@
                 </div>
             </div>
             <br />
-            @using (Html.BeginForm("gerenciar", "conta", FormMethod.Post, new { @class = "form-horizontal" }))
-            {
-                @Html.AntiForgeryToken()
-            }
-
+            @(temSenha ? Html.Partial("_SenhaAtualizar", new SenhaVM()) : Html.Partial("_SenhaSalvar", new SenhaVM()))
         </div>
     </div>
 </div>

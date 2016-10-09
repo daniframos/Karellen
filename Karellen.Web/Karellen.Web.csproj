@@ -287,11 +287,11 @@
     <Compile Include="Identity\Servico\EmailIdentityServico.cs" />
     <Compile Include="Identity\Store\GrupoIdentityStore.cs" />
     <Compile Include="Identity\Store\UsuarioIdentityStore.cs" />
+    <Compile Include="Models\Conta\SenhaVM.cs" />
     <Compile Include="Models\Conta\GerenciarVM.cs" />
     <Compile Include="Models\Conta\LoginExternoVM.cs" />
     <Compile Include="Models\Conta\LoginVM.cs" />
     <Compile Include="Models\Conta\RegistrarVM.cs" />
-    <Compile Include="Models\Conta\SenhaVM.cs" />
     <Compile Include="Models\Log\LogVM.cs" />
     <Compile Include="Models\Ocorrencia\NovaOcorrenciaVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -326,9 +326,9 @@
     <Content Include="Views\Ocorrencia\Nova.cshtml" />
     <Content Include="Views\Conta\RedeSocial.cshtml" />
     <Content Include="Views\Conta\_MenuConta.cshtml" />
-    <Content Include="Views\Conta\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Conta\_SenhaAtualizar.cshtml" />
     <Content Include="Views\Conta\_LoginExternoAssociar.cshtml" />
-    <Content Include="Views\Conta\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Conta\_SenhaSalvar.cshtml" />
     <Content Include="Views\Conta\Seguranca.cshtml" />
     <Content Include="Views\Conta\_LoginExterno.cshtml" />
     <Content Include="Views\Conta\_LoginExternoRemover.cshtml" />
