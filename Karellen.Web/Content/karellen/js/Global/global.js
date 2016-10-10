@@ -20,7 +20,9 @@
         };
 
         _private.ConfigurarChosen = function () {
-            $(".chosen-select").chosen({ no_results_text: "Nada encontrado", width: "100%" });
+            $(function() {
+                $(".chosen-select").chosen({ no_results_text: "Nada encontrado", width: "100%" });
+            });
         };
 
         _private.ConfigurarDraw = function () {
@@ -32,9 +34,11 @@
         };
 
         _private.ConfigurarDateTimePicker = function () {
-            $("#datetimepicker1").datetimepicker({
-                locale: 'pt-br'
-            });
+           $(function() {
+               $("#datetimepicker1").datetimepicker({
+                   locale: 'pt-br'
+               });
+           });
         };
 
         _private.AssinarEdit = function () {
@@ -103,7 +107,7 @@
         };
 
         $public.HabilitarEdicao = function () {
-
+            debugger;
             var drawItens = new L.FeatureGroup();
             _private.mapa.addLayer(drawItens);
 

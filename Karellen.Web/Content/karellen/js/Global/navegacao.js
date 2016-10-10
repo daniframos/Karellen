@@ -13,7 +13,7 @@
                 return;
 
             var fn = $(elemento).data("callback");
-            if (typeof (fn) == ! "undefined") {
+            if (typeof (fn) !== "undefined") {
                 App[fn]();
             }
         })
