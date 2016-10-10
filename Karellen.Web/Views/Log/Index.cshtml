@@ -4,76 +4,80 @@
     ViewBag.Title = "Log";
 }
 
-<h2>Registro de Log</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Local)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserAgent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Browser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Data)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SessaoId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EntidadeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EntidadeNome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Acao)
-        </th>
-        <th></th>
-    </tr>
+<div id="sidewrapper">
+    <h1>Logs</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="text-center">
+            </div>
+            <hr />
+        </div>
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Local)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserAgent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Browser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SessaoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EntidadeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EntidadeNome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Acao)
-            </td>
-        </tr>
-    }
+        <!-- edit form column -->
+        <div class="col-md-12 personal-info">
+            <table class="table">
+                <tr>
+                    <th>
+                        Log
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ip)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Local)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Browser)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Data)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SessaoId)
+                    </th>
+                    <th>
+                        Alteração de entidade
+                    </th>
+                </tr>
 
-</table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Log "+item.Id, "detalhes", "log",null,  new { id = item.Id })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ip)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Local)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Browser)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SessaoId)
+                        </td>
+                        <td style="text-align: center">
+                            @Html.CheckBox("AlteracaoEntidade", !string.IsNullOrEmpty(item.EntidadeId), new { disabled = "true" })
+                        </td>
+                    </tr>
+                }
 
-<div class="row paginacao">
-    <div class="col-md-12">
-        @Html.PagedListPager(Model as IPagedList, pagina => Url.Action("Index", new { pagina }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+            </table>
+
+            <div class="row paginacao">
+                <div class="col-md-12">
+                    @Html.PagedListPager(Model as IPagedList, pagina => Url.Action("Index", new { pagina }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+

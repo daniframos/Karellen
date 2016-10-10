@@ -332,6 +332,7 @@
     <Content Include="Views\Conta\Seguranca.cshtml" />
     <Content Include="Views\Conta\_LoginExterno.cshtml" />
     <Content Include="Views\Conta\_LoginExternoRemover.cshtml" />
+    <Content Include="Views\Log\Detalhes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

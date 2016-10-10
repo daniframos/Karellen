@@ -6,5 +6,6 @@ namespace Karellen.Negocio.Interface
     public interface ILogServico
     {
         IList<LogDTO> BuscarTodosLog();
+        LogDTO BuscarTodosLog(int id);
     }
 }
