@@ -16,7 +16,7 @@ namespace Karellen.Web.Models.Log
         public DateTime Data { get; set; }
         [DisplayName(@"Sessao")]
         public Guid SessaoId { get; set; }
-        [DisplayName(@"Identificador Entidade")]
+        [DisplayName(@"ID Entidade")]
         public string EntidadeId { get; set; }
         [DisplayName(@"Entidade")]
         public string EntidadeNome { get; set; }

@@ -21,7 +21,7 @@ namespace Karellen.Web.Filtro
 
             var controllerName = filterContext.RouteData.Values["controller"];
             var actionName = filterContext.RouteData.Values["action"];
-            var local = filterContext.RequestContext.HttpContext.Request.UrlReferrer.ToString();
+            var local = filterContext.RequestContext.HttpContext.Request.UrlReferrer.ToString().ToLower();
             var sessaoId = new Guid(filterContext.RequestContext.HttpContext.Request.Form.GetValues("SessaoId").FirstOrDefault());
             // TODO: Salvar
             filterContext.HttpContext.Session[IdOperacao] = Servico.SalvarOperacao(userAgent, usuario, browser, ip, local, sessaoId, null, null);

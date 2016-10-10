@@ -9,10 +9,49 @@
     <h1>Logs</h1>
     <hr>
     <div class="row">
-        <div class="col-md-3">
-            <div class="text-center">
+        <div class="col-md-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <span class="fa-stack fa-5x">
+                        <i class="fa fa-circle fa-stack-2x text-primary" id="circleocorrencia"></i>
+                        <i class="fa fa-step-backward fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <h4>@ViewBag.UltimoMes Logs</h4>
+                    <p><strong>no ultimo mes</strong></p>
+                </div>
             </div>
-            <hr />
+        </div>
+        
+        <div class="col-md-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <span class="fa-stack fa-5x">
+                        <i class="fa fa-circle fa-stack-2x text-primary" id="circleocorrencia"></i>
+                        <i class="fa fa-star-o fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <h4>@ViewBag.UltimoDia Logs</h4>
+                    <p><strong>nas ultimas 24 horas</strong></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <span class="fa-stack fa-5x">
+                        <i class="fa fa-circle fa-stack-2x text-primary" id="circleocorrencia"></i>
+                        <i class="fa fa-step-backward fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <h4>@ViewBag.Total Logs</h4>
+                    <p><strong>no total</strong></p>
+                </div>
+            </div>
         </div>
 
         <!-- edit form column -->
@@ -46,7 +85,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.ActionLink("Log "+item.Id, "detalhes", "log",null,  new { id = item.Id })
+                            @Html.ActionLink("Log "+item.Id, "detalhes", "log", new { id = item.Id }, null )
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Ip)

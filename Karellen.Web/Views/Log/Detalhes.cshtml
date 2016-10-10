@@ -1,8 +1,88 @@
 ﻿@model Karellen.Web.Models.Log.LogVM
-
 @{
-    ViewBag.Title = "Log da Sessão "+Model.SessaoId;
-    Layout = "_Layout";
+    ViewBag.Title = "Log " +Model.Id;
 }
+<div id="sidewrapper">
+    <h1>Log @Model.Id</h1>
+    <h3>Sessão @Model.SessaoId</h3>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Ip)
+                </dt>
 
-<h2>Log </h2>
+                <dd>
+                    @Html.DisplayFor(model => model.Ip)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Local)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Local)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserAgent)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserAgent)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Browser)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Browser)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Data)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Data)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SessaoId)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SessaoId)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EntidadeId)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EntidadeId)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EntidadeNome)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EntidadeNome)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Acao)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Acao)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+
+</div>

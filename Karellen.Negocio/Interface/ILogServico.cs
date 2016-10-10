@@ -1,4 +1,5 @@
 ﻿using Karellen.Negocio.Util.DTO;
+using System;
 using System.Collections.Generic;
 
 namespace Karellen.Negocio.Interface
@@ -6,6 +7,7 @@ namespace Karellen.Negocio.Interface
     public interface ILogServico
     {
         IList<LogDTO> BuscarTodosLog();
-        LogDTO BuscarTodosLog(int id);
+        LogDTO BuscarLog(int id);
+        int QuantidadeDeLog(DateTime dataInicio);
     }
 }
