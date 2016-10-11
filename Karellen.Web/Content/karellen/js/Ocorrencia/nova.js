@@ -1,3 +1,6 @@
 ﻿$(function() {
-    App.HabilitarEdicao();
+    App.CallBackTitleLayer(function () {
+        App.HabilitarEdicao();
+        App.DesabilitarMarcadores();
+    });
 });

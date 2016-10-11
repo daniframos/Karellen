@@ -30,7 +30,12 @@ namespace Karellen.Web.Controllers
         public ActionResult Login(EnumMensagem? mensagem, string returnUrl)
         {
             if (mensagem != null)
-                ViewBag.Mensagem = mensagem.GetDescricao();
+            {
+                if (mensagem.Value == EnumMensagem.ErroPermissao)
+                    ModelState.AddModelError("", mensagem.Value.GetDescricao());
+                else
+                    ViewBag.Mensagem = mensagem.Value.GetDescricao();
+            }
 
             ViewBag.ReturnUrl = returnUrl;
             return View("login");

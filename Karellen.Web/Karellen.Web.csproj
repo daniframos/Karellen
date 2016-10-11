@@ -207,6 +207,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\email.html" />
     <Content Include="Content\bootstrap\dist\css\bootstrap.css" />
     <Content Include="Content\bootstrap\dist\js\bootstrap.js" />
     <Content Include="Content\chosen\chosen.css" />
@@ -341,7 +342,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\karellen\js\Conta\" />
   </ItemGroup>
   <ItemGroup>

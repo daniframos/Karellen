@@ -41,11 +41,26 @@
            });
         };
 
+        _private.DesabilitarMarcadores = function() {
+
+            debugger;
+
+            _private.mapa.eachLayer(function (layer) {
+                if (layer instanceof L.Marker) {
+                    _private.mapa.removeLayer(layer);
+                }
+            });
+        }
+
         _private.AssinarEdit = function () {
             $("#sidewrapper").on("click", "#btnedit", function () {
                 $("form input[disabled]").removeAttr("disabled");
             });
         };
+
+        $public.CallBackTitleLayer = function(fn) {
+            _private.TitleLayer.on("load", fn);
+        }
 
         $public.SuportaAjax = function () {
             return window.history.length > 0;
@@ -88,7 +103,7 @@
 
             _private.mapaUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + _private.Token;
 
-            L.tileLayer(_private.mapaUrl, options).addTo(_private.mapa);
+            _private.TitleLayer = L.tileLayer(_private.mapaUrl, options).addTo(_private.mapa);
 
             return _private.mapa;
         };
@@ -107,74 +122,9 @@
         };
 
         $public.HabilitarEdicao = function () {
-            debugger;
-            var drawItens = new L.FeatureGroup();
-            _private.mapa.addLayer(drawItens);
 
-            var drawControl = new L.Control.Draw({
-                draw: {
-                    rectangle: false,
-                    polyline: false,
-                    polygon: false,
-                    circle: false,
-                    marker: true
-                },
-                edit: {
-                    featureGroup: drawItens,
-                    remove: true
-                }
-            });
-            _private.drawControl = drawControl;
-            _private.drawItens = drawItens;
-
-            _private.mapa.addControl(drawControl);
-            _private.ConfigurarDraw();
-
-
-            _private.mapa.on("draw:created", function (event) {
-
-                var tipo = event.layerType;
-                var layer = event.layer;
-
-                if (tipo === "marker") {
-
-                    $("#Latitude").val(layer._latlng.lat);
-                    $("#Longitude").val(layer._latlng.lng);
-
-                    _private.mapa.removeLayer(_private.drawItens);
-
-                    var drawItens = new L.FeatureGroup();
-                    _private.mapa.addLayer(drawItens);
-
-                    var drawControl = new L.Control.Draw({
-                        draw: {
-                            rectangle: false,
-                            polyline: false,
-                            polygon: false,
-                            circle: false,
-                            marker: false
-                        },
-                        edit: {
-                            featureGroup: drawItens,
-                            remove: true
-                        }
-                    });
-
-                    _private.mapa.removeControl(_private.drawControl);
-
-                    _private.drawControl = drawControl;
-                    _private.drawItens = drawItens;
-
-                    _private.mapa.addControl(drawControl);
-                    _private.ConfigurarDraw();
-                }
-
-                drawItens.addLayer(layer);
-            });
-
-            _private.mapa.on("draw:deleted", function (event) {
-
-                _private.mapa.removeLayer(_private.drawItens);
+            if (!_private.ModoEdicao) {
+                _private.DesabilitarMarcadores();
 
                 var drawItens = new L.FeatureGroup();
                 _private.mapa.addLayer(drawItens);
@@ -192,33 +142,104 @@
                         remove: true
                     }
                 });
-
-                _private.mapa.removeControl(_private.drawControl);
-
                 _private.drawControl = drawControl;
                 _private.drawItens = drawItens;
 
                 _private.mapa.addControl(drawControl);
-                _private.TraduzirDraw();
+                _private.ConfigurarDraw();
 
-                $("#Latitude").val("");
-                $("#Longitude").val("");
-            });
 
-            _private.mapa.on("draw:edited", function (event) {
+                _private.mapa.on("draw:created", function (event) {
 
-                var layers = event.layers;
-                layers.eachLayer(function(layer) {
-                    if (layer instanceof L.Marker) {
+                    var tipo = event.layerType;
+                    var layer = event.layer;
+
+                    if (tipo === "marker") {
+
                         $("#Latitude").val(layer._latlng.lat);
                         $("#Longitude").val(layer._latlng.lng);
+
+                        _private.mapa.removeLayer(_private.drawItens);
+
+                        var drawItens = new L.FeatureGroup();
+                        _private.mapa.addLayer(drawItens);
+
+                        var drawControl = new L.Control.Draw({
+                            draw: {
+                                rectangle: false,
+                                polyline: false,
+                                polygon: false,
+                                circle: false,
+                                marker: false
+                            },
+                            edit: {
+                                featureGroup: drawItens,
+                                remove: true
+                            }
+                        });
+
+                        _private.mapa.removeControl(_private.drawControl);
+
+                        _private.drawControl = drawControl;
+                        _private.drawItens = drawItens;
+
+                        _private.mapa.addControl(drawControl);
+                        _private.ConfigurarDraw();
                     }
+
+                    drawItens.addLayer(layer);
                 });
 
-            })
+                _private.mapa.on("draw:deleted", function (event) {
 
-            _private.ConfigurarChosen();
-            _private.ConfigurarDateTimePicker();
+                    _private.mapa.removeLayer(_private.drawItens);
+
+                    var drawItens = new L.FeatureGroup();
+                    _private.mapa.addLayer(drawItens);
+
+                    var drawControl = new L.Control.Draw({
+                        draw: {
+                            rectangle: false,
+                            polyline: false,
+                            polygon: false,
+                            circle: false,
+                            marker: true
+                        },
+                        edit: {
+                            featureGroup: drawItens,
+                            remove: true
+                        }
+                    });
+
+                    _private.mapa.removeControl(_private.drawControl);
+
+                    _private.drawControl = drawControl;
+                    _private.drawItens = drawItens;
+
+                    _private.mapa.addControl(drawControl);
+                    _private.TraduzirDraw();
+
+                    $("#Latitude").val("");
+                    $("#Longitude").val("");
+                });
+
+                _private.mapa.on("draw:edited", function (event) {
+
+                    var layers = event.layers;
+                    layers.eachLayer(function (layer) {
+                        if (layer instanceof L.Marker) {
+                            $("#Latitude").val(layer._latlng.lat);
+                            $("#Longitude").val(layer._latlng.lng);
+                        }
+                    });
+
+                })
+
+                _private.ConfigurarChosen();
+                _private.ConfigurarDateTimePicker();
+
+                _private.ModoEdicao = true;
+            }
         }
 
         return $public;

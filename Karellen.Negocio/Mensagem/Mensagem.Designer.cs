@@ -167,5 +167,14 @@ namespace Karellen.Negocio.Mensagem {
                 return ResourceManager.GetString("MN021", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Você não tem permissão de acesso a esta página. Por favor, entre com uma conta com acesso..
+        /// </summary>
+        public static string MN022 {
+            get {
+                return ResourceManager.GetString("MN022", resourceCulture);
+            }
+        }
     }
 }

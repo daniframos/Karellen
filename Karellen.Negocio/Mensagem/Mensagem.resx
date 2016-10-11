@@ -161,4 +161,8 @@
     <value>Informações atualizadas com sucesso</value>
     <comment>Quando o cidadão atualiza os próprios dados</comment>
   </data>
+  <data name="MN022" xml:space="preserve">
+    <value>Você não tem permissão de acesso a esta página. Por favor, entre com uma conta com acesso.</value>
+    <comment>Quando uma pessoa tenta acessar uma página sem permissão</comment>
+  </data>
 </root>
