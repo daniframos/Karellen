@@ -41,9 +41,7 @@
            });
         };
 
-        _private.DesabilitarMarcadores = function() {
-
-            debugger;
+        $public.DesabilitarMarcadores = function () {
 
             _private.mapa.eachLayer(function (layer) {
                 if (layer instanceof L.Marker) {
@@ -108,6 +106,7 @@
             return _private.mapa;
         };
 
+
         $public.PopUp = function () {
             var popup = L.popup();
 
@@ -124,7 +123,7 @@
         $public.HabilitarEdicao = function () {
 
             if (!_private.ModoEdicao) {
-                _private.DesabilitarMarcadores();
+                $public.DesabilitarMarcadores();
 
                 var drawItens = new L.FeatureGroup();
                 _private.mapa.addLayer(drawItens);
@@ -223,23 +222,22 @@
                     $("#Longitude").val("");
                 });
 
-                _private.mapa.on("draw:edited", function (event) {
+                _private.mapa.on("draw:edited", function(event) {
 
                     var layers = event.layers;
-                    layers.eachLayer(function (layer) {
+                    layers.eachLayer(function(layer) {
                         if (layer instanceof L.Marker) {
                             $("#Latitude").val(layer._latlng.lat);
                             $("#Longitude").val(layer._latlng.lng);
                         }
                     });
 
-                })
-
-                _private.ConfigurarChosen();
-                _private.ConfigurarDateTimePicker();
+                });
 
                 _private.ModoEdicao = true;
             }
+            _private.ConfigurarChosen();
+            _private.ConfigurarDateTimePicker();
         }
 
         return $public;

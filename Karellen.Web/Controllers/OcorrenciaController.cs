@@ -29,6 +29,7 @@ namespace Karellen.Web.Controllers
 
 
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Nova()
         {
             return View("Nova", new NovaOcorrenciaVM());
@@ -43,9 +44,9 @@ namespace Karellen.Web.Controllers
 
             var ocorrencia = Mapper.Map<NovaOcorrenciaVM, OcorrenciaDTO>(model);
 
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated && !model.OcorrenciaAnonima)
             {
-                ocorrencia.UsuarioId = Convert.ToInt32(User.Identity.GetUserId());
+                ocorrencia.UsuarioId = User.Identity.GetUserId<int>();
             }
             var idOperacaoLog = Session[IdOperacao];
             var resultado = _servico.SalvarNovaOcorrencia(ocorrencia, idOperacaoLog);
