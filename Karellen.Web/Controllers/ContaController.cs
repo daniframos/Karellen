@@ -168,6 +168,7 @@ namespace Karellen.Web.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+            Session["NomeUsuario"] = null;
             return RedirectToAction("Index", "Home");
         }
 
