@@ -171,6 +171,7 @@ namespace Karellen.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [OutputCache(NoStore = true, Duration = 0)]
         [HttpGet]
         public ActionResult Gerenciar(EnumMensagem? mensagem)
         {
