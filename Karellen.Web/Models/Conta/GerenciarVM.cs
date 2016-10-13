@@ -3,6 +3,9 @@ using Karellen.Web.Identity.Manager;
 using Microsoft.Practices.Unity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
+using Microsoft.AspNet.Identity;
+
 
 namespace Karellen.Web.Models.Conta
 {
@@ -27,10 +30,9 @@ namespace Karellen.Web.Models.Conta
             var task = manager.FindByEmailAsync(this.Email);
             task.Wait();
             var u = task.Result;
-            if (u != null)
-            {
+            if (u == null) yield break;
+            if (u.Id != HttpContext.Current.User.Identity.GetUserId<int>())
                 yield return new ValidationResult(Mensagem.MN018);
-            }
         }
     }
 }
