@@ -15,15 +15,20 @@
                     var id = "home" + providerName;
 
                     var buttonType = ViewBag.ShowRemoveButton ? "submit" : "button";
-
+                    var disabled = buttonType == "button" ? "disabled" : string.Empty;
 
                     @Html.Hidden("loginProvider", account.LoginProvider)
                     @Html.Hidden("providerKey", account.ProviderKey)
                     <div class="col-xs-6 col-sm-3">
-                        <button type="@buttonType" class="btn btn-lg btn-block btn-@providerName first-letter" id="@id" name="provider" value="@providerName">
+                        <button type="@buttonType" class="btn btn-lg btn-block btn-@providerName first-letter" id="@id" name="provider" value="@providerName" @disabled>
                             <i class="fa fa-@providerName visible-xs"></i>
                             <span class="hidden-xs">@providerName</span>
                         </button>
+                        
+                        @if (!string.IsNullOrEmpty(disabled))
+                        {
+                            <small>Você não tem senha local. Logo, não pode remover seu unico login social</small>
+                        }
                     </div>
                 }
             </div>

@@ -213,7 +213,10 @@ namespace Karellen.Web.Controllers
         {
             var logins = _userManager.GetLogins(User.Identity.GetUserId<int>());
             if (logins != null)
+            {
+                ViewBag.UserKey = logins.First(l => l.LoginProvider == "Facebook").ProviderKey;
                 ViewBag.Logins = logins.Select(l => l.LoginProvider.ToLower()).ToList();
+            }
 
             return View("RedeSocial");
         }
