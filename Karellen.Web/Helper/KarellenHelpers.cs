@@ -7,6 +7,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using Karellen.Web.Identity.Manager;
+using Microsoft.AspNet.Identity;
+using Microsoft.Practices.Unity;
 
 namespace Karellen.Web.Helper
 {
@@ -42,6 +45,25 @@ namespace Karellen.Web.Helper
             }
 
             return new MvcHtmlString(sb.ToString());
+        }
+
+        public static MvcHtmlString ImagemUsuario<TModel>(this HtmlHelper<TModel> htmlHelper, int usuarioId)
+        {
+            var container = UnityConfig.GetConfiguredContainer() as UnityContainer;
+            var manager = container.Resolve<UsuarioIdentityManager>();
+            var logins = manager.GetLogins(usuarioId);
+            string userKey = string.Empty;
+            if (logins != null)
+            {
+                var u = logins.FirstOrDefault(l => l.LoginProvider == "Facebook");
+                userKey = u == null ? string.Empty : u.ProviderKey;
+            }
+
+            var tag = new TagBuilder("img");
+            tag.AddCssClass("profile");
+            tag.MergeAttribute("src", "http://graph.facebook.com/"+ userKey + "/picture?type=normal");
+
+            return new MvcHtmlString(tag.ToString());
         }
     }
 }

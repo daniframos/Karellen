@@ -3,7 +3,9 @@
     ViewBag.Title = "RedeSocial";
 }
 
+@using Karellen.Web.Helper
 @using Karellen.Web.Models.Conta
+@using Microsoft.AspNet.Identity
 @model Karellen.Web.Models.Conta.GerenciarVM
 @{
     var mensagem = ViewBag.Mensagem as string;
@@ -17,7 +19,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="text-center">
-                <img src="http://graph.facebook.com/@ViewBag.UserKey/picture?type=normal" class="profile"/>
+                @Html.ImagemUsuario(User.Identity.GetUserId<int>())
             </div>
             <hr/>
             @Html.Partial("_MenuConta", "redesocial")

@@ -1,16 +1,15 @@
 ﻿@model ICollection<Microsoft.AspNet.Identity.UserLoginInfo>
 @if (Model.Count > 0)
 {
-    using (Html.BeginForm("desassociar", "conta", null, FormMethod.Post, new { @class = "login-form", role = "form" }))
+    foreach (var account in Model)
     {
+        using (Html.BeginForm("desassociar", "conta", null, FormMethod.Post, new { @class = "login-form", role = "form" }))
+        {
         @Html.AntiForgeryToken()
 
             <div class="row omb_row-sm-offset-3 btnsocial form-sociallogin">
-
-                @foreach (var account in Model)
-                {
-
-
+                
+                @{
                     var providerName = account.LoginProvider.ToLower();
                     var id = "home" + providerName;
 
@@ -19,18 +18,21 @@
 
                     @Html.Hidden("loginProvider", account.LoginProvider)
                     @Html.Hidden("providerKey", account.ProviderKey)
-                    <div class="col-xs-6 col-sm-3">
-                        <button type="@buttonType" class="btn btn-lg btn-block btn-@providerName first-letter" id="@id" name="provider" value="@providerName" @disabled>
-                            <i class="fa fa-@providerName visible-xs"></i>
-                            <span class="hidden-xs">@providerName</span>
-                        </button>
-                        
-                        @if (!string.IsNullOrEmpty(disabled))
-                        {
-                            <small>Você não tem senha local. Logo, não pode remover seu unico login social</small>
-                        }
-                    </div>
                 }
+                <div class="col-xs-6 col-sm-3">
+                    <button type="@buttonType" class="btn btn-lg btn-block btn-@providerName first-letter" id="@id" name="provider" value="@providerName" @disabled>
+                        <i class="fa fa-@providerName visible-xs"></i>
+                        <span class="hidden-xs">@providerName</span>
+                    </button>
+                        
+                    @if (!string.IsNullOrEmpty(disabled))
+                    {
+                        <small>Você não tem senha local. Logo, não pode remover seu unico login social</small>
+                    }
+                </div>
             </div>
-     }
+            <br/>
+        }
+    }
+
 }

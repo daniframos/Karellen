@@ -1,4 +1,6 @@
-﻿@using Karellen.Web.Models.Conta
+﻿@using Karellen.Web.Helper
+@using Karellen.Web.Models.Conta
+@using Microsoft.AspNet.Identity
 @model Karellen.Web.Models.Conta.SenhaVM
 
 @{
@@ -12,7 +14,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="text-center">
-                <img src="http://graph.facebook.com/100013298985823/picture?type=normal" class="profile" />
+                @Html.ImagemUsuario(User.Identity.GetUserId<int>())
             </div>
             <hr />
             @Html.Partial("_MenuConta", "seguranca")
