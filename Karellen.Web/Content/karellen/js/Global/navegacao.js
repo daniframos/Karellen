@@ -9,8 +9,11 @@
         $(document).on('pjax:end', function (xhr, options) {
             var elemento = xhr.relatedTarget;
 
-            if (typeof(elemento) === "undefined")
+            if (typeof(elemento) === "undefined") {
+                window.location.reload(false);
                 return;
+            }
+
 
             var fn = $(elemento).data("callback");
             if (typeof (fn) !== "undefined") {

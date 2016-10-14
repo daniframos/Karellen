@@ -1,6 +1,5 @@
 ﻿$(function() {
-    App.CallBackTitleLayer(function () {
+    if (App.SuportaAjax()) {
         App.HabilitarEdicao();
-        App.DesabilitarMarcadores();
-    });
+    };
 });
