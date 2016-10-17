@@ -17,6 +17,7 @@ using Microsoft.Practices.Unity;
 
 namespace Karellen.Web.Controllers
 {
+    [Authorize]
     public class OcorrenciaController : BaseController
     {
         private readonly IOcorrenciaServico _servico;
@@ -59,15 +60,31 @@ namespace Karellen.Web.Controllers
         [HttpGet]
         public ActionResult Coordenadas()
         {
-            Response.AddHeader("Access-Control-Allow-Origin", "*");
             var ocorrencias = _servico.BuscarTodasOcorrencias();
-            var f = new FeatureCollection();
+            var featureCollection = new FeatureCollection();
 
-            var c = ocorrencias.Select(o => new Feature(new Point(new GeographicPosition(o.Latitude, o.Longitude)), new {Nome = o.Titulo, Data = o.DataAcontecimento.ToString("D",DateTimeFormatInfo.CurrentInfo), Detalhes = o.Detalhes}));
-            f.Features.AddRange(c);
-            var coordenadasSerializadas = JsonConvert.SerializeObject(f, Formatting.Indented);
+            var c = ocorrencias.Select(o => 
+            new Feature
+                (new Point
+                    (new GeographicPosition(o.Latitude, o.Longitude)), new
+                    {
+                        o.Id, Nome = o.Titulo, Data = o.DataAcontecimento.ToString("D",DateTimeFormatInfo.CurrentInfo), o.Detalhes
+                    }));
+
+            featureCollection.Features.AddRange(c);
+            var coordenadasSerializadas = JsonConvert.SerializeObject(featureCollection, Formatting.Indented);
 
             return GeoJson(coordenadasSerializadas);
+        }
+
+
+        [HttpGet]
+        public ActionResult Detalhes(int id)
+        {
+            var ocorrencia = _servico.BuscarOcorrencia(id);
+            var model = Mapper.Map<OcorrenciaDTO, NovaOcorrenciaVM>(ocorrencia);
+
+            return View("Detalhes", model);
         }
     }
 }

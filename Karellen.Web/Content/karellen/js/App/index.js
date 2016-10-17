@@ -34,7 +34,12 @@
                 if (prop.Data) {
                     // Cria 
                     popup += '<br /><small class="quiet" style="text-align:center"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp' + prop.Data + '</small>';
-                    popup += '<br /><a href="" type="button" class="btn btn-primary btn-default btnsaibamais">Saiba mais</button>'
+                    popup += '<br /><a href="' +
+                        App.Url() +
+                        "/ocorrencia/detalhes/" +
+                        prop.Id +
+                        '" type="button" data-title="Detalhes" data-pjax data-callback="Detalhes"' +
+                        ' class="btn btn-primary btn-default btnsaibamais" style="color: white">Saiba mais</button>';
                 }
 
                 var details = listing.appendChild(document.createElement('div'));

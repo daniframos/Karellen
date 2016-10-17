@@ -329,6 +329,7 @@
     <Content Include="Views\Conta\_LoginExternoRemover.cshtml" />
     <Content Include="Views\Log\Detalhes.cshtml" />
     <Content Include="images\render.sh" />
+    <Content Include="Views\Ocorrencia\Detalhes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

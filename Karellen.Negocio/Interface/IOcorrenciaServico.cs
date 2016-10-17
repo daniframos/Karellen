@@ -10,5 +10,6 @@ namespace Karellen.Negocio.Interface
         List<OcorrenciaDTO> BuscarTodasOcorrencias();
         OperacaoResultado SalvarNovaOcorrencia(OcorrenciaDTO ocorrencia, object idoperacao);
         int SalvarOperacao(string userAgent, string usuario, string browser, string ip, string local, Guid sessaoId, string entidade, string entidadeId);
+        OcorrenciaDTO BuscarOcorrencia(int id);
     }
 }

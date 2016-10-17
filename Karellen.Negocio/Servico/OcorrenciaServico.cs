@@ -74,5 +74,14 @@ namespace Karellen.Negocio.Servico
 
             return log.Id;
         }
+
+        public OcorrenciaDTO BuscarOcorrencia(int id)
+        {
+            var ocorrencia = _unitOfWork.RepositorioOcorrencia.Buscar(o => o.Id == id).FirstOrDefault();
+
+            var resultado = Mapper.Map<Ocorrencia, OcorrenciaDTO>(ocorrencia);
+
+            return resultado;
+        }
     }
 }

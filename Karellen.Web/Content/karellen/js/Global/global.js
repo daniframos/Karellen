@@ -8,7 +8,7 @@
 
         // Private
         _private.mapaCarregado = function() {
-            return typeof (_private.mapa) !== "undefined";
+            return typeof _private.mapa !== "undefined";
         };
 
         _private.configurarAjax = function () {
@@ -136,14 +136,6 @@
 
         _private.iniciarControlesEdicao = function () {
 
-            //debugger;
-            //var kmarker = L.Icon.extend({
-            //    iconUrl: _private.url + '/content/karellen/img/robbery.png',
-            //    iconSize: [32, 32],
-            //    iconAnchor: [28, 28],
-            //    popupAnchor: [0, -34]
-            //});
-
             var drawItens = new L.FeatureGroup();
             _private.mapa.addLayer(drawItens);
 
@@ -169,7 +161,7 @@
 
         $public.Url = function() {
             return _private.url;
-        }
+        };
 
         $public.SuportaAjax = function () {
             return window.history.length > 0;
@@ -196,7 +188,7 @@
             _private.coordenadas = coordenadas;
             _private.zoom = zoom;
 
-            if (typeof(tipo) === "undefined") {
+            if (typeof tipo === "undefined") {
                 tipo = "mapbox.light";
             }
             
@@ -224,7 +216,6 @@
         };
 
         $public.NovaOcorrencia = function () {
-            debugger;
             if (_private.mapaCarregado()) {
                 $public.DestruirMapa();
             }
@@ -242,11 +233,19 @@
         };
 
         $public.ZoomPara = function (coordenadas, zoomNivel) {
-            if (typeof (zoomNivel) !== "undefined") {
+            if (typeof zoomNivel !== "undefined") {
                 _private.mapa.setView(coordenadas, zoomNivel);
                 return;
             }
             _private.mapa.panTo(coordenadas);
+        };
+
+        $public.Detalhes = function() {
+            if (_private.mapaCarregado()) {
+                $public.DestruirMapa();
+            }
+
+            $public.IniciarMapa("mapa", [-15.64511, -47.78214], 13, "mapbox.streets");
         };
 
         return $public;
