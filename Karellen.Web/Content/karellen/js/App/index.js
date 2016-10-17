@@ -7,7 +7,7 @@
         locations.on('ready', function () {
 
             var cluster = new L.MarkerClusterGroup({
-                maxClusterRadius:140
+                maxClusterRadius: 80
             });
 
             // Para cada layer
@@ -51,7 +51,6 @@
 
                 layer.on('click', function (e) {
 
-                    App.ZoomPara(layer.getLatLng());
 
                     // 2. Set active the markers associated listing.
                     setActive(listing);
@@ -60,7 +59,6 @@
                 link.onclick = function () {
                     setActive(listing);
 
-                    App.ZoomPara(layer.getLatLng(), 16);
                     layer.openPopup();
                     return false;
                 };

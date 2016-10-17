@@ -27,7 +27,6 @@ namespace Karellen.Negocio.Servico
         {
             var o = _unitOfWork.RepositorioOcorrencia.BuscarTodos().OrderByDescending(oc => oc.DataAcontecimento).ToList();
             var resultado = Mapper.Map<List<Ocorrencia>, List<OcorrenciaDTO>>(o);
-
             return resultado;
         }
 
@@ -78,7 +77,8 @@ namespace Karellen.Negocio.Servico
         public OcorrenciaDTO BuscarOcorrencia(int id)
         {
             var ocorrencia = _unitOfWork.RepositorioOcorrencia.Buscar(o => o.Id == id).FirstOrDefault();
-
+            ocorrencia.TipoOcorrencias =
+                _unitOfWork.RepositorioTipoOcorrencia.Buscar(t => t.OcorrenciaId == ocorrencia.Id);
             var resultado = Mapper.Map<Ocorrencia, OcorrenciaDTO>(ocorrencia);
 
             return resultado;

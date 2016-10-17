@@ -10,7 +10,6 @@ namespace Karellen.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Karellen.Data.Contexto.KarellenContexto";
         }
 
         protected override void Seed(Karellen.Data.Contexto.KarellenContexto context)

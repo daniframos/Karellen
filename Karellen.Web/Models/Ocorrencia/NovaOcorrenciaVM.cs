@@ -20,7 +20,7 @@ namespace Karellen.Web.Models.Ocorrencia
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd h:mm:ss tt}")]
         public DateTime DataAcontecimento { get; set; }
         [DisplayName(@"Tipo de Ocorrência")]
-        public ICollection<TipoOcorrencia> TipoOcorrencias { get; set; }
+        public ICollection<EnumTipoOcorrencia> TipoOcorrencias { get; set; }
         [DisplayName(@"Sexo da Vítima")]
         public Sexo SexoVitima { get; set; }
         public string Detalhes { get; set; }

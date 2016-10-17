@@ -83,6 +83,7 @@ namespace Karellen.Web.Controllers
         {
             var ocorrencia = _servico.BuscarOcorrencia(id);
             var model = Mapper.Map<OcorrenciaDTO, NovaOcorrenciaVM>(ocorrencia);
+            model.OcorrenciaAnonima = ocorrencia.UsuarioId == null;
 
             return View("Detalhes", model);
         }

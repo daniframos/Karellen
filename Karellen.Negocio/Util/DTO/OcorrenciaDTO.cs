@@ -19,7 +19,7 @@ namespace Karellen.Negocio.Util.DTO
         public bool? HaBoletimDeOcorrencia { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
-        public ICollection<TipoOcorrencia> TipoOcorrencias { get; set; }
+        public ICollection<EnumTipoOcorrencia> TipoOcorrencias { get; set; }
 
         public int? UsuarioId { get; set; }
     }

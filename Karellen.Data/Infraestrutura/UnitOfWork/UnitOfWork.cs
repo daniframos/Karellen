@@ -15,6 +15,7 @@ namespace Karellen.Data.Infraestrutura.UnitOfWork
         private IRepositorioUsuario _repositorioUsuario;
         private IRepositorioLog _repositorioLog;
         private IRepositorioOcorrencia _repositorioOcorrencia;
+        private IRepositorioTipoOcorrencia _repositorioTipoOcorrencia;
 
         public IRepositorioLog RepositorioLog
         {
@@ -27,6 +28,12 @@ namespace Karellen.Data.Infraestrutura.UnitOfWork
         {
             get { return _repositorioOcorrencia ?? (_repositorioOcorrencia = new RepositorioOcorrencia(_context)); }
         }
+
+        public IRepositorioTipoOcorrencia RepositorioTipoOcorrencia
+        {
+            get { return _repositorioTipoOcorrencia ?? (_repositorioTipoOcorrencia = new RepositorioTipoOcorrencia(_context)); }
+        }
+
         public IRepositorioGrupo RepositorioGrupo
         {
             get

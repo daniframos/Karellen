@@ -12,6 +12,7 @@ namespace Karellen.Data.Interface.UnitOfWork
         IRepositorioUsuario RepositorioUsuario { get; }
         IRepositorioLog RepositorioLog { get; }
         IRepositorioOcorrencia RepositorioOcorrencia { get; }
+        IRepositorioTipoOcorrencia RepositorioTipoOcorrencia { get; }
 
         int SaveChanges();
         Task<int> SaveChangesAsync();

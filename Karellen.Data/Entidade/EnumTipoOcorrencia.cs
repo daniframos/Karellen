@@ -2,7 +2,13 @@
 
 namespace Karellen.Data.Entidade
 {
-    public enum TipoOcorrencia
+    public class TipoOcorrencia
+    {
+        public EnumTipoOcorrencia Tipo { get; set; }
+        public Ocorrencia Ocorrencia { get; set; }
+        public int OcorrenciaId { get; set; }
+    }
+    public enum EnumTipoOcorrencia
     {
         [Description("Furto em veículo")]
         FurtoVeiculo,

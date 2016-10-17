@@ -17,8 +17,8 @@ namespace Karellen.Web.Helper
     {
         public static MvcHtmlString OcorrenciasFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
         {
-            var ocorrencias = Enum.GetValues(typeof(TipoOcorrencia))
-                    .Cast<TipoOcorrencia>()
+            var ocorrencias = Enum.GetValues(typeof(EnumTipoOcorrencia))
+                    .Cast<EnumTipoOcorrencia>()
                     .Select(l => new SelectListItem
                     {
                         Value = ((int)l).ToString(),

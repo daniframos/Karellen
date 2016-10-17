@@ -12,6 +12,7 @@ namespace Karellen.Data.Contexto
         public virtual IDbSet<LoginExterno> LoginsExternos { get; set; }
         public virtual IDbSet<Ocorrencia> Ocorrencias { get; set; }
         public virtual IDbSet<Log> Logs { get; set; }
+        public virtual IDbSet<TipoOcorrencia> TipoOcorrencias { get; set; }
 
         public KarellenContexto() : base("KarellenConnectionString")
         {

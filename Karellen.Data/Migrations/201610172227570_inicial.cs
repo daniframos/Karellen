@@ -3,7 +3,7 @@ namespace Karellen.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class inicial : DbMigration
     {
         public override void Up()
         {
@@ -26,6 +26,7 @@ namespace Karellen.Data.Migrations
                         Username = c.String(nullable: false),
                         Email = c.String(nullable: false, maxLength: 50),
                         Senha = c.String(),
+                        Cidade = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -61,6 +62,17 @@ namespace Karellen.Data.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.TBUsuario", t => t.UsuarioId)
                 .Index(t => t.UsuarioId);
+            
+            CreateTable(
+                "dbo.TBTipoOcorrencia",
+                c => new
+                    {
+                        OcorrenciaId = c.Int(nullable: false),
+                        Tipo = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.OcorrenciaId, t.Tipo })
+                .ForeignKey("dbo.TBOcorrencia", t => t.OcorrenciaId)
+                .Index(t => t.OcorrenciaId);
             
             CreateTable(
                 "dbo.TBLog",
@@ -99,13 +111,16 @@ namespace Karellen.Data.Migrations
             DropForeignKey("dbo.TBUsuarioGrupo", "UsuarioId", "dbo.TBUsuario");
             DropForeignKey("dbo.TBUsuarioGrupo", "GrupoId", "dbo.TBGrupo");
             DropForeignKey("dbo.TBOcorrencia", "UsuarioId", "dbo.TBUsuario");
+            DropForeignKey("dbo.TBTipoOcorrencia", "OcorrenciaId", "dbo.TBOcorrencia");
             DropForeignKey("dbo.TBLoginExterno", "UsuarioId", "dbo.TBUsuario");
             DropIndex("dbo.TBUsuarioGrupo", new[] { "UsuarioId" });
             DropIndex("dbo.TBUsuarioGrupo", new[] { "GrupoId" });
+            DropIndex("dbo.TBTipoOcorrencia", new[] { "OcorrenciaId" });
             DropIndex("dbo.TBOcorrencia", new[] { "UsuarioId" });
             DropIndex("dbo.TBLoginExterno", new[] { "UsuarioId" });
             DropTable("dbo.TBUsuarioGrupo");
             DropTable("dbo.TBLog");
+            DropTable("dbo.TBTipoOcorrencia");
             DropTable("dbo.TBOcorrencia");
             DropTable("dbo.TBLoginExterno");
             DropTable("dbo.TBUsuario");
