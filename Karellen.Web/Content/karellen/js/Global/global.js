@@ -7,7 +7,11 @@
         var $public = {};
 
         // Private
-        _private.ConfigurarAjax = function () {
+        _private.mapaCarregado = function() {
+            return typeof (_private.mapa) !== "undefined";
+        };
+
+        _private.configurarAjax = function () {
             $(document).ajaxStart(function () {
                     NProgress.start();
                 });
@@ -17,13 +21,13 @@
             $.ajaxSetup({ cache: false });
         };
 
-        _private.ConfigurarChosen = function () {
+        _private.configurarChosen = function () {
             $(function() {
                 $(".chosen-select").chosen({ no_results_text: "Nada encontrado", width: "100%" });
             });
         };
 
-        _private.ConfigurarDraw = function () {
+        _private.configurarDraw = function () {
             L.drawLocal.draw.handlers.marker.tooltip.start = "Click no mapa para inserir o local da ocorrência";
             L.drawLocal.draw.toolbar.buttons.marker = "Insira o local da ocorrência";
             L.drawLocal.edit.toolbar.buttons.edit = "Editar";
@@ -31,7 +35,7 @@
             L.Icon.Default.imagePath = _private.url + "/images";
         };
 
-        _private.ConfigurarDateTimePicker = function () {
+        _private.configurarDateTimePicker = function () {
            $(function() {
                $("#datetimepicker1").datetimepicker({
                    locale: 'pt-br'
@@ -39,13 +43,13 @@
            });
         };
 
-        _private.ConfigurarBotaoEdicao = function () {
+        _private.configurarBotaoEdicao = function () {
             $("#sidewrapper").on("click", "#btnedit", function () {
                 $("form input[disabled]").removeAttr("disabled");
             });
         };
 
-        _private.OnDrawDeleted = function(event) {
+        _private.onDrawDeleted = function(event) {
 
             _private.mapa.removeLayer(_private.drawItens);
 
@@ -78,7 +82,7 @@
             $("#Longitude").val("");
         };
 
-        _private.OnDrawCreated = function(event) {
+        _private.onDrawCreated = function(event) {
 
             var tipo = event.layerType;
             var layer = event.layer;
@@ -113,13 +117,13 @@
                 _private.drawItens = drawItens;
 
                 _private.mapa.addControl(drawControl);
-                _private.ConfigurarDraw();
+                _private.configurarDraw();
             }
 
             drawItens.addLayer(layer);
         };
 
-        _private.OnDrawEdited = function(event) {
+        _private.onDrawEdited = function(event) {
 
             var layers = event.layers;
             layers.eachLayer(function(layer) {
@@ -130,7 +134,7 @@
             });
         };
 
-        _private.IniciarControlesEdicao = function () {
+        _private.iniciarControlesEdicao = function () {
 
             //debugger;
             //var kmarker = L.Icon.extend({
@@ -160,10 +164,10 @@
             _private.drawItens = drawItens;
 
             _private.mapa.addControl(drawControl);
-            _private.ConfigurarDraw();
+            _private.configurarDraw();
         };
 
-        $public.Url = function(url) {
+        $public.Url = function() {
             return _private.url;
         }
 
@@ -174,9 +178,9 @@
         $public.Init = function (url) {
 
             _private.url = url;
-            _private.ConfigurarAjax();
-            _private.ConfigurarChosen();
-            _private.ConfigurarBotaoEdicao();
+            _private.configurarAjax();
+            _private.configurarChosen();
+            _private.configurarBotaoEdicao();
         };
 
         $public.GetGeoJson = function (local) {
@@ -186,20 +190,25 @@
             return locations;
         };
 
-        $public.IniciarMapa = function (elemento, coordenadas, zoom) {
+        $public.IniciarMapa = function (elemento, coordenadas, zoom, tipo) {
 
             _private.elemento = elemento;
             _private.coordenadas = coordenadas;
             _private.zoom = zoom;
 
+            if (typeof(tipo) === "undefined") {
+                tipo = "mapbox.light";
+            }
+            
             L.mapbox.accessToken = 'pk.eyJ1Ijoia2tyaWNvIiwiYSI6ImNpc3l5bGtsNDBmcDQycGtoOTgwN3JtN3IifQ.Bc9quEp60HksbmydwEUJqw';
-            _private.mapa = L.mapbox.map(elemento, "mapbox.light").setView(coordenadas, zoom);
+            _private.mapa = L.mapbox.map(elemento, tipo).setView(coordenadas, zoom);
 
 
             _private.mapa.on('ready', function() {
                 new L.Control.MiniMap(L.mapbox.tileLayer('mapbox.streets')).addTo(_private.mapa);
-            })
-        };
+            });
+
+            };
 
         $public.DestruirMapa = function() {
             _private.mapa.off();
@@ -208,17 +217,24 @@
 
         $public.HabilitarEdicao = function() {
 
-            $public.DestruirMapa();
-            $public.IniciarMapa(_private.elemento, _private.coordenadas, _private.zoom);
+            _private.iniciarControlesEdicao();
+            _private.mapa.on("draw:created", _private.onDrawCreated);
+            _private.mapa.on("draw:deleted", _private.onDrawDeleted);
+            _private.mapa.on("draw:edited", _private.onDrawEdited);
+        };
 
-            _private.IniciarControlesEdicao();
-            _private.mapa.on("draw:created", _private.OnDrawCreated);
-            _private.mapa.on("draw:deleted", _private.OnDrawDeleted);
-            _private.mapa.on("draw:edited", _private.OnDrawEdited);
+        $public.NovaOcorrencia = function () {
+            debugger;
+            if (_private.mapaCarregado()) {
+                $public.DestruirMapa();
+            }
 
-            _private.ConfigurarChosen();
-            _private.ConfigurarDraw();
-            _private.ConfigurarDateTimePicker();
+            $public.IniciarMapa("mapa", [-15.64511, -47.78214], 13, "mapbox.streets");
+            $public.HabilitarEdicao();
+
+            _private.configurarChosen();
+            _private.configurarDraw();
+            _private.configurarDateTimePicker();
         };
 
         return $public;
