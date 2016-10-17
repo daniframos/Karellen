@@ -6,15 +6,14 @@ namespace Karellen.Web
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.UseCdn = true;
             bundles.Add(new StyleBundle("~/css")
                 .Include("~/Content/font-awesome/css/font-awesome.css")
                 .Include("~/Content/nprogress/nprogress.css")
                 .Include("~/Content/bootstrap/dist/css/bootstrap.css")
                 .Include("~/Content/chosen/chosen.css")
                 .Include("~/Content/datetimepicker/build/css/bootstrap-datetimepicker.css")
-                .Include("~/Content/leaflet/dist/leaflet.css")
                 .Include("~/Content/pagedlist/css/pagedlist.css")
-                .Include("~/Content/leaflet-draw/dist/leaflet.draw.css")
                 .Include("~/Content/karellen/css/site.css"));
 
             bundles.Add(new ScriptBundle("~/js")
@@ -26,10 +25,9 @@ namespace Karellen.Web
                 .Include("~/Content/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js")
                 .Include("~/Content/chosen/chosen.jquery.js")
                 .Include("~/Content/nprogress/nprogress.js")
-                .Include("~/Content/leaflet/dist/leaflet.js")
-                .Include("~/Content/leaflet-draw/dist/leaflet.draw.js")
                 .Include("~/Content/jquery-pjax/jquery.pjax.js")
-                .Include("~/Content/karellen/js/Global/global.js"));
+                .Include("~/Content/karellen/js/Global/global.js")
+                );
         }
     }
 }

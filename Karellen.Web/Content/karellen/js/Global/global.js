@@ -2,11 +2,11 @@
     "use strict";
 
     var app = (function ($) {
+
         var _private = {};
         var $public = {};
 
         // Private
-
         _private.ConfigurarAjax = function () {
             $(document).ajaxStart(function () {
                     NProgress.start();
@@ -45,7 +45,7 @@
             });
         };
 
-        _private.OnDrawDeleted = function (event) {
+        _private.OnDrawDeleted = function(event) {
 
             _private.mapa.removeLayer(_private.drawItens);
 
@@ -76,9 +76,9 @@
 
             $("#Latitude").val("");
             $("#Longitude").val("");
-        }
+        };
 
-        _private.OnDrawCreated = function (event) {
+        _private.OnDrawCreated = function(event) {
 
             var tipo = event.layerType;
             var layer = event.layer;
@@ -117,7 +117,7 @@
             }
 
             drawItens.addLayer(layer);
-        }
+        };
 
         _private.OnDrawEdited = function(event) {
 
@@ -130,14 +130,30 @@
             });
         };
 
-        $public.DesabilitarMarcadores = function () {
+        _private.IniciarControlesEdicao = function () {
 
-            _private.mapa.eachLayer(function (layer) {
-                if (layer instanceof L.Marker) {
-                    _private.mapa.removeLayer(layer);
+            var drawItens = new L.FeatureGroup();
+            _private.mapa.addLayer(drawItens);
+
+            var drawControl = new L.Control.Draw({
+                draw: {
+                    rectangle: false,
+                    polyline: false,
+                    polygon: false,
+                    circle: false,
+                    marker: true
+                },
+                edit: {
+                    featureGroup: drawItens,
+                    remove: true
                 }
             });
-        }
+            _private.drawControl = drawControl;
+            _private.drawItens = drawItens;
+
+            _private.mapa.addControl(drawControl);
+            _private.ConfigurarDraw();
+        };
 
         $public.SuportaAjax = function () {
             return window.history.length > 0;
@@ -147,42 +163,24 @@
 
             _private.url = url;
             _private.ConfigurarAjax();
-            _private.ConfigurarDraw();
             _private.ConfigurarChosen();
             _private.ConfigurarBotaoEdicao();
         };
 
-        $public.GetGeoJson = function (local, callback) {
+        $public.GetGeoJson = function (local) {
+            var locations = L.mapbox.featureLayer().addTo(_private.mapa); // Pega a feature layer. Acredito que somente exista 1 feature layer
 
-            var options = {
-                url: _private.url + local,
-                method: 'GET'
-            };
-
-            $.ajax(options)
-                .done(function (data, res) {
-                    callback(data, res, _private.mapa);
-                    L.geoJson(data).addTo(_private.mapa);
-                });
+            locations.loadURL(_private.url + local);
         };
 
         $public.IniciarMapa = function (elemento, coordenadas, zoom) {
 
-            _private.zoom = zoom;
-            _private.coordenadas = coordenadas;
             _private.elemento = elemento;
-            _private.mapa = L.map(elemento).setView(coordenadas, zoom);
-            _private.Token = 'pk.eyJ1Ijoia2tyaWNvIiwiYSI6ImNpc3l5bGtsNDBmcDQycGtoOTgwN3JtN3IifQ.Bc9quEp60HksbmydwEUJqw';
-            var options = {
-                id: 'mapbox.streets',
-                minZoom: 10,
-                maxZoom: 20,
-                attribution: '<a href="http://openstreetmap.org">OpenStreetMap</a> &copy; | <a href="http://mapbox.com">Mapbox</a> &copy; sobre ' +
-                                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>.'
-            };
+            _private.coordenadas = coordenadas;
+            _private.zoom = zoom;
 
-            _private.mapaUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + _private.Token;
-            _private.TitleLayer = L.tileLayer(_private.mapaUrl, options).addTo(_private.mapa);
+            L.mapbox.accessToken = 'pk.eyJ1Ijoia2tyaWNvIiwiYSI6ImNpc3l5bGtsNDBmcDQycGtoOTgwN3JtN3IifQ.Bc9quEp60HksbmydwEUJqw';
+            _private.mapa = L.mapbox.map(elemento, "mapbox.light").setView(coordenadas, zoom);
         };
 
         $public.DestruirMapa = function() {
@@ -190,41 +188,21 @@
             _private.mapa.remove();
         };
 
-        $public.HabilitarEdicao = function () {
+        $public.HabilitarEdicao = function() {
 
+            debugger;
             $public.DestruirMapa();
             $public.IniciarMapa(_private.elemento, _private.coordenadas, _private.zoom);
 
-            var drawItens = new L.FeatureGroup();
-            _private.mapa.addLayer(drawItens);
-
-            var drawControl = new L.Control.Draw({
-                    draw: {
-                        rectangle: false,
-                        polyline: false,
-                        polygon: false,
-                        circle: false,
-                        marker: true
-                    },
-                    edit: {
-                        featureGroup: drawItens,
-                        remove: true
-                    }
-                });
-            _private.drawControl = drawControl;
-            _private.drawItens = drawItens;
-
-            _private.mapa.addControl(drawControl);
-            _private.ConfigurarDraw();
-
-
+            _private.IniciarControlesEdicao();
             _private.mapa.on("draw:created", _private.OnDrawCreated);
             _private.mapa.on("draw:deleted", _private.OnDrawDeleted);
             _private.mapa.on("draw:edited", _private.OnDrawEdited);
 
             _private.ConfigurarChosen();
+            _private.ConfigurarDraw();
             _private.ConfigurarDateTimePicker();
-        }
+        };
 
         return $public;
 

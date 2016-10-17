@@ -372,3 +372,11 @@ footer .footer-below {
     margin-bottom: 1.0em; 
     display: inline-block;
 }
+
+#titulo {
+    border-bottom: none;
+}
+
+#btn-novaocorrencia {
+    margin-top: 1em;
+}

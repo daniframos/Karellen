@@ -8,6 +8,7 @@ using Karellen.Negocio.Util.DTO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Karellen.Negocio.Servico
 {
@@ -24,7 +25,7 @@ namespace Karellen.Negocio.Servico
 
         public List<OcorrenciaDTO> BuscarTodasOcorrencias()
         {
-            var o = _unitOfWork.RepositorioOcorrencia.BuscarTodos();
+            var o = _unitOfWork.RepositorioOcorrencia.BuscarTodos().OrderByDescending(oc => oc.DataAcontecimento).ToList();
             var resultado = Mapper.Map<List<Ocorrencia>, List<OcorrenciaDTO>>(o);
 
             return resultado;

@@ -226,18 +226,6 @@
     <Content Include="Content\karellen\js\Global\global.js" />
     <Content Include="Content\karellen\js\Global\navegacao.js" />
     <Content Include="Content\karellen\js\Ocorrencia\nova.js" />
-    <Content Include="Content\leaflet-draw\dist\images\spritesheet-2x.png" />
-    <Content Include="Content\leaflet-draw\dist\images\spritesheet.png" />
-    <Content Include="Content\leaflet-draw\dist\images\spritesheet.svg" />
-    <Content Include="Content\leaflet-draw\dist\leaflet.draw.css" />
-    <Content Include="Content\leaflet-draw\dist\leaflet.draw.js" />
-    <Content Include="Content\leaflet\dist\images\layers-2x.png" />
-    <Content Include="Content\leaflet\dist\images\layers.png" />
-    <Content Include="Content\leaflet\dist\images\marker-icon-2x.png" />
-    <Content Include="Content\leaflet\dist\images\marker-icon.png" />
-    <Content Include="Content\leaflet\dist\images\marker-shadow.png" />
-    <Content Include="Content\leaflet\dist\leaflet.css" />
-    <Content Include="Content\leaflet\dist\leaflet.js" />
     <Content Include="Content\moment\locale\pt-br.js" />
     <Content Include="Content\moment\moment.js" />
     <Content Include="Content\nprogress\nprogress.css" />
@@ -246,6 +234,9 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\icons-000000%402x.png" />
+    <Content Include="images\icons-ffffff%402x.png" />
+    <Content Include="images\icons.svg" />
     <Content Include="images\layers-2x.png" />
     <Content Include="images\layers.png" />
     <Content Include="images\marker-icon-2x.png" />
@@ -254,7 +245,9 @@
     <Content Include="images\spritesheet-2x.png" />
     <Content Include="images\spritesheet.png" />
     <Content Include="images\spritesheet.svg" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfig.cs" />
@@ -334,6 +327,7 @@
     <Content Include="Views\Conta\_LoginExterno.cshtml" />
     <Content Include="Views\Conta\_LoginExternoRemover.cshtml" />
     <Content Include="Views\Log\Detalhes.cshtml" />
+    <Content Include="images\render.sh" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
