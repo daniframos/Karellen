@@ -132,6 +132,14 @@
 
         _private.IniciarControlesEdicao = function () {
 
+            //debugger;
+            //var kmarker = L.Icon.extend({
+            //    iconUrl: _private.url + '/content/karellen/img/robbery.png',
+            //    iconSize: [32, 32],
+            //    iconAnchor: [28, 28],
+            //    popupAnchor: [0, -34]
+            //});
+
             var drawItens = new L.FeatureGroup();
             _private.mapa.addLayer(drawItens);
 
@@ -155,6 +163,10 @@
             _private.ConfigurarDraw();
         };
 
+        $public.Url = function(url) {
+            return _private.url;
+        }
+
         $public.SuportaAjax = function () {
             return window.history.length > 0;
         };
@@ -171,6 +183,7 @@
             var locations = L.mapbox.featureLayer().addTo(_private.mapa); // Pega a feature layer. Acredito que somente exista 1 feature layer
 
             locations.loadURL(_private.url + local);
+            return locations;
         };
 
         $public.IniciarMapa = function (elemento, coordenadas, zoom) {
@@ -181,6 +194,11 @@
 
             L.mapbox.accessToken = 'pk.eyJ1Ijoia2tyaWNvIiwiYSI6ImNpc3l5bGtsNDBmcDQycGtoOTgwN3JtN3IifQ.Bc9quEp60HksbmydwEUJqw';
             _private.mapa = L.mapbox.map(elemento, "mapbox.light").setView(coordenadas, zoom);
+
+
+            _private.mapa.on('ready', function() {
+                new L.Control.MiniMap(L.mapbox.tileLayer('mapbox.streets')).addTo(_private.mapa);
+            })
         };
 
         $public.DestruirMapa = function() {
@@ -190,7 +208,6 @@
 
         $public.HabilitarEdicao = function() {
 
-            debugger;
             $public.DestruirMapa();
             $public.IniciarMapa(_private.elemento, _private.coordenadas, _private.zoom);
 

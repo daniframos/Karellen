@@ -206,6 +206,7 @@ footer .footer-below {
     height: 100%;
     overflow: auto;
     padding-bottom: 60px;
+    float: left;
 }
 .listings .item {
     display: block;
@@ -226,7 +227,7 @@ footer .footer-below {
 }
 .listings .item.active .title,
 .listings .item .title:hover {
-    color: #8cc63f;
+    color: #003e1c;
 }
 .listings .item.active {
     background-color: #f8f8f8;
@@ -250,13 +251,12 @@ footer .footer-below {
 .leaflet-popup-content {
     font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
     padding: 0;
-    width: 200px;
 }
 .leaflet-popup-content-wrapper {
     padding: 0;
 }
 .leaflet-popup-content h3 {
-    background: #91c949;
+    background: #51843e;
     color: #fff;
     margin: 0;
     display: block;
@@ -379,4 +379,9 @@ footer .footer-below {
 
 #btn-novaocorrencia {
     margin-top: 1em;
+}
+#listings {
+    width: 100%;
+    margin-left: 2em;
+    margin-right: 2em;
 }

@@ -222,6 +222,7 @@
     <Content Include="Content\karellen\css\site.css" />
     <Content Include="Content\karellen\img\bg.jpg" />
     <Content Include="Content\karellen\img\favicon.ico" />
+    <Content Include="Content\karellen\img\robbery.png" />
     <Content Include="Content\karellen\js\App\index.js" />
     <Content Include="Content\karellen\js\Global\global.js" />
     <Content Include="Content\karellen\js\Global\navegacao.js" />

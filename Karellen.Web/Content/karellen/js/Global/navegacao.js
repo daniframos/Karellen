@@ -1,5 +1,5 @@
 ﻿$(function () {
-    //if (App.SuportaAjax()) {
+    if (App.SuportaAjax()) {
         $(document).pjax('[data-pjax] a, a[data-pjax]', '#sidewrapper',
         {
             fragment: "#sidewrapper"
@@ -20,5 +20,5 @@
                 App[fn]();
             }
         })
-    //}
+    }
 });
