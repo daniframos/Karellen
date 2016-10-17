@@ -2,6 +2,7 @@
 @model Karellen.Web.Models.Ocorrencia.NovaOcorrenciaVM
 @{
     ViewBag.Title = "Nova Ocorrência";
+    var acao = ViewBag.Acao as string;
 }
 
 <div id="sidewrapper">
@@ -9,10 +10,10 @@
         <div class="heading">
         </div>
         <div class="heading">
-            <h1>Nova Ocorrência</h1>
+            <h1>@acao Ocorrência</h1>
         </div>
         <div id="listingsocorrencia" class="listings">
-            @using (Html.BeginForm("Nova", "Ocorrencia", FormMethod.Post))
+            @using (Html.BeginForm(acao, "Ocorrencia", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
 
@@ -33,7 +34,7 @@
                         <div class="col-md-12">
                             @Html.LabelFor(model => model.DataAcontecimento, htmlAttributes: new { @class = "control-label" })
                             <div class='input-group date' id='datetimepicker1'>
-                                @Html.EditorFor(model => model.DataAcontecimento, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                @Html.TextBoxFor(model => model.DataAcontecimento, new { @class = "form-control datepicker" })
                                 <span class="input-group-addon" id="datetimepicker">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>

@@ -54,6 +54,8 @@ namespace Karellen.Web.Controllers
             var idOperacaoLog = Session[IdOperacao];
             var resultado = _servico.SalvarNovaOcorrencia(ocorrencia, idOperacaoLog);
 
+            ViewBag.Acao = "Nova";
+
             return RedirectToAction("index", "app", new {mensagem = EnumMensagem.OcorrenciaCriada});
         }
 
@@ -90,6 +92,27 @@ namespace Karellen.Web.Controllers
             model.OcorrenciaAnonima = ocorrencia.UsuarioId == null;
 
             return View("Detalhes", model);
+        }
+
+        [HttpGet]
+        public ActionResult Editar(int id)
+        {
+            var ocorrencia = _servico.BuscarOcorrencia(id);
+            var model = Mapper.Map<OcorrenciaDTO, NovaOcorrenciaVM>(ocorrencia);
+            model.OcorrenciaAnonima = ocorrencia.UsuarioId == null;
+            ViewBag.Acao = "Editar";
+            return View("Nova", model);
+        }
+
+        [HttpPost]
+        public ActionResult Editar(NovaOcorrenciaVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Nova");
+            }
+
+            return RedirectToAction("index", "app", new {mensagem = EnumMensagem.Alterado});
         }
     }
 }
