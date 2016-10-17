@@ -39,7 +39,18 @@
                         "/ocorrencia/detalhes/" +
                         prop.Id +
                         '" type="button" data-title="Detalhes" data-pjax data-callback="Detalhes"' +
-                        ' class="btn btn-primary btn-default btnsaibamais" style="color: white">Saiba mais</button>';
+                        ' class="btn btn-primary btn-default btnsaibamais" style="color: white">Saiba mais</a>';
+                }
+
+                if (prop.UsuarioId != null) {
+                    popup += '<a href="' +
+                        App.Url() +
+                        "/ocorrencia/editar/" +
+                        prop.Id +
+                        '" type="button" style="margin-left:1em; color:white;" data-title="Editar" data-pjax data-callback="Editar"' +
+                        ' class="btn btn-primary btn-default btnsaibamais" style="color: white">' +
+                        '<i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>';
+                    link.innerHTML += ' <i class="fa fa-pencil" aria-hidden="true"></i>'
                 }
 
                 var details = listing.appendChild(document.createElement('div'));

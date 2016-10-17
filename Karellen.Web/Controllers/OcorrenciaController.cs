@@ -68,7 +68,11 @@ namespace Karellen.Web.Controllers
                 (new Point
                     (new GeographicPosition(o.Latitude, o.Longitude)), new
                     {
-                        o.Id, Nome = o.Titulo, Data = o.DataAcontecimento.ToString("D",DateTimeFormatInfo.CurrentInfo), o.Detalhes
+                        UsuarioId = User.Identity.GetUserId<int>() == o.UsuarioId ? o.UsuarioId : null,
+                        o.Id,
+                        Nome = o.Titulo,
+                        Data = o.DataAcontecimento.ToString("D",DateTimeFormatInfo.CurrentInfo),
+                        o.Detalhes
                     }));
 
             featureCollection.Features.AddRange(c);
