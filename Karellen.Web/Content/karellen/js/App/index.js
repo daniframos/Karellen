@@ -25,7 +25,6 @@
                 listing.className = 'item';
 
                 // Cria a ancora
-                debugger;
                 listing.appendChild(document.createElement('h4'));
                 var link = listing.childNodes[0].appendChild(document.createElement('a'));
                 link.href = '#';
@@ -33,17 +32,14 @@
 
                 // Se tiver a propriedade crossStreet 'rua' diferente de undefined
                 link.innerHTML = prop.Nome;
-                if (prop.crossStreet) {
+                if (prop.Data) {
                     // Cria 
-                    link.innerHTML += '<br /><small class="quiet">' + prop.Nome + '</small>';
-                    popup += '<br /><small class="quiet">' + prop.DataAcontecimento + '</small>';
+                    popup += '<br /><small class="quiet" style="text-align:center"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp' + prop.Data + '</small>';
                 }
 
                 var details = listing.appendChild(document.createElement('div'));
                 details.innerHTML = prop.Data;
-                if (prop.phone) {
-                    details.innerHTML += ' &middot; ' + prop.phoneFormatted;
-                }
+                
 
                 popup += '</div>';
                 locale.bindPopup(popup);

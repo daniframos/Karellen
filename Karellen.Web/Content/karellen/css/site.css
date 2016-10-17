@@ -385,3 +385,8 @@ footer .footer-below {
     margin-left: 2em;
     margin-right: 2em;
 }
+
+.leaflet-popup-content {
+    text-align: center !important;
+    width: 100% !important;
+}
