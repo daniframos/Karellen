@@ -11,17 +11,11 @@
             });
 
             // Para cada layer
-            locations.eachLayer(function (locale) {
-                cluster.addLayer(locale);
-                debugger;
-                // Shorten locale.feature.properties to just `prop` so we're not
-                // writing this long form over and over again.
+            locations.eachLayer(function (layer) {
+                cluster.addLayer(layer);
 
-                // Pega as propriedades
-                var prop = locale.feature.properties;
+                var prop = layer.feature.properties;
 
-                // Cria o header do popup
-                // Each marker on the map.
                 var popup = '<h3>' + prop.Nome + '</h3>';
                 popup += '<div>' + prop.Detalhes + '</div>';
 
@@ -40,7 +34,7 @@
                 if (prop.Data) {
                     // Cria 
                     popup += '<br /><small class="quiet" style="text-align:center"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp' + prop.Data + '</small>';
-                    popup += '<br /><button type="button" class="btn btn-primary btn-default btnsaibamais">Saiba mais</button>'
+                    popup += '<br /><a href="" type="button" class="btn btn-primary btn-default btnsaibamais">Saiba mais</button>'
                 }
 
                 var details = listing.appendChild(document.createElement('div'));
@@ -48,7 +42,24 @@
                 
 
                 popup += '</div>';
-                locale.bindPopup(popup);
+                layer.bindPopup(popup);
+
+                layer.on('click', function (e) {
+
+                    App.ZoomPara(layer.getLatLng());
+
+                    // 2. Set active the markers associated listing.
+                    setActive(listing);
+                });
+
+                link.onclick = function () {
+                    setActive(listing);
+
+                    App.ZoomPara(layer.getLatLng(), 16);
+                    layer.openPopup();
+                    return false;
+                };
+
             });
 
             App.AddLayer(cluster);
@@ -67,3 +78,13 @@
         });
     }
 });
+
+function setActive(el) {
+    var siblings = listings.getElementsByTagName('div');
+    for (var i = 0; i < siblings.length; i++) {
+        siblings[i].className = siblings[i].className
+          .replace(/active/, '').replace(/\s\s*$/, '');
+    }
+
+    el.className += ' active';
+}

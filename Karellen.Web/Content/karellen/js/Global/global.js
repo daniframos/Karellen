@@ -239,7 +239,15 @@
 
         $public.AddLayer = function(layer) {
             _private.mapa.addLayer(layer);
-        }
+        };
+
+        $public.ZoomPara = function (coordenadas, zoomNivel) {
+            if (typeof (zoomNivel) !== "undefined") {
+                _private.mapa.setView(coordenadas, zoomNivel);
+                return;
+            }
+            _private.mapa.panTo(coordenadas);
+        };
 
         return $public;
 
