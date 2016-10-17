@@ -237,6 +237,10 @@
             _private.configurarDateTimePicker();
         };
 
+        $public.AddLayer = function(layer) {
+            _private.mapa.addLayer(layer);
+        }
+
         return $public;
 
     })($);

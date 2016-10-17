@@ -1,14 +1,19 @@
 ﻿$(function () {
 
     if (App.SuportaAjax()) {
-        App.IniciarMapa("mapa", [-15.64511, -47.78214], 13);
+        App.IniciarMapa("mapa", [-15.64511, -47.78214], 14);
 
         var locations = App.GetGeoJson("/ocorrencia/coordenadas");
         locations.on('ready', function () {
 
+            var cluster = new L.MarkerClusterGroup({
+                maxClusterRadius:140
+            });
+
             // Para cada layer
             locations.eachLayer(function (locale) {
-
+                cluster.addLayer(locale);
+                debugger;
                 // Shorten locale.feature.properties to just `prop` so we're not
                 // writing this long form over and over again.
 
@@ -35,6 +40,7 @@
                 if (prop.Data) {
                     // Cria 
                     popup += '<br /><small class="quiet" style="text-align:center"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp' + prop.Data + '</small>';
+                    popup += '<br /><button type="button" class="btn btn-primary btn-default btnsaibamais">Saiba mais</button>'
                 }
 
                 var details = listing.appendChild(document.createElement('div'));
@@ -44,9 +50,12 @@
                 popup += '</div>';
                 locale.bindPopup(popup);
             });
+
+            App.AddLayer(cluster);
         });
 
         locations.on('layeradd', function (e) {
+
             var marker = e.layer;
             marker.setIcon(L.icon({
                 iconUrl: App.Url() + '/content/karellen/img/robbery.png', // load your own custom marker image here
@@ -54,6 +63,7 @@
                 iconAnchor: [28, 28],
                 popupAnchor: [0, -34]
             }));
+            
         });
     }
 });

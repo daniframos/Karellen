@@ -388,5 +388,9 @@ footer .footer-below {
 
 .leaflet-popup-content {
     text-align: center !important;
-    width: 100% !important;
+    width: 330px !important;
+}
+
+.btnsaibamais {
+    margin-top: 1em;
 }
