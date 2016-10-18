@@ -267,6 +267,7 @@
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContaController.cs" />
+    <Compile Include="Controllers\EstatisticaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\OcorrenciaController.cs" />
@@ -340,6 +341,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\karellen\js\Conta\" />
+    <Folder Include="Views\Estatistica\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Karellen.Data\Karellen.Data.csproj">

@@ -1,5 +1,6 @@
 ﻿@using Karellen.Negocio.Util.Extensao
 @using Karellen.Web.Helper
+@using Microsoft.AspNet.Identity
 @model Karellen.Web.Models.Ocorrencia.NovaOcorrenciaVM
 @{
     ViewBag.Title = "Detalhes";
@@ -58,16 +59,19 @@
                 <label class="control-label">Autor: </label>
                 <br/>
                 @{
-                    var autor = Model.OcorrenciaAnonima ? "Ocorrência Anônima" : Session["NomeUsuario"] as string;
+                    var autor = Model.OcorrenciaAnonima ? "Ocorrência Anônima" : ViewBag.Autor as string;
                 }
                 <h5>@autor</h5>
             </div>
-            <div class="col-md-6">
-                <button type="button" data-toggle="modal" data-hidden="@Model.Id" data-target="#myModal" style="margin-left:1em; color:white;" class="btn btn-primary btn-default btnsaibamais" style="color: white">
-                    <i class="fa fa-check" aria-hidden="true"></i> Solucionar
-                </button>
-            </div>
-
+            @if (ViewBag.AutorId == User.Identity.GetUserId<int>())
+            {
+                <div class="col-md-6">
+                    <button type="button" data-toggle="modal" data-hidden="@Model.Id" data-target="#myModal" style="margin-left:1em; color:white;" class="btn btn-primary btn-default btnsaibamais" style="color: white">
+                        <i class="fa fa-check" aria-hidden="true"></i> Solucionar
+                    </button>
+                </div>
+            }
+            
                 <div class="col-md-12" style="text-align: center">
                     <h3>Compartilhe</h3>
                 </div>

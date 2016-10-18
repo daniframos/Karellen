@@ -51,6 +51,7 @@
     <Compile Include="Util\Atributo\DescricaoAtributo.cs" />
     <Compile Include="Util\AutoMapper\LogProfile.cs" />
     <Compile Include="Util\AutoMapper\OcorrenciaProfile.cs" />
+    <Compile Include="Util\DTO\AutorDTO.cs" />
     <Compile Include="Util\DTO\LogDTO.cs" />
     <Compile Include="Util\DTO\OcorrenciaDTO.cs" />
     <Compile Include="Util\Extensao\EnumExtensao.cs" />

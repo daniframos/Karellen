@@ -144,7 +144,7 @@
                     $("#myModalLabel").text("Solucionar " + titulo +"?");
                 }
             });
-        }
+        };
 
         _private.iniciarControlesEdicao = function () {
 
@@ -176,7 +176,7 @@
             var id = url[url.length - 1];
 
             return id;
-        }
+        };
 
         $public.Url = function() {
             return _private.url;
@@ -286,6 +286,18 @@
 
                     layer.openPopup();
                 });
+            });
+
+            layers.on('layeradd', function (e) {
+
+                var marker = e.layer;
+                marker.setIcon(L.icon({
+                    iconUrl: App.Url() + '/content/karellen/img/robbery.png', // load your own custom marker image here
+                    iconSize: [32, 32],
+                    iconAnchor: [28, 28],
+                    popupAnchor: [0, -34]
+                }));
+
             });
         };
 

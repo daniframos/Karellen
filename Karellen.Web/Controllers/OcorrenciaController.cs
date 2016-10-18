@@ -83,6 +83,7 @@ namespace Karellen.Web.Controllers
             return GeoJson(coordenadasSerializadas);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Coordenada(int id)
         {
@@ -106,11 +107,15 @@ namespace Karellen.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Detalhes(int id)
         {
             var ocorrencia = _servico.BuscarOcorrencia(id);
             var model = Mapper.Map<OcorrenciaDTO, NovaOcorrenciaVM>(ocorrencia);
-            model.OcorrenciaAnonima = ocorrencia.UsuarioId == null;
+            var autor = _servico.BuscarAutorOcorrencia(id);
+
+            ViewBag.Autor = autor == null ? "Ocorrência Anônima" : autor.NomeCompleto;
+            ViewBag.AutorId = autor?.Id;
 
             return View("Detalhes", model);
         }

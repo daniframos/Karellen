@@ -33,6 +33,16 @@ namespace Karellen.Negocio.Servico
             return resultado;
         }
 
+        public List<OcorrenciaDTO> BuscarTodasOcorrencias(int usuarioId)
+        {
+            var o = _unitOfWork.RepositorioOcorrencia
+                .BuscarTodos()
+                .Where(oc => oc.UsuarioId == usuarioId)
+                .OrderByDescending(oc => oc.DataAcontecimento).ToList();
+            var resultado = Mapper.Map<List<Ocorrencia>, List<OcorrenciaDTO>>(o);
+            return resultado;
+        }
+
         public OperacaoResultado SalvarNovaOcorrencia(OcorrenciaDTO ocorrencia, object idOperacao)
         {
             var o = Mapper.Map<OcorrenciaDTO, Ocorrencia>(ocorrencia);
@@ -93,6 +103,20 @@ namespace Karellen.Negocio.Servico
             ocorrencia.DataResolucao = DateTime.Now;
 
             _unitOfWork.SaveChanges();
+        }
+
+        public AutorDTO BuscarAutorOcorrencia(int id)
+        {
+            var ocorrencia = _unitOfWork.RepositorioOcorrencia.BuscarPorId(id);
+            if (ocorrencia.UsuarioId == null)
+                return null;
+
+            var usuario = _unitOfWork.RepositorioUsuario.BuscarPorId(ocorrencia.UsuarioId);
+            return new AutorDTO()
+            {
+                Id = ocorrencia.UsuarioId,
+                NomeCompleto = usuario.NomeCompleto
+            };
         }
     }
 }
