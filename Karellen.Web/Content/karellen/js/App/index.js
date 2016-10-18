@@ -7,7 +7,7 @@
         locations.on('ready', function () {
 
             var cluster = new L.MarkerClusterGroup({
-                maxClusterRadius: 80
+                maxClusterRadius: 45
             });
 
             // Para cada layer
@@ -19,17 +19,14 @@
                 var popup = '<h3>' + prop.Nome + '</h3>';
                 popup += '<div>' + prop.Detalhes + '</div>';
 
-                // Cria a div em si que irá encapsular o corpo e o header
                 var listing = listings.appendChild(document.createElement('div'));
                 listing.className = 'item';
 
-                // Cria a ancora
                 listing.appendChild(document.createElement('h4'));
                 var link = listing.childNodes[0].appendChild(document.createElement('a'));
                 link.href = '#';
                 link.className = 'title';
 
-                // Se tiver a propriedade crossStreet 'rua' diferente de undefined
                 link.innerHTML = prop.Nome;
                 if (prop.Data) {
                     // Cria 
@@ -50,6 +47,10 @@
                         '" type="button" style="margin-left:1em; color:white;" data-title="Editar" data-pjax data-callback="Editar"' +
                         ' class="btn btn-primary btn-default btnsaibamais" style="color: white">' +
                         '<i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>';
+
+                    popup += '<button type="button" data-toggle="modal" data-hidden="'+ prop.Id +'" data-target="#myModal" style="margin-left:1em; color:white;"' +
+                        ' class="btn btn-primary btn-default btnsaibamais" style="color: white">' +
+                        '<i class="fa fa-check" aria-hidden="true"></i> Solucionar</a>';
                     link.innerHTML += ' <i class="fa fa-pencil" aria-hidden="true"></i>'
                 }
 
@@ -61,7 +62,6 @@
                 layer.bindPopup(popup);
 
                 layer.on('click', function (e) {
-
 
                     // 2. Set active the markers associated listing.
                     setActive(listing);

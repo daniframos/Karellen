@@ -42,7 +42,7 @@ namespace Karellen.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Nova(NovaOcorrenciaVM model)
-        {   
+        {
             if (!ModelState.IsValid) return View("Nova");
 
             var ocorrencia = Mapper.Map<NovaOcorrenciaVM, OcorrenciaDTO>(model);
@@ -65,17 +65,17 @@ namespace Karellen.Web.Controllers
             var ocorrencias = _servico.BuscarTodasOcorrencias();
             var featureCollection = new FeatureCollection();
 
-            var c = ocorrencias.Select(o => 
-            new Feature
+            var c = ocorrencias.Select(o =>
+                new Feature
                 (new Point
                     (new GeographicPosition(o.Latitude, o.Longitude)), new
-                    {
-                        UsuarioId = User.Identity.GetUserId<int>() == o.UsuarioId ? o.UsuarioId : null,
-                        o.Id,
-                        Nome = o.Titulo,
-                        Data = o.DataAcontecimento.ToString("D",DateTimeFormatInfo.CurrentInfo),
-                        o.Detalhes
-                    }));
+                {
+                    UsuarioId = User.Identity.GetUserId<int>() == o.UsuarioId ? o.UsuarioId : null,
+                    o.Id,
+                    Nome = o.Titulo,
+                    Data = o.DataAcontecimento.ToString("D", DateTimeFormatInfo.CurrentInfo),
+                    o.Detalhes
+                }));
 
             featureCollection.Features.AddRange(c);
             var coordenadasSerializadas = JsonConvert.SerializeObject(featureCollection, Formatting.Indented);
@@ -111,6 +111,20 @@ namespace Karellen.Web.Controllers
             {
                 return View("Nova");
             }
+
+            return RedirectToAction("index", "app", new {mensagem = EnumMensagem.Alterado});
+        }
+
+        [HttpPost]
+        public ActionResult Solucionar(int id)
+        {
+            var o = _servico.BuscarOcorrencia(id);
+            if (o.UsuarioId != User.Identity.GetUserId<int>())
+            {
+                return View();
+            }
+
+            _servico.SolucionarOcorrencia(id);
 
             return RedirectToAction("index", "app", new {mensagem = EnumMensagem.Alterado});
         }

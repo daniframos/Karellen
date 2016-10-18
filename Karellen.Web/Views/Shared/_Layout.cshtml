@@ -47,8 +47,32 @@
         <br>Portanto, se algo estiver quebrado e/ou você ler spoiler de Game Of Thrones não é culpa nossa :)
     </div>
 </noscript>
-    <div class="body-content container" id="body">
-            @RenderBody()
+<div class="body-content container" id="body">
+    @RenderBody()
+</div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                @using (Html.BeginForm("solucionar", "ocorrencia", FormMethod.Post, new { @class = "form-horizontal", role = "form", style="width: 70%; margin: 0 auto;" }))
+                {
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Solucionar Ocorrência</h4>
+
+                        </div>
+                        <input type="hidden" id="myhidden">
+                        <div class="modal-body">Deseja solucionar esta ocorrência? Uma vez solucionada, ela sairá do mapa.</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Solucionar</button>
+                        </div>
+                    </div>
+                  }
+            </div>
+        </div>
     </div>
     @Scripts.Render("~/js")
 

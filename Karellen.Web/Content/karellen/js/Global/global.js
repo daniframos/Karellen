@@ -134,6 +134,19 @@
             });
         };
 
+        _private.configurarModal = function(event) {
+            $(document).on('show.bs.modal', function (e) {
+                if (typeof e.relatedTarget !== "undefined") {
+
+                    debugger;
+                    var elemento = $(e.relatedTarget);
+                    $("#myhidden").val(elemento.data("hidden"));
+                    var titulo = elemento.siblings("h3").first().text();
+                    $("#myModalLabel").text("Solucionar " + titulo +"?");
+                }
+            });
+        }
+
         _private.iniciarControlesEdicao = function () {
 
             var drawItens = new L.FeatureGroup();
@@ -173,6 +186,7 @@
             _private.configurarAjax();
             _private.configurarChosen();
             _private.configurarBotaoEdicao();
+            _private.configurarModal();
         };
 
         $public.GetGeoJson = function (local) {
