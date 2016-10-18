@@ -138,7 +138,6 @@
             $(document).on('show.bs.modal', function (e) {
                 if (typeof e.relatedTarget !== "undefined") {
 
-                    debugger;
                     var elemento = $(e.relatedTarget);
                     $("#myhidden").val(elemento.data("hidden"));
                     var titulo = elemento.siblings("h3").first().text();
@@ -171,6 +170,13 @@
             _private.mapa.addControl(drawControl);
             _private.configurarDraw();
         };
+
+        _private.BuscarIdOcorrencia = function() {
+            var url = window.location.pathname.split('/');
+            var id = url[url.length - 1];
+
+            return id;
+        }
 
         $public.Url = function() {
             return _private.url;
@@ -254,12 +260,33 @@
             _private.mapa.panTo(coordenadas);
         };
 
-        $public.Detalhes = function() {
+        $public.Detalhes = function () {
+            debugger;
+
             if (_private.mapaCarregado()) {
                 $public.DestruirMapa();
             }
 
             $public.IniciarMapa("mapa", [-15.64511, -47.78214], 13, "mapbox.streets");
+            var layers = $public.GetGeoJson("/ocorrencia/coordenada/" + _private.BuscarIdOcorrencia());
+
+            layers.on("ready", function() {
+                layers.eachLayer(function (layer) {
+                    var prop = layer.feature.properties;
+
+                    var popup = '<h3>' + prop.Nome + '</h3>';
+                    popup += '<div>' + prop.Detalhes + '</div>';
+
+                    if (prop.Data) {
+                        // Cria 
+                        popup += '<br /><small class="quiet" style="text-align:center"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp' + prop.Data + '</small>';
+                    }
+
+                    layer.bindPopup(popup);
+
+                    layer.openPopup();
+                });
+            });
         };
 
         return $public;

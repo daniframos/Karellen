@@ -83,6 +83,27 @@ namespace Karellen.Web.Controllers
             return GeoJson(coordenadasSerializadas);
         }
 
+        [HttpGet]
+        public ActionResult Coordenada(int id)
+        {
+            var ocorrencia = _servico.BuscarOcorrencia(id);
+            var featureCollection = new FeatureCollection();
+
+            var c = new Feature
+                (new Point (new GeographicPosition(ocorrencia.Latitude, ocorrencia.Longitude)), new
+                    {
+                        UsuarioId = User.Identity.GetUserId<int>() == ocorrencia.UsuarioId ? ocorrencia.UsuarioId : null,
+                    ocorrencia.Id,
+                        Nome = ocorrencia.Titulo,
+                        Data = ocorrencia.DataAcontecimento.ToString("D", DateTimeFormatInfo.CurrentInfo),
+                    ocorrencia.Detalhes
+                    });
+
+            featureCollection.Features.Add(c);
+            var coordenadasSerializadas = JsonConvert.SerializeObject(featureCollection, Formatting.Indented);
+
+            return GeoJson(coordenadasSerializadas);
+        }
 
         [HttpGet]
         public ActionResult Detalhes(int id)

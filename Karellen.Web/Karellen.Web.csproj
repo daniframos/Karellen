@@ -226,6 +226,7 @@
     <Content Include="Content\karellen\js\App\index.js" />
     <Content Include="Content\karellen\js\Global\global.js" />
     <Content Include="Content\karellen\js\Global\navegacao.js" />
+    <Content Include="Content\karellen\js\Ocorrencia\detalhes.js" />
     <Content Include="Content\karellen\js\Ocorrencia\nova.js" />
     <Content Include="Content\moment\locale\pt-br.js" />
     <Content Include="Content\moment\moment.js" />

@@ -15,33 +15,19 @@
         <div id="listingsocorrencia" class="listings">
            
             <br/>
-            <div class="form-group">
-                        <div class="col-md-12">
                             @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label", placeholder = "O Título da ocorrência" })
                             <br/>
                             @Html.DisplayFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-12">
+            <br/>
                             @Html.LabelFor(model => model.DataAcontecimento, htmlAttributes: new { @class = "control-label" })
                             <div class='input-group date' id='datetimepicker1'>
                                 <label class="control-label">@Model.DataAcontecimento.ToString("f")</label>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-12">
                             @Html.LabelFor(model => model.Detalhes, htmlAttributes: new { @class = "control-label" })
                             <br/>
                             @Html.DisplayFor(model => model.Detalhes, new { @class = "form-control"})
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-12">
+                            <br/>
                             <label class="control-label">Sexo da vítima: *</label>
                             <br/>
 
@@ -49,20 +35,13 @@
                             Feminino
 
                             @Html.RadioButtonFor(model => model.SexoVitima, "Masculino", new { disabled = "disabled" })
-                            Masculino
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-12">
+            Masculino
+            <br/>
                             @Html.LabelFor(model => model.TemBoletimOCorrencia, htmlAttributes: new { @class = "control-label" })
                             <br/>
                             @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "true", new { disabled = "disabled" })<span> Sim</span>
-                            @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "false", new { disabled = "disabled" })<span> Não</span>
-                        </div>
-                    </div>
-            <div class="form-group">
-                <div class="col-md-12">
+            @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "false", new { disabled = "disabled" })<span> Não</span>
+            <br/>
                     @Html.LabelFor(m => m.TipoOcorrencias)
                     <br />
                     @foreach (var tipo in Model.TipoOcorrencias)
@@ -73,27 +52,25 @@
                         </div>
                     }
 
-                </div>
+
+
+            <div class="col-md-6">
+                <label class="control-label">Autor: </label>
+                <br/>
+                @{
+                    var autor = Model.OcorrenciaAnonima ? "Ocorrência Anônima" : Session["NomeUsuario"] as string;
+                }
+                <h5>@autor</h5>
+            </div>
+            <div class="col-md-6">
+                <button type="button" data-toggle="modal" data-hidden="@Model.Id" data-target="#myModal" style="margin-left:1em; color:white;" class="btn btn-primary btn-default btnsaibamais" style="color: white">
+                    <i class="fa fa-check" aria-hidden="true"></i> Solucionar
+                </button>
             </div>
 
-
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <label class="control-label">Autor: </label>
-                            <br/>
-                            @{
-                                var autor = Model.OcorrenciaAnonima ? "Ocorrência Anônima" : Session["NomeUsuario"] as string;
-                            }
-                            <h5>@autor</h5>
-                        </div>
-                    </div>
-
-            <div class="row">
                 <div class="col-md-12" style="text-align: center">
                     <h3>Compartilhe</h3>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-xs-6 col-sm-6">
                     <a href=https://plus.google.com/share?url=@Request.Url target="_blank" class="btn btn-lg btn-block btn-google first-letter" id="homegoogle" name="provider" value="google">
                         <i class="fa fa-google visible-xs"></i>
@@ -110,10 +87,10 @@
           
         </div>
     </div>
-</div>
 
 <div id="mapa" class="map"></div>
 
 @section scripts {
+    <script src="~/Content/karellen/js/Ocorrencia/detalhes.js"></script>
     <script src="~/Content/karellen/js/Global/navegacao.js" type="text/javascript"></script>
 }
