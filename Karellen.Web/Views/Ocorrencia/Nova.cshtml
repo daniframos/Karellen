@@ -7,9 +7,7 @@
 
 <div id="sidewrapper">
     <div class="sidebar">
-        <div class="heading">
-        </div>
-        <div class="heading">
+        <div class="heading" id="titulo">
             <h1>@acao Ocorrência</h1>
         </div>
         <div id="listingsocorrencia" class="listings">
@@ -23,14 +21,14 @@
 
                 <div class="form-horizontal form-espacado">
                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                    <div class="form-group">
+                    <div class="form-group listings item">
                         <div class="col-md-12">
                             @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label", placeholder = "O Título da ocorrência" })
                             @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group listings item ">
                         <div class="col-md-12">
                             @Html.LabelFor(model => model.DataAcontecimento, htmlAttributes: new { @class = "control-label" })
                             <div class='input-group date' id='datetimepicker1'>
@@ -42,14 +40,14 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group listings item">
                         <div class="col-md-12">
                             @Html.LabelFor(model => model.Detalhes, htmlAttributes: new { @class = "control-label" })
                             @Html.TextAreaFor(model => model.Detalhes, new { @class = "form-control", rows = 10 })
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group listings item">
                         <div class="col-md-12">
                             <label class="control-label">Sexo da vítima: *</label>
 
@@ -61,14 +59,14 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group listings item">
                         <div class="col-md-12">
                             @Html.LabelFor(model => model.TemBoletimOCorrencia, htmlAttributes: new { @class = "control-label" })
                             @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "true")<span> Sim</span>
                             @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "false")<span> Não</span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group item">
                         <div class="col-md-12">
                             @Html.LabelFor(model => model.TipoOcorrencias, htmlAttributes: new { @class = "control-label" })<span> *</span>
                             @Html.OcorrenciasFor(model => model.TipoOcorrencias, new { @class = "chosen-select", data_placeholder = "Escolha o tipo de ocorrência" });
@@ -76,14 +74,14 @@
                     </div>
 
 
-                    <div class="form-group">
+                    <div class="form-group listings item">
                         <div class="col-md-12" style="text-align: center">
                             <label class="control-label">Autor: </label>
                             @Html.OcorrenciaAnonimaFor(model => model.OcorrenciaAnonima, User.Identity.IsAuthenticated, usuarioNome: Session["NomeUsuario"] as string)
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group  listings item" style="margin-bottom: 15em;">
                         <div class="col-md-12" style="text-align: center">
                             <input type="submit" value="Criar" class="btn btn-default btn-lg btn-primary" id="btn-submit" />
                         </div>

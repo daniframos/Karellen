@@ -1,0 +1,141 @@
+﻿p.homeinfo {
+    font-size: 20px;
+    text-align: justify;
+}
+p.small {
+    font-size: 16px;
+}
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+    color: #51843e;
+    outline: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+hr.star-light,
+hr.star-primary {
+    padding: 0;
+    border: none;
+    border-top: solid 5px;
+    text-align: center;
+    max-width: 250px;
+    margin: 25px auto 30px;
+}
+hr.star-light:after,
+hr.star-primary:after {
+    content: "\f005";
+    font-family: FontAwesome;
+    display: inline-block;
+    position: relative;
+    top: -0.8em;
+    font-size: 2em;
+    padding: 0 0.25em;
+}
+hr.star-light {
+    border-color: white;
+}
+hr.star-light:after {
+    background-color: black;
+    color: white;
+}
+hr.star-primary {
+    border-color: #2C3E50;
+}
+hr.star-primary:after {
+    background-color: white;
+    color: #2C3E50;
+}
+.img-centered {
+    margin: 0 auto;
+}
+#header {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-image: url('../../../Content/karellen/img/bg.jpg');
+    background-blend-mode: multiply;
+    background-size: cover;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 0px 2px rgba(150, 150, 150, 1);
+}
+#header .container {
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+#header img {
+    display: block;
+    margin: 0 auto 20px;
+}
+#header .intro-text .name {
+    display: block;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2em;
+}
+#header .intro-text .skills {
+    font-size: 1.25em;
+    font-weight: 300;
+}
+@media (min-width: 768px) {
+    #header .container {
+        padding-top: 200px;
+        padding-bottom: 100px;
+    }
+    #header .intro-text .name {
+        font-size: 4.75em;
+    }
+    #header .intro-text .skills {
+        font-size: 1.75em;
+    }
+}
+section {
+    padding: 100px 0;
+}
+section h2 {
+    margin: 0;
+    font-size: 3em;
+}
+@media (max-width: 767px) {
+    section {
+        padding: 75px 0;
+    }
+    section.first {
+        padding-top: 75px;
+    }
+}
+footer {
+    color: white;
+}
+footer h3 {
+    margin-bottom: 30px;
+}
+footer .footer-above {
+    padding-top: 50px;
+    background-color: #2C3E50;
+}
+footer .footer-col {
+    margin-bottom: 50px;
+}
+footer .footer-below {
+    padding: 25px 0;
+    background-color: #233140;
+}
+#sobre {
+    padding-bottom: 2em;
+}
+
+.btn-go {
+    margin-top: 2em;
+}

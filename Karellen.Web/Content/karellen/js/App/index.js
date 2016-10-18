@@ -7,12 +7,20 @@
         locations.on('ready', function () {
 
             var cluster = new L.MarkerClusterGroup({
-                maxClusterRadius: 45
+                maxClusterRadius: 80
             });
+
+            var allLayers = locations._layers;
+            var ar = $.map(allLayers, function (value, index) {
+                return [value];
+            });
+            cluster.addLayers(ar);
+            App.AddLayer(cluster);
+
 
             // Para cada layer
             locations.eachLayer(function (layer) {
-                cluster.addLayer(layer);
+                debugger;
 
                 var prop = layer.feature.properties;
 
@@ -76,7 +84,6 @@
 
             });
 
-            App.AddLayer(cluster);
         });
 
         locations.on('layeradd', function (e) {

@@ -8,85 +8,85 @@
 
 <div id="sidewrapper">
     <div class="sidebar">
-        <div class="heading">
-        </div>
-        <div class="heading">
+        <div class="heading" id="titulo">
             <h1>Detalhes</h1>
         </div>
         <div id="listingsocorrencia" class="listings">
            
-            <br/>
-                            @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label", placeholder = "O Título da ocorrência" })
-                            <br/>
-                            @Html.DisplayFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
-            <br/>
-                            @Html.LabelFor(model => model.DataAcontecimento, htmlAttributes: new { @class = "control-label" })
-                            <div class='input-group date' id='datetimepicker1'>
-                                <label class="control-label">@Model.DataAcontecimento.ToString("f")</label>
-                            </div>
+            <div class="item">
+                @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label", placeholder = "O Título da ocorrência" })
+                <div>
+                    @Html.DisplayFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="item">
+                @Html.LabelFor(model => model.DataAcontecimento, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    <div class='input-group date' id='datetimepicker1'>
+                        <label class="control-label">@Model.DataAcontecimento.ToString("f")</label>
+                    </div> 
+                </div>
+            </div>
+            <div class="item">
+                @Html.LabelFor(model => model.Detalhes, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.DisplayFor(model => model.Detalhes, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="item">
+                <label class="control-label">Sexo da vítima: *</label>
+                <div>
+                    @Html.RadioButtonFor(model => model.SexoVitima, "Feminino", new { disabled = "disabled" })
+                    Feminino
 
-                            @Html.LabelFor(model => model.Detalhes, htmlAttributes: new { @class = "control-label" })
-                            <br/>
-                            @Html.DisplayFor(model => model.Detalhes, new { @class = "form-control"})
-                            <br/>
-                            <label class="control-label">Sexo da vítima: *</label>
-                            <br/>
+                    @Html.RadioButtonFor(model => model.SexoVitima, "Masculino", new { disabled = "disabled" })
+                    Masculino
+                </div>
+            </div>
+            <div class="item">
+                @Html.LabelFor(model => model.TemBoletimOCorrencia, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "true", new { disabled = "disabled" })<span> Sim</span>
+                    @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "false", new { disabled = "disabled" })<span> Não</span>
 
-                            @Html.RadioButtonFor(model => model.SexoVitima, "Feminino", new {disabled="disabled"})
-                            Feminino
-
-                            @Html.RadioButtonFor(model => model.SexoVitima, "Masculino", new { disabled = "disabled" })
-            Masculino
-            <br/>
-                            @Html.LabelFor(model => model.TemBoletimOCorrencia, htmlAttributes: new { @class = "control-label" })
-                            <br/>
-                            @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "true", new { disabled = "disabled" })<span> Sim</span>
-            @Html.RadioButtonFor(m => m.TemBoletimOCorrencia, "false", new { disabled = "disabled" })<span> Não</span>
-            <br/>
-                    @Html.LabelFor(m => m.TipoOcorrencias)
-                    <br />
+                </div>
+            </div>
+            <div class="item">
+                @Html.LabelFor(m => m.TipoOcorrencias)
+                <div>
                     @foreach (var tipo in Model.TipoOcorrencias)
                     {
-                        <div class="col-md-4">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i>
-                            @tipo.GetDescricao()
-                        </div>
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        @tipo.GetDescricao()
                     }
-
-
-
-            <div class="col-md-6">
+                </div>
+            </div>
+            <div class="item">
                 <label class="control-label">Autor: </label>
-                <br/>
                 @{
                     var autor = Model.OcorrenciaAnonima ? "Ocorrência Anônima" : ViewBag.Autor as string;
                 }
-                <h5>@autor</h5>
+                <h5 class="autor">@autor</h5>
+                    @if (ViewBag.AutorId == User.Identity.GetUserId<int>())
+                    {
+                        <button type="button" data-toggle="modal" data-hidden="@Model.Id" data-target="#myModal" style="margin-left:1em; color:white;" class="btn btn-primary btn-default btnsaibamais autor">
+                            <i class="fa fa-check" aria-hidden="true"></i> Solucionar
+                        </button>
+                    }
             </div>
-            @if (ViewBag.AutorId == User.Identity.GetUserId<int>())
-            {
-                <div class="col-md-6">
-                    <button type="button" data-toggle="modal" data-hidden="@Model.Id" data-target="#myModal" style="margin-left:1em; color:white;" class="btn btn-primary btn-default btnsaibamais" style="color: white">
-                        <i class="fa fa-check" aria-hidden="true"></i> Solucionar
-                    </button>
-                </div>
-            }
-            
-                <div class="col-md-12" style="text-align: center">
-                    <h3>Compartilhe</h3>
-                </div>
-                <div class="col-xs-6 col-sm-6">
+            <div class="item" style="margin-bottom: 10em;">
+                <h3>Compartilhe</h3>
+                <div>
                     <a href=https://plus.google.com/share?url=@Request.Url target="_blank" class="btn btn-lg btn-block btn-google first-letter" id="homegoogle" name="provider" value="google">
                         <i class="fa fa-google visible-xs"></i>
                         <span class="hidden-xs">google</span>
                     </a>
-                </div>
-                <div class="col-xs-6 col-sm-6">
                     <a href=https://facebook.com/sharer.php?u=@Request.Url target="_blank" class="btn btn-lg btn-block btn-facebook first-letter" id="homefacebook" name="provider" value="facebook">
                         <i class="fa fa-google visible-xs"></i>
                         <span class="hidden-xs">facebook</span>
                     </a>
                 </div>
+            </div>
             </div>
           
         </div>

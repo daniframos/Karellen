@@ -1,6 +1,121 @@
-﻿.body-content {
-    margin-top: 50px;
+﻿* { box-sizing: border-box; }
+
+body {
+  color: #404040;
+  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  font-smoothing: antialiased;
 }
+
+h1 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+}
+a {
+  color: #404040;
+  text-decoration: none;
+}
+a:hover { color: #101010; }
+
+.sidebar {
+  position: absolute;
+  width: 33.3333%;
+  height: 100%;
+  top: 0; left: 0;
+  overflow: hidden;
+  border-right: 1px solid rgba(0,0,0,0.25);
+}
+
+.pad2 { padding: 20px; }
+.quiet { color:#888; }
+
+.map {
+  position: absolute;
+  left: 33.3333%;
+  width: 66.6666%;
+  top: 0; bottom: 0;
+}
+
+.heading {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 10px;
+}
+
+.listings {
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 60px;
+}
+
+.listings .item {
+  display: block;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.listings .item:last-child { border-bottom: none; }
+
+.listings .item .title {
+  display: block;
+  color: #00853e;
+  font-weight: 700;
+}
+
+.listings .item .title small { font-weight: 400; }
+.listings .item.active .title,
+.listings .item .title:hover { color: #51843e; }
+.listings .item.active { background-color: #f8f8f8; }
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-left: 0;
+  background: rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-track {
+  background: none;
+}
+::-webkit-scrollbar-thumb {
+  background: #00853e;
+  border-radius: 0;
+}
+
+.clearfix { display: block; }
+.clearfix:after {
+  content: '.';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.leaflet-popup-content {
+  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  padding: 0;
+    text-align: center;
+}
+.leaflet-popup-content-wrapper {
+  padding: 0;
+}
+.leaflet-popup-content h3 {
+  background: #51843e;
+  color: #fff;
+  margin: 0;
+  display: block;
+  padding: 10px;
+  border-radius: 3px 3px 0 0;
+  font-weight: 700;
+  margin-top: -15px;
+}
+.leaflet-popup-content div {
+  padding: 10px;
+}
+.leaflet-container .leaflet-marker-icon { cursor: pointer; }
+
 .validation-summary-errors {
     color: #a94442;
     background-color: #f2dede;
@@ -10,274 +125,24 @@
     border: 1px solid transparent;
     border-radius: 4px;
 }
-.nav-tabs > li,
-.nav-pills > li {
-    float: none;
-    display: inline-block;
-    *display: inline;
-    /* ie7 fix */
-    
-    zoom: 1;
-    /* hasLayout ie7 trigger */
+
+.body-content {
+    margin-top: 72px;
 }
-.nav-tabs,
-.nav-pills {
-    text-align: center;
+
+#homefacebook {
+    color: white;
+    background-color: #3b5998;
 }
-p.homeinfo {
-    font-size: 20px;
-    text-align: justify;
+
+#homegoogle {
+    color: white;
+    background-color: #c32f10;
 }
-p.small {
-    font-size: 16px;
-}
-a,
-a:hover,
-a:focus,
-a:active,
-a.active {
-    color: #51843e;
-    outline: none;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+.first-letter:first-letter {
     text-transform: uppercase;
-    font-weight: 700;
 }
-hr.star-light,
-hr.star-primary {
-    padding: 0;
-    border: none;
-    border-top: solid 5px;
-    text-align: center;
-    max-width: 250px;
-    margin: 25px auto 30px;
-}
-hr.star-light:after,
-hr.star-primary:after {
-    content: "\f005";
-    font-family: FontAwesome;
-    display: inline-block;
-    position: relative;
-    top: -0.8em;
-    font-size: 2em;
-    padding: 0 0.25em;
-}
-hr.star-light {
-    border-color: white;
-}
-hr.star-light:after {
-    background-color: black;
-    color: white;
-}
-hr.star-primary {
-    border-color: #2C3E50;
-}
-hr.star-primary:after {
-    background-color: white;
-    color: #2C3E50;
-}
-.img-centered {
-    margin: 0 auto;
-}
-#header {
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-image: url('../../../Content/karellen/img/bg.jpg');
-    background-blend-mode: multiply;
-    background-size: cover;
-    text-align: center;
-    color: white;
-    text-shadow: 2px 0px 2px rgba(150, 150, 150, 1);
-}
-#header .container {
-    padding-top: 100px;
-    padding-bottom: 50px;
-}
-#header img {
-    display: block;
-    margin: 0 auto 20px;
-}
-#header .intro-text .name {
-    display: block;
-    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 2em;
-}
-#header .intro-text .skills {
-    font-size: 1.25em;
-    font-weight: 300;
-}
-@media (min-width: 768px) {
-    #header .container {
-        padding-top: 200px;
-        padding-bottom: 100px;
-    }
-    #header .intro-text .name {
-        font-size: 4.75em;
-    }
-    #header .intro-text .skills {
-        font-size: 1.75em;
-    }
-}
-section {
-    padding: 100px 0;
-}
-section h2 {
-    margin: 0;
-    font-size: 3em;
-}
-@media (max-width: 767px) {
-    section {
-        padding: 75px 0;
-    }
-    section.first {
-        padding-top: 75px;
-    }
-}
-footer {
-    color: white;
-}
-footer h3 {
-    margin-bottom: 30px;
-}
-footer .footer-above {
-    padding-top: 50px;
-    background-color: #2C3E50;
-}
-footer .footer-col {
-    margin-bottom: 50px;
-}
-footer .footer-below {
-    padding: 25px 0;
-    background-color: #233140;
-}
-#sobre {
-    padding-bottom: 2em;
-}
-.list-inline {
-    color: white;
-}
-#mensagemtopo {
-    padding-top: 2em;
-}
-* {
-    box-sizing: border-box;
-}
-.sidebar {
-    position: absolute;
-    width: 33.3333%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    border-right: 1px solid rgba(0, 0, 0, 0.25);
-}
-.pad2 {
-    padding: 20px;
-}
-.quiet {
-    color: #888;
-}
-.map {
-    position: absolute;
-    left: 33.3333%;
-    width: 66.6666%;
-    top: 0;
-    bottom: 0;
-}
-.heading {
-    background: #fff;
-    border-bottom: 1px solid #eee;
-    height: 50px;
-    line-height: 60px;
-    padding: 0 10px;
-}
-.heading h1 {
-    text-align: center;
-}
-.listings {
-    height: 100%;
-    overflow: auto;
-    padding-bottom: 60px;
-    float: left;
-}
-.listings .item {
-    display: block;
-    border-bottom: 1px solid #eee;
-    padding: 10px;
-    text-decoration: none;
-}
-.listings .item:last-child {
-    border-bottom: none;
-}
-.listings .item .title {
-    display: block;
-    color: #00853e;
-    font-weight: 700;
-}
-.listings .item .title small {
-    font-weight: 400;
-}
-.listings .item.active .title,
-.listings .item .title:hover {
-    color: #003e1c;
-}
-.listings .item.active {
-    background-color: #f8f8f8;
-}
-
-.clearfix {
-    display: block;
-}
-.clearfix:after {
-    content: '.';
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}
-/* Marker tweaks */
-
-.leaflet-popup-close-button {
-    display: none;
-}
-.leaflet-popup-content {
-    font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
-    padding: 0;
-}
-.leaflet-popup-content-wrapper {
-    padding: 0;
-}
-.leaflet-popup-content h3 {
-    background: #51843e;
-    color: #fff;
-    margin: 0;
-    display: block;
-    padding: 10px;
-    border-radius: 3px 3px 0 0;
-    font-weight: 700;
-    margin-top: -15px;
-}
-.leaflet-popup-content div {
-    padding: 10px;
-}
-.leaflet-container {
-    margin-top: 51px;
-}
-.leaflet-container .leaflet-marker-icon {
-    cursor: pointer;
-}
-.btn-go {
-    margin-top: 2em;
-}
-
 
 .btn-primary {
         color: #fff;
@@ -301,69 +166,16 @@ footer .footer-below {
         color: #fff;
     border-color: #51843e
 }
-#listingsocorrencia {
-    margin-left: 2em;
-    margin-right: 2em;
-}
-
-::-webkit-scrollbar {
-  width: 3px;
-  height: 3px;
-  border-left: 0;
-  background: rgba(0,0,0,0.1);
-}
-::-webkit-scrollbar-track {
-  background: none;
-}
-::-webkit-scrollbar-thumb {
-  background: #51843e;
-  border-radius: 0;
-}
-
-.form-espacado {
-    margin-bottom: 10em;
-}
-
-.first-letter:first-letter {
-    text-transform: uppercase;
-}
-
-.leaflet-draw-actions li:first-child a {
-    background-color: #51843e;
-    color: white !important;
-}
-
-.leaflet-draw-actions li:last-child a {
-    background-color: #51843e;
-    color: white !important;
-}
-
-.paginacao {
-    text-align: center;
-}
-#homefacebook {
-    color: white;
-    background-color: #3b5998;
-}
-
-#homegoogle {
-    color: white;
-    background-color: #c32f10;
-}
-
-.btn-facaparte {
-    margin-top: 2em;
-}
 
 .profile {
     border-radius: 100%;
 }
 
-                
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
     background-color: #51843e;
     border-color: #51843e;
 }
+
 #circleocorrencia {
     color: #51843e;
 }
@@ -374,44 +186,21 @@ footer .footer-below {
 }
 
 #titulo {
-    border-bottom: none;
+    margin-top: 72px;
 }
 
-#btn-novaocorrencia {
-    margin-top: 1em;
-}
-#listings {
-    width: 100%;
-    margin-left: 2em;
-    margin-right: 2em;
+#titulo * {
+    display: inline-block;
 }
 
-.leaflet-popup-content {
-    text-align: center !important;
-    width: 330px !important;
+#mapa {
+    margin-top: 52px;
 }
 
-.btnsaibamais {
-    margin-top: 1em;
+.leaflet-popup-content .btn {
+    margin: 1em;
 }
 
-.vertical-alignment-helper {
-    display:table;
-    height: 100%;
-    width: 100%;
-    pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
-}
-.vertical-align-center {
-    /* To center vertically */
-    display: table-cell;
-    vertical-align: middle;
-    pointer-events:none;
-}
-.modal-content {
-    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
-    width:inherit;
-    height:inherit;
-    /* To center horizontally */
-    margin: 0 auto;
-    pointer-events: all;
+.autor {
+    display: inline-block;
 }

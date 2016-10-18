@@ -35,6 +35,7 @@ namespace Karellen.Web.Controllers
         [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Nova()
         {
+            ViewBag.Acao = "Nova";
             return View("Nova", new NovaOcorrenciaVM());
         }
 
