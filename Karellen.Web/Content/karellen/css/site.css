@@ -204,3 +204,7 @@ a:hover { color: #101010; }
 .autor {
     display: inline-block;
 }
+
+a, a:hover {
+    color: #51843e;
+}
