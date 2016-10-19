@@ -26,7 +26,6 @@ namespace Karellen.Data.Contexto
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Configurations.AddFromAssembly(typeof(KarellenContexto).Assembly);
 
             base.OnModelCreating(modelBuilder);

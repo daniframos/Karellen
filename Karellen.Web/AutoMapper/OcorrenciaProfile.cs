@@ -17,8 +17,8 @@ namespace Karellen.Web.AutoMapper
             CreateMap<OcorrenciaDTO, NovaOcorrenciaVM>()
                 .ForMember(dest => dest.SessaoId , src => src.Ignore())
                 .ForMember(dest => dest.OcorrenciaAnonima, src => src.Ignore())
-                .ForMember(dest => dest.Latitude, src => src.Ignore())
-                .ForMember(dest => dest.Longitude, src => src.Ignore())
+                .ForMember(dest => dest.Latitude, src => src.MapFrom(s => s.Latitude))
+                .ForMember(dest => dest.Longitude, src => src.MapFrom(s => s.Longitude))
                 .ForMember(dest => dest.TemBoletimOCorrencia, src => src.MapFrom(s => s.HaBoletimDeOcorrencia));
         }
     }

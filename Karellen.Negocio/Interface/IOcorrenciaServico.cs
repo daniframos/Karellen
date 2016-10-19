@@ -14,5 +14,7 @@ namespace Karellen.Negocio.Interface
         OcorrenciaDTO BuscarOcorrencia(int id);
         void SolucionarOcorrencia(int id);
         AutorDTO BuscarAutorOcorrencia(int id);
+        void AtualizarOcorrencia(OcorrenciaDTO ocorrencia, object idOperacaoLog);
+        void ExcluirOcorrencia(int id);
     }
 }

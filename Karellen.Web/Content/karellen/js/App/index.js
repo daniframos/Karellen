@@ -17,10 +17,8 @@
             cluster.addLayers(ar);
             App.AddLayer(cluster);
 
-
             // Para cada layer
             locations.eachLayer(function (layer) {
-                debugger;
 
                 var prop = layer.feature.properties;
 
@@ -59,6 +57,11 @@
                     popup += '<button type="button" data-toggle="modal" data-hidden="'+ prop.Id +'" data-target="#myModal" style="margin-left:1em; color:white;"' +
                         ' class="btn btn-primary btn-default btnsaibamais" style="color: white">' +
                         '<i class="fa fa-check" aria-hidden="true"></i> Solucionar</a>';
+
+                    popup += '<button type="button" data-toggle="modal" data-hidden="' + prop.Id + '" data-target="#modalExcluir" style="margin-left:1em; color:white;"' +
+                        ' class="btn btn-danger btn-default" style="color: white">' +
+                        '<i class="fa fa-trash-o" aria-hidden="true"></i> Excluir</a>';
+
                     link.innerHTML += ' <i class="fa fa-pencil" aria-hidden="true"></i>'
                 }
 

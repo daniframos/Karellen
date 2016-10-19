@@ -5,12 +5,6 @@
 
 <div id="sidewrapper">
     <div class="sidebar">
-        @if (!string.IsNullOrEmpty(mensagem))
-            {
-                <div class="alert alert-success" role="alert" style="margin:2em">
-                    @mensagem
-                </div>
-            }
         <div class="heading" id="titulo">
             <h1>Ocorrências</h1>
             <a href="@Url.Action("nova", "ocorrencia")" id="btn-novaocorrencia" class="btn btn-success btn-large" role="button"
@@ -18,7 +12,14 @@
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </a>
         </div>
+       
         <div id="listings" class="listings">
+            @if (!string.IsNullOrEmpty(mensagem))
+            {
+                <div class="alert alert-success" role="alert" style="margin-bottom: 0px">
+                    @mensagem
+                </div>
+            }
         </div>
     </div>
 </div>

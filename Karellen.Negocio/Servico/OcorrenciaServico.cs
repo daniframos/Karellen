@@ -27,7 +27,7 @@ namespace Karellen.Negocio.Servico
         {
             var o = _unitOfWork.RepositorioOcorrencia
                 .BuscarTodos()
-                .Where(oc => oc.DataResolucao == null)
+                .Where(oc => oc.DataResolucao == null && oc.Excluida == false)
                 .OrderByDescending(oc => oc.DataAcontecimento).ToList();
             var resultado = Mapper.Map<List<Ocorrencia>, List<OcorrenciaDTO>>(o);
             return resultado;
@@ -117,6 +117,49 @@ namespace Karellen.Negocio.Servico
                 Id = ocorrencia.UsuarioId,
                 NomeCompleto = usuario.NomeCompleto
             };
+        }
+
+        public void AtualizarOcorrencia(OcorrenciaDTO ocorrencia, object idOperacaoLog)
+        {
+            var tipos = _unitOfWork.RepositorioTipoOcorrencia.Buscar(t => t.OcorrenciaId == ocorrencia.Id);
+            var ocorrenciaOriginal = _unitOfWork.RepositorioOcorrencia.BuscarPorId(ocorrencia.Id);
+            foreach (var tipoOcorrencia in tipos)
+            {
+                _unitOfWork.RepositorioTipoOcorrencia.Remover(tipoOcorrencia);
+            }
+            _unitOfWork.RepositorioOcorrencia.Remover(ocorrenciaOriginal);
+            _unitOfWork.SaveChanges();
+
+            var o = Mapper.Map<OcorrenciaDTO, Ocorrencia>(ocorrencia);
+            o.DataAcontecimento = ocorrenciaOriginal.DataAcontecimento;
+            o.DataCriacao = ocorrenciaOriginal.DataCriacao;
+            o.Id = 0;
+            o.Excluida = false;
+            
+
+            _unitOfWork.RepositorioOcorrencia.Adicionar(o);
+            _unitOfWork.SaveChanges();
+
+            var st = new StackTrace();
+            var sf = st.GetFrame(0);
+            var methodName = sf.GetMethod().Name;
+
+            var logOperacao = _unitOfWork.RepositorioLog.BuscarPorId(idOperacaoLog);
+            logOperacao.EntidadeId = Convert.ToString(o.Id);
+            logOperacao.Acao = methodName;
+            logOperacao.EntidadeNome = nameof(Ocorrencia);
+
+            _unitOfWork.RepositorioLog.Atualizar(logOperacao);
+            _unitOfWork.SaveChanges();
+        }
+
+        public void ExcluirOcorrencia(int id)
+        {
+            var o = _unitOfWork.RepositorioOcorrencia.BuscarPorId(id);
+            o.Excluida = true;
+
+            _unitOfWork.RepositorioOcorrencia.Atualizar(o);
+            _unitOfWork.SaveChanges();
         }
     }
 }

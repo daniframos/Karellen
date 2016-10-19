@@ -3,7 +3,7 @@ namespace Karellen.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class inicial : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -39,7 +39,7 @@ namespace Karellen.Data.Migrations
                         UsuarioId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.LoginProvedor, t.KeyProvedor, t.UsuarioId })
-                .ForeignKey("dbo.TBUsuario", t => t.UsuarioId)
+                .ForeignKey("dbo.TBUsuario", t => t.UsuarioId, cascadeDelete: true)
                 .Index(t => t.UsuarioId);
             
             CreateTable(
@@ -71,7 +71,7 @@ namespace Karellen.Data.Migrations
                         Tipo = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.OcorrenciaId, t.Tipo })
-                .ForeignKey("dbo.TBOcorrencia", t => t.OcorrenciaId)
+                .ForeignKey("dbo.TBOcorrencia", t => t.OcorrenciaId, cascadeDelete: true)
                 .Index(t => t.OcorrenciaId);
             
             CreateTable(

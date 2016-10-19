@@ -122,6 +122,7 @@ namespace Karellen.Web.Controllers
         }
 
         [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Editar(int id)
         {
             var ocorrencia = _servico.BuscarOcorrencia(id);
@@ -131,17 +132,44 @@ namespace Karellen.Web.Controllers
             return View("Nova", model);
         }
 
+        [Log]
         [HttpPost]
         public ActionResult Editar(NovaOcorrenciaVM model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) { return View("Nova"); }
+
+            var dto = Mapper.Map<NovaOcorrenciaVM, OcorrenciaDTO>(model);
+
+            if (model.OcorrenciaAnonima)
             {
-                return View("Nova");
+                dto.UsuarioId = null;
             }
+
+            if (User.Identity.IsAuthenticated && !model.OcorrenciaAnonima)
+            {
+                dto.UsuarioId = User.Identity.GetUserId<int>();
+            }
+
+
+            var idOperacaoLog = Session[IdOperacao];
+            _servico.AtualizarOcorrencia(dto, idOperacaoLog);
+
 
             return RedirectToAction("index", "app", new {mensagem = EnumMensagem.Alterado});
         }
 
+        [HttpPost]
+        public ActionResult Excluir(int id)
+        {
+            var ocorrencia = _servico.BuscarOcorrencia(id);
+            if (ocorrencia.UsuarioId != User.Identity.GetUserId<int>())
+            {
+                return RedirectToAction("index", "app", new {mensagem = EnumMensagem.ErroPermissao});
+            }
+
+            _servico.ExcluirOcorrencia(id);
+            return RedirectToAction("index", "app", new { mensagem = EnumMensagem.Alterado });
+        }
         [HttpPost]
         public ActionResult Solucionar(int id)
         {

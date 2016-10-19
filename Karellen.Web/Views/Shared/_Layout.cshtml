@@ -15,7 +15,8 @@
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-minimap/v1.0.0/Control.MiniMap.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
-
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.css' rel='stylesheet' />
+    
     @RenderSection("css", required: false)
 </head>
 <body>
@@ -63,7 +64,7 @@
                             <h4 class="modal-title" id="myModalLabel">Solucionar Ocorrência</h4>
 
                         </div>
-                        <input type="hidden" id="myhidden" name="id">
+                        <input type="hidden" class="myhidden" name="id">
                         <div class="modal-body">Deseja solucionar esta ocorrência? Uma vez solucionada, ela sairá do mapa.</div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -74,13 +75,41 @@
             </div>
         </div>
     </div>
-    @Scripts.Render("~/js")
+    
+    
+    <div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                @using (Html.BeginForm("excluir", "ocorrencia", FormMethod.Post, new { @class = "form-horizontal", role = "form", style = "width: 70%; margin: 0 auto;" }))
+                {
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Excluir Ocorrência</h4>
+
+                        </div>
+                        <input type="hidden" class="myhidden" name="id">
+                        <div class="modal-body">Deseja excluir esta ocorrência? Uma vez excluida, ela sairá do mapa e das estatisticas.</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-danger">Excluir</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    
+
+@Scripts.Render("~/js")
 
     <script src="https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js"></script>
     <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.js"></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-minimap/v1.0.0/Control.MiniMap.js'></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
-    
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.26.0/mapbox-gl.js'></script>
 
 <script type="text/javascript">
         

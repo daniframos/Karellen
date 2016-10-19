@@ -139,16 +139,22 @@
                 if (typeof e.relatedTarget !== "undefined") {
 
                     var elemento = $(e.relatedTarget);
-                    $("#myhidden").val(elemento.data("hidden"));
+                    $(".myhidden").val(elemento.data("hidden"));
                     var titulo = elemento.siblings("h3").first().text();
                     $("#myModalLabel").text("Solucionar " + titulo +"?");
                 }
             });
         };
 
-        _private.iniciarControlesEdicao = function () {
+        _private.iniciarControlesEdicao = function (marcador) {
 
             var drawItens = new L.FeatureGroup();
+
+            if (typeof marcador !== "undefined") {
+                drawItens.addLayer(marcador);
+            }
+
+
             _private.mapa.addLayer(drawItens);
 
             var drawControl = new L.Control.Draw({
@@ -261,7 +267,6 @@
         };
 
         $public.Detalhes = function () {
-            debugger;
 
             if (_private.mapaCarregado()) {
                 $public.DestruirMapa();
@@ -299,6 +304,23 @@
                 }));
 
             });
+        };
+
+        $public.Editar = function () {
+            debugger;
+            if (_private.mapaCarregado()) {
+                $public.DestruirMapa();
+            }
+
+            $public.IniciarMapa("mapa", [$("#Latitude").val(), $("#Longitude").val()], 13, "mapbox.streets");
+            _private.configurarChosen();
+            _private.configurarDraw();
+            var marker = new L.Marker([$("#Latitude").val(), $("#Longitude").val()]);
+
+            _private.iniciarControlesEdicao(marker);
+            _private.mapa.on("draw:created", _private.onDrawCreated);
+            _private.mapa.on("draw:deleted", _private.onDrawDeleted);
+            _private.mapa.on("draw:edited", _private.onDrawEdited);
         };
 
         return $public;
