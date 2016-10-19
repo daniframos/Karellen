@@ -3,9 +3,13 @@
 @using Microsoft.AspNet.Identity
 @model Karellen.Web.Models.Ocorrencia.NovaOcorrenciaVM
 @{
-    ViewBag.Title = "Detalhes";
+    ViewBag.Title = Model.Titulo + " - Detalhes";
 }
-
+@section css {
+    <meta property="og:title" content="@Model.Titulo">
+    <meta property="og:site_name" content="Karellen">
+    <meta property="og:description" content="@Model.Detalhes">
+}
 <div id="sidewrapper">
     <div class="sidebar">
         <div class="heading" id="titulo">
