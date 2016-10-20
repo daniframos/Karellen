@@ -45,7 +45,7 @@
                         ' class="btn btn-primary btn-default btnsaibamais" style="color: white">Saiba mais</a>';
                 }
 
-                if (prop.UsuarioId != null) {
+                if (prop.UsuarioId !== null) {
                     popup += '<a href="' +
                         App.Url() +
                         "/ocorrencia/editar/" +
@@ -62,7 +62,7 @@
                         ' class="btn btn-danger btn-default" style="color: white">' +
                         '<i class="fa fa-trash-o" aria-hidden="true"></i> Excluir</a>';
 
-                    link.innerHTML += ' <i class="fa fa-pencil" aria-hidden="true"></i>'
+                    link.innerHTML += ' <i class="fa fa-pencil" aria-hidden="true"></i>';
                 }
 
                 var details = listing.appendChild(document.createElement('div'));

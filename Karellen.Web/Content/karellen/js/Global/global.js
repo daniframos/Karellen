@@ -202,7 +202,7 @@
         };
 
         $public.GetGeoJson = function (local) {
-            var locations = L.mapbox.featureLayer().addTo(_private.mapa); // Pega a feature layer. Acredito que somente exista 1 feature layer
+            var locations = L.mapbox.featureLayer().addTo(_private.mapa);
 
             locations.loadURL(_private.url + local);
             return locations;
@@ -252,6 +252,8 @@
             _private.configurarChosen();
             _private.configurarDraw();
             _private.configurarDateTimePicker();
+
+            $("#DataAcontecimento").val(moment().format("DD/MM/YYYY HH:mm"));
         };
 
         $public.AddLayer = function(layer) {
