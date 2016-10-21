@@ -1,24 +1,17 @@
 ﻿$(function () {
 
     if (App.SuportaAjax()) {
-        App.IniciarMapa("mapa", [-15.64511, -47.78214], 14);
+        App.IniciarMapa("mapa", [40.7224 , -73.9933], 14);
 
-        var locations = App.GetGeoJson("/ocorrencia/coordenadas");
-        locations.on('ready', function () {
+        App.GetGeoJson("/ocorrencia/coordenadas", function (data) {
 
-            var cluster = new L.MarkerClusterGroup({
-                maxClusterRadius: 80
-            });
+              var json = data;
+              var geoJson = L.geoJson(json);
+              markers = new L.MarkerClusterGroup();
 
-            var allLayers = locations._layers;
-            var ar = $.map(allLayers, function (value, index) {
-                return [value];
-            });
-            cluster.addLayers(ar);
-            App.AddLayer(cluster);
-
-            // Para cada layer
-            locations.eachLayer(function (layer) {
+            geoJson.eachLayer(function(layer) {
+                debugger;
+                var prop = layer.feature.properties;
 
                 var prop = layer.feature.properties;
 
@@ -34,9 +27,23 @@
                 link.className = 'title';
 
                 link.innerHTML = prop.Nome;
+
+                if (layer instanceof L.Marker) {
+
+                    layer.setIcon(L.icon({
+                        iconUrl: App
+                            .Url() +
+                            '/content/karellen/img/robbery.png', // load your own custom marker image here
+                        iconSize: [32, 32],
+                        iconAnchor: [28, 28],
+                        popupAnchor: [0, -34]
+                    }));
+                }
+
                 if (prop.Data) {
                     // Cria 
-                    popup += '<br /><small class="quiet" style="text-align:center"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp' + prop.Data + '</small>';
+                    popup +=
+                        '<br /><small class="quiet" style="text-align:center"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp' + prop.Data + '</small>';
                     popup += '<br /><a href="' +
                         App.Url() +
                         "/ocorrencia/detalhes/" +
@@ -54,11 +61,15 @@
                         ' class="btn btn-primary btn-default btnsaibamais" style="color: white">' +
                         '<i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>';
 
-                    popup += '<button type="button" data-toggle="modal" data-hidden="'+ prop.Id +'" data-target="#myModal" style="margin-left:1em; color:white;"' +
+                    popup += '<button type="button" data-toggle="modal" data-hidden="' +
+                        prop.Id +
+                        '" data-target="#myModal" style="margin-left:1em; color:white;"' +
                         ' class="btn btn-primary btn-default btnsaibamais" style="color: white">' +
                         '<i class="fa fa-check" aria-hidden="true"></i> Solucionar</a>';
 
-                    popup += '<button type="button" data-toggle="modal" data-hidden="' + prop.Id + '" data-target="#modalExcluir" style="margin-left:1em; color:white;"' +
+                    popup += '<button type="button" data-toggle="modal" data-hidden="' +
+                        prop.Id +
+                        '" data-target="#modalExcluir" style="margin-left:1em; color:white;"' +
                         ' class="btn btn-danger btn-default" style="color: white">' +
                         '<i class="fa fa-trash-o" aria-hidden="true"></i> Excluir</a>';
 
@@ -67,38 +78,30 @@
 
                 var details = listing.appendChild(document.createElement('div'));
                 details.innerHTML = prop.Data;
-                
+
 
                 popup += '</div>';
                 layer.bindPopup(popup);
 
-                layer.on('click', function (e) {
+                layer.on('click', function(e) {
+                        setActive(listing);
+                    });
 
-                    // 2. Set active the markers associated listing.
+                link.onclick = function(evt) {
+                    debugger;
+                    
                     setActive(listing);
-                });
 
-                link.onclick = function () {
-                    setActive(listing);
-
+                    App.AddLayer(layer);
+                    markers.removeLayer(layer);
                     layer.openPopup();
                     return false;
                 };
 
+                markers.addLayer(layer);
             });
 
-        });
-
-        locations.on('layeradd', function (e) {
-
-            var marker = e.layer;
-            marker.setIcon(L.icon({
-                iconUrl: App.Url() + '/content/karellen/img/robbery.png', // load your own custom marker image here
-                iconSize: [32, 32],
-                iconAnchor: [28, 28],
-                popupAnchor: [0, -34]
-            }));
-            
+            App.AddLayer(markers);
         });
     }
 });

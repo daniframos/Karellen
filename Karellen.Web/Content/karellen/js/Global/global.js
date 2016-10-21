@@ -184,6 +184,12 @@
             return id;
         };
 
+        _private.IniciarMiniMapa = function() {
+            _private.mapa.on('ready', function () {
+                new L.Control.MiniMap(L.mapbox.tileLayer('mapbox.streets')).addTo(_private.mapa);
+            });
+        }
+
         $public.Url = function() {
             return _private.url;
         };
@@ -201,11 +207,10 @@
             _private.configurarModal();
         };
 
-        $public.GetGeoJson = function (local) {
-            var locations = L.mapbox.featureLayer().addTo(_private.mapa);
+        $public.GetGeoJson = function (local, callback) {
+            var resultado = {};
 
-            locations.loadURL(_private.url + local);
-            return locations;
+            $.getJSON("http://api.tiles.mapbox.com/v3/mapbox.o11ipb8h/markers.geojson", callback);
         };
 
         $public.IniciarMapa = function (elemento, coordenadas, zoom, tipo) {
@@ -220,13 +225,8 @@
             
             L.mapbox.accessToken = 'pk.eyJ1Ijoia2tyaWNvIiwiYSI6ImNpc3l5bGtsNDBmcDQycGtoOTgwN3JtN3IifQ.Bc9quEp60HksbmydwEUJqw';
             _private.mapa = L.mapbox.map(elemento, tipo).setView(coordenadas, zoom);
-
-
-            _private.mapa.on('ready', function() {
-                new L.Control.MiniMap(L.mapbox.tileLayer('mapbox.streets')).addTo(_private.mapa);
-            });
-
-            };
+            _private.IniciarMiniMapa();
+        };
 
         $public.DestruirMapa = function() {
             _private.mapa.off();
@@ -309,7 +309,7 @@
         };
 
         $public.Editar = function () {
-            debugger;
+
             if (_private.mapaCarregado()) {
                 $public.DestruirMapa();
             }
