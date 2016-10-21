@@ -1,7 +1,7 @@
 ﻿$(function () {
 
     if (App.SuportaAjax()) {
-        App.IniciarMapa("mapa", [40.7224 , -73.9933], 14);
+        App.IniciarMapa("mapa", [-15.64511, -47.78214], 14);
 
         App.GetGeoJson("/ocorrencia/coordenadas", function (data) {
 

@@ -210,7 +210,7 @@
         $public.GetGeoJson = function (local, callback) {
             var resultado = {};
 
-            $.getJSON("http://api.tiles.mapbox.com/v3/mapbox.o11ipb8h/markers.geojson", callback);
+            $.getJSON(_private.url + local, callback);
         };
 
         $public.IniciarMapa = function (elemento, coordenadas, zoom, tipo) {

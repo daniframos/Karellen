@@ -333,6 +333,7 @@
     <Content Include="Views\Log\Detalhes.cshtml" />
     <Content Include="images\render.sh" />
     <Content Include="Views\Ocorrencia\Detalhes.cshtml" />
+    <Content Include="Views\Estatistica\Estatistica.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -342,7 +343,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\karellen\js\Conta\" />
-    <Folder Include="Views\Estatistica\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Karellen.Data\Karellen.Data.csproj">

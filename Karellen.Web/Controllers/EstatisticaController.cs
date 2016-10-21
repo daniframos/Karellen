@@ -17,6 +17,12 @@ namespace Karellen.Web.Controllers
         {
             _servico = servico;
         }
+
+        public ActionResult Index()
+        {
+            return View("Estatistica");
+        }
+
         // GET: Estatistica
         public ActionResult SuasEstatisticas()
         {
