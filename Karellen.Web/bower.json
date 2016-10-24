@@ -23,6 +23,7 @@
     "eonasdan-bootstrap-datetimepicker": "^4.17.42",
     "jquery-ajax-unobtrusive": "https://github.com/aspnet/jquery-ajax-unobtrusive.git#^3.2.4",
     "chosen": "^1.6.2",
-    "jquery-pjax": "^1.9.6"
+    "jquery-pjax": "^1.9.6",
+    "chart.js": "^2.3.0"
   }
 }

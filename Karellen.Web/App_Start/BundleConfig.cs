@@ -26,6 +26,7 @@ namespace Karellen.Web
                 .Include("~/Content/chosen/chosen.jquery.js")
                 .Include("~/Content/nprogress/nprogress.js")
                 .Include("~/Content/jquery-pjax/jquery.pjax.js")
+                .Include("~/Content/chart.js/Chart.js")
                 .Include("~/Content/karellen/js/Global/global.js")
                 );
         }
