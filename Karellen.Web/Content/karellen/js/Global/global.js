@@ -188,7 +188,112 @@
             _private.mapa.on('ready', function () {
                 new L.Control.MiniMap(L.mapbox.tileLayer('mapbox.streets')).addTo(_private.mapa);
             });
-        }
+        };
+
+        _private.setActive = function(el) {
+            var siblings = listings.getElementsByTagName('div');
+            for (var i = 0; i < siblings.length; i++) {
+                siblings[i].className = siblings[i].className
+                    .replace(/active/, '')
+                    .replace(/\s\s*$/, '');
+            }
+
+            el.className += ' active';
+        };
+
+        _private.index = function(data) {
+
+            var json = data;
+            var geoJson = L.geoJson(json);
+            _private.markers = new L.MarkerClusterGroup();
+
+            geoJson.eachLayer(function(layer) {
+                var prop = layer.feature.properties;
+                var popup = '<h3>' + prop.Nome + '</h3>';
+                popup += '<div>' + prop.Detalhes + '</div>';
+
+                var listing = listings.appendChild(document.createElement('div'));
+                listing.className = 'item';
+
+                listing.appendChild(document.createElement('h4'));
+                var link = listing.childNodes[0].appendChild(document.createElement('a'));
+                link.href = '#';
+                link.className = 'title';
+
+                link.innerHTML = prop.Nome;
+
+                if (layer instanceof L.Marker) {
+
+                    layer.setIcon(L.icon({
+                        iconUrl: $public.Url() +
+                            '/content/karellen/img/robbery.png', // load your own custom marker image here
+                        iconSize: [32, 32],
+                        iconAnchor: [28, 28],
+                        popupAnchor: [0, -34]
+                    }));
+                }
+
+                if (prop.Data) {
+                    // Cria 
+                    popup +=
+                        '<br /><small class="quiet" style="text-align:center"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp' + prop.Data + '</small>';
+                    popup += '<br /><a href="' +
+                        $public.Url() +
+                        "/ocorrencia/detalhes/" +
+                        prop.Id +
+                        '" type="button" data-title="Detalhes" data-pjax data-callback="Detalhes"' +
+                        ' class="btn btn-primary btn-default btnsaibamais" style="color: white">Saiba mais</a>';
+                }
+
+                if (prop.UsuarioId !== null) {
+                    popup += '<a href="' +
+                        $public.Url() +
+                        "/ocorrencia/editar/" +
+                        prop.Id +
+                        '" type="button" style="margin-left:1em; color:white;" data-title="Editar" data-pjax data-callback="Editar"' +
+                        ' class="btn btn-primary btn-default btnsaibamais" style="color: white">' +
+                        '<i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>';
+
+                    popup += '<button type="button" data-toggle="modal" data-hidden="' +
+                        prop.Id +
+                        '" data-target="#myModal" style="margin-left:1em; color:white;"' +
+                        ' class="btn btn-primary btn-default btnsaibamais" style="color: white">' +
+                        '<i class="fa fa-check" aria-hidden="true"></i> Solucionar</a>';
+
+                    popup += '<button type="button" data-toggle="modal" data-hidden="' +
+                        prop.Id +
+                        '" data-target="#modalExcluir" style="margin-left:1em; color:white;"' +
+                        ' class="btn btn-danger btn-default" style="color: white">' +
+                        '<i class="fa fa-trash-o" aria-hidden="true"></i> Excluir</a>';
+
+                    link.innerHTML += ' <i class="fa fa-pencil" aria-hidden="true"></i>';
+                }
+
+                var details = listing.appendChild(document.createElement('div'));
+                details.innerHTML = prop.Data;
+
+
+                popup += '</div>';
+                layer.bindPopup(popup);
+
+                layer.on('click',
+                    function(e) {
+                        _private.setActive(listing);
+                    });
+
+                link.onclick = function(evt) {
+                    _private.setActive(listing);
+                    _private.markers.removeLayer(layer);
+                    _private.mapa.addLayer(layer);
+                    layer.openPopup();
+                    return false;
+                };
+
+                _private.markers.addLayer(layer);
+            });
+
+            _private.mapa.addLayer(_private.markers);
+        };
 
         $public.Url = function() {
             return _private.url;
@@ -275,10 +380,13 @@
             }
 
             $public.IniciarMapa("mapa", [-15.64511, -47.78214], 13, "mapbox.streets");
-            var layers = $public.GetGeoJson("/ocorrencia/coordenada/" + _private.BuscarIdOcorrencia());
+            $public.GetGeoJson("/ocorrencia/coordenada/" + _private.BuscarIdOcorrencia(), function(data) {
+                var json = data;
+                var geoJson = L.geoJson(json);
 
-            layers.on("ready", function() {
-                layers.eachLayer(function (layer) {
+                geoJson.eachLayer(function (layer) {
+                    _private.mapa.addLayer(layer);
+
                     var prop = layer.feature.properties;
 
                     var popup = '<h3>' + prop.Nome + '</h3>';
@@ -289,22 +397,23 @@
                         popup += '<br /><small class="quiet" style="text-align:center"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp' + prop.Data + '</small>';
                     }
 
+                    if (layer instanceof L.Marker) {
+
+                        layer.setIcon(L.icon({
+                            iconUrl: $public.Url() +
+                                '/content/karellen/img/robbery.png', // load your own custom marker image here
+                            iconSize: [32, 32],
+                            iconAnchor: [28, 28],
+                            popupAnchor: [0, -34]
+                        }));
+                    }
+
                     layer.bindPopup(popup);
 
+
                     layer.openPopup();
+
                 });
-            });
-
-            layers.on('layeradd', function (e) {
-
-                var marker = e.layer;
-                marker.setIcon(L.icon({
-                    iconUrl: App.Url() + '/content/karellen/img/robbery.png', // load your own custom marker image here
-                    iconSize: [32, 32],
-                    iconAnchor: [28, 28],
-                    popupAnchor: [0, -34]
-                }));
-
             });
         };
 
@@ -323,6 +432,12 @@
             _private.mapa.on("draw:created", _private.onDrawCreated);
             _private.mapa.on("draw:deleted", _private.onDrawDeleted);
             _private.mapa.on("draw:edited", _private.onDrawEdited);
+        };
+
+        $public.Index = function() {
+            $public.IniciarMapa("mapa", [-15.64511, -47.78214], 14);
+
+            $public.GetGeoJson("/ocorrencia/coordenadas", _private.index);
         };
 
         return $public;
