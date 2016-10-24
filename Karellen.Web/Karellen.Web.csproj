@@ -210,7 +210,10 @@
     <Content Include="App_Data\email.html" />
     <Content Include="Content\bootstrap\dist\css\bootstrap.css" />
     <Content Include="Content\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Content\chartjs\dist\Chart.bundle.js" />
+    <Content Include="Content\chartjs\dist\Chart.bundle.min.js" />
     <Content Include="Content\chartjs\dist\Chart.js" />
+    <Content Include="Content\chartjs\dist\Chart.min.js" />
     <Content Include="Content\chosen\chosen.css" />
     <Content Include="Content\chosen\chosen.jquery.js" />
     <Content Include="Content\datetimepicker\build\css\bootstrap-datetimepicker.css" />
