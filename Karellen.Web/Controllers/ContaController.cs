@@ -143,8 +143,8 @@ namespace Karellen.Web.Controllers
             user = _userManager.FindByEmail(loginInfo.Email);
             if (user != null)
             {
-                ModelState.AddModelError("email", Mensagem.MN010);
-                return View("Registrar");
+                ModelState.AddModelError("email", Mensagem.MN018);
+                return View("Login");
             }
             // Criar a conta
             var result = await _userManager.CreateAsync(userIdentity);
