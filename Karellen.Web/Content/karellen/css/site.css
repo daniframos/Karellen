@@ -50,6 +50,9 @@ a:hover { color: #101010; }
   padding-bottom: 60px;
 }
 
+.listings .item:last-child {
+}
+
 .listings .item {
   display: block;
   border-bottom: 1px solid #eee;
@@ -57,7 +60,10 @@ a:hover { color: #101010; }
   text-decoration: none;
 }
 
-.listings .item:last-child { border-bottom: none; }
+.listings .item:last-child {
+    margin-bottom: 5em;
+    border-bottom: none;
+}
 
 .listings .item .title {
   display: block;
