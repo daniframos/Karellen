@@ -440,6 +440,68 @@
             $public.GetGeoJson("/ocorrencia/coordenadas", _private.index);
         };
 
+        $public.IniciarGrafico = function() {
+            $(function() {
+
+                Array.prototype.max = function() {
+                    return Math.max.apply(null, this);
+                };
+
+
+                var info = JSON.parse($("#grafico").val());
+                var valores = new Array();
+
+                for (var key in info) {
+                    valores.push(info[key]);
+                };
+
+                var topo = (valores.max()) * 1.5;
+                var options = {
+                    scales: {
+                        xAxes: [
+                            {
+                                stacked: true
+                            }
+                        ],
+                        yAxes: [
+                            {
+                                stacked: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: topo
+                                }
+                            }
+                        ]
+                    }
+                }
+
+                var data = {
+                    labels: Object.keys(info),
+                    datasets: [
+                        {
+                            label: "Quantidade de ocorrências nos ultimos 6 meses",
+                            backgroundColor: "rgba(212, 247, 199, 1)",
+                            borderColor: "rgba(81, 132, 62, 1)",
+                            borderWidth: 1,
+                            hoverBackgroundColor: "rgba(134, 158, 126, 1)",
+                            hoverBorderColor: "rgba(3, 42, 81, 1)",
+                            data: valores,
+                        }
+                    ]
+                };
+
+
+                var ctx = $("#ctx");
+
+                var myBarChart = new Chart(ctx,
+                {
+                    type: 'bar',
+                    data: data,
+                    options: options
+                });
+            });
+        };
+
         return $public;
 
     })($);

@@ -31,7 +31,7 @@
                     </span>
                 </div>
                 <div class="panel-body">
-                    <h4>@Html.Action("suasestatisticas", "estatistica") ocorrências</h4>
+                    <h4><a href="@Url.Action("index", "estatistica")">@Html.EstatisticaUsuario(User.Identity.GetUserId<int>()) ocorrências</a></h4>
                     <h4>No ultimos meses</h4>
                     <br /><small>Não estão inclusas ocorrências anonimas. Nós <strong>NÃO TEMOS</strong> informações dos autores de ocorrências anonimas.</small>
                 </div>

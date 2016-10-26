@@ -1,0 +1,76 @@
+﻿@using Karellen.Web.Helper
+@using Microsoft.AspNet.Identity
+@model Karellen.Web.Models.Estatistica.EstatisticaVM
+
+@{
+    ViewBag.Title = "Estatistica";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="sidewrapper">
+    <h1>Estatisticas<br/><small>Todos os numeros</small></h1>
+    <br/>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8" style="text-align: center">
+            <!--Area chart example -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i>Ocorrências nos últimos 6 meses
+                </div>
+
+                <div class="panel-body">
+                    <div>
+                        <canvas id="ctx"></canvas>
+                    </div>
+                    @Html.Partial("_RelatorioMensal", Model.OcorrenciasUltimos6Meses.ToDictionary(o => o.Mes, o => o.Quantidade))
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="alert alert-danger text-center">
+                <i class="fa fa-user-plus fa-3x"></i>&nbsp;<b>@Html.EstatisticaUsuario(User.Identity.GetUserId<int>()) </b>ocorrências cadastradas por você
+
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="alert alert-danger text-center">
+                <i class="fa fa-calendar fa-3x"></i>&nbsp;<b>@Model.QuantidadeOcorrencias </b> ocorrências cadastradas em todo o sistema desde o inicio
+
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="alert alert-info text-center">
+                <i class="fa  fa-eye fa-3x"></i>&nbsp;<b>@Model.QuantidadeOcorrenciasAnonimas (@Model.PorcentagemAnonima)% </b> das ocorrências são anonimas 
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="alert alert-info text-center">
+                <i class="fa fa-eye fa-3x"></i>&nbsp;<b>@Model.QuantidadeOcorrenciasNaoAnonimas (@Model.PorcentagemNaoAnonima)% </b> das ocorrências não são anonimas 
+
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="alert alert-warning text-center">
+                <i class="fa fa-female fa-3x"></i>&nbsp;<b>@Model.QuantidadeOcorrenciasSexoFeminino (@Model.PorcentagemFeminina)% </b>ocorrências envolvem pessoas  do sexo feminino 
+            </div>
+        </div>
+        
+        <div class="col-lg-3">
+            <div class="alert alert-warning text-center">
+                <i class="fa fa-male fa-3x"></i>&nbsp;<b>@Model.QuantidadeOcorrenciasSexoMasculino (@Model.PorcentagemMasculina)% </b>ocorrências envolvem pessoas do sexo masculino
+            </div>
+        </div>
+        <div class="col-lg-3" style="text-align: center;">
+            <button type="button" class="btn btn-default btn-primary" onclick="javascript:window.print();">Imprimir</button>
+        </div>
+    </div>
+    
+</div>
+
+@section scripts {
+    <script src="~/Content/karellen/js/Estatistica/index.js"></script>
+}

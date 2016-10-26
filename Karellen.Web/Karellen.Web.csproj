@@ -229,6 +229,7 @@
     <Content Include="Content\karellen\img\favicon.ico" />
     <Content Include="Content\karellen\img\robbery.png" />
     <Content Include="Content\karellen\js\App\index.js" />
+    <Content Include="Content\karellen\js\Estatistica\index.js" />
     <Content Include="Content\karellen\js\Global\global.js" />
     <Content Include="Content\karellen\js\Global\navegacao.js" />
     <Content Include="Content\karellen\js\Ocorrencia\detalhes.js" />
@@ -264,9 +265,11 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="AutoMapper\EstatisticaProfile.cs" />
     <Compile Include="AutoMapper\GerenciarProfile.cs" />
     <Compile Include="AutoMapper\GrupoProfile.cs" />
     <Compile Include="AutoMapper\LogProfile.cs" />
+    <Compile Include="AutoMapper\OcorrenciaMensalProfile.cs" />
     <Compile Include="AutoMapper\OcorrenciaProfile.cs" />
     <Compile Include="AutoMapper\UsuarioProfile.cs" />
     <Compile Include="Controllers\AppController.cs" />
@@ -294,6 +297,8 @@
     <Compile Include="Models\Conta\LoginExternoVM.cs" />
     <Compile Include="Models\Conta\LoginVM.cs" />
     <Compile Include="Models\Conta\RegistrarVM.cs" />
+    <Compile Include="Models\Estatistica\EstatisticaVM.cs" />
+    <Compile Include="Models\Estatistica\OcorrenciaMensalVM.cs" />
     <Compile Include="Models\Log\LogVM.cs" />
     <Compile Include="Models\Ocorrencia\NovaOcorrenciaVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -337,7 +342,8 @@
     <Content Include="Views\Log\Detalhes.cshtml" />
     <Content Include="images\render.sh" />
     <Content Include="Views\Ocorrencia\Detalhes.cshtml" />
-    <Content Include="Views\Estatistica\Estatistica.cshtml" />
+    <Content Include="Views\Estatistica\Index.cshtml" />
+    <Content Include="Views\Estatistica\_RelatorioMensal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

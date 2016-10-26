@@ -14,6 +14,8 @@ namespace Karellen.Web
                 x.AddProfile<OcorrenciaProfile>();
                 x.AddProfile<LogProfile>();
                 x.AddProfile<GerenciarProfile>();
+                x.AddProfile<OcorrenciaMensalProfile>();
+                x.AddProfile<EstatisticaProfile>();
 
                 x.AddProfile<Karellen.Negocio.Util.AutoMapper.OcorrenciaProfile>();
                 x.AddProfile<Karellen.Negocio.Util.AutoMapper.LogProfile>();

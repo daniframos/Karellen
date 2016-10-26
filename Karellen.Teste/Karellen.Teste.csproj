@@ -103,6 +103,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AutoMapper\EstatisticaProfileTests.cs" />
     <Compile Include="AutoMapper\GerenciarProfileTests.cs" />
     <Compile Include="AutoMapper\GrupoProfileTests.cs" />
     <Compile Include="AutoMapper\OcorrenciaProfileTests.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Controllers\OcorrenciaControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\AutoMapper\LogProfileTests.cs" />
+    <Compile Include="Util\StringHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using Karellen.Negocio.Interface;
 using Karellen.Web.Identity.Manager;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
@@ -52,7 +53,7 @@ namespace Karellen.Web.Helper
             var container = UnityConfig.GetConfiguredContainer() as UnityContainer;
             var manager = container.Resolve<UsuarioIdentityManager>();
             var logins = manager.GetLogins(usuarioId);
-            string userKey = string.Empty;
+            var userKey = string.Empty;
             if (logins != null)
             {
                 var u = logins.FirstOrDefault(l => l.LoginProvider == "Facebook");
@@ -64,6 +65,15 @@ namespace Karellen.Web.Helper
             tag.MergeAttribute("src", "http://graph.facebook.com/"+ userKey + "/picture?type=normal");
 
             return new MvcHtmlString(tag.ToString());
+        }
+
+        public static MvcHtmlString EstatisticaUsuario<TModel>(this HtmlHelper<TModel> htmlHelper, int usuarioId)
+        {
+            var container = UnityConfig.GetConfiguredContainer() as UnityContainer;
+            var servico = container.Resolve<IOcorrenciaServico>();
+            var ocorrencias = servico.BuscarTodasOcorrencias(usuarioId).Count;
+         
+            return new MvcHtmlString(ocorrencias.ToString());
         }
     }
 }

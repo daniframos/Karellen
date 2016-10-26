@@ -9,13 +9,16 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Karellen.Negocio.Util.Extensao;
 
 namespace Karellen.Negocio.Servico
 {
     public class OcorrenciaServico: IOcorrenciaServico
     {
+        private readonly string _masculino = "masculino";
         private readonly IUnitOfWork _unitOfWork;
         private readonly OperacaoResultado _resultado;
+        private readonly string _feminino;
 
         public OcorrenciaServico(IUnitOfWork unitOfWork)
         {
@@ -160,6 +163,113 @@ namespace Karellen.Negocio.Servico
 
             _unitOfWork.RepositorioOcorrencia.Atualizar(o);
             _unitOfWork.SaveChanges();
+        }
+
+        public EstatisticaDTO BuscarEstatisticas()
+        {
+            var r = new EstatisticaDTO
+            {
+                QuantidadeOcorrencias = BuscarTodasOcorrenciasJaCadastradas(),
+                OcorrenciasUltimos6Meses = BuscarOcorrenciasRecentes(6),
+                QuantidadeOcorrenciasAnonimas = BuscarOcorrenciaAnonimas(),
+                QuantidadeOcorrenciasNaoAnonimas = BuscarOcorrenciasNaoAnonimas(),
+                QuantidadeOcorrenciasSexoFeminino = BuscarOCorrenciasSexoFeminino(),
+                QuantidadeOcorrenciasSexoMasculino = BuscarOcorrenciasSexoMasculino()
+            };
+
+            return r;
+        }
+
+        private int BuscarTodasOcorrenciasJaCadastradas()
+        {
+            return _unitOfWork.RepositorioOcorrencia.BuscarTodos().Count;
+        }
+
+        private int BuscarOcorrenciasSexoMasculino()
+        {
+            var c = (from o in _unitOfWork.RepositorioOcorrencia.BuscarTodos()
+                     group o.SexoVitima by o.SexoVitima into ocorrenciaGroup
+                     select new
+                     {
+                         Sexo = ocorrenciaGroup.Key == 0 ? _masculino : _feminino,
+                         Total = ocorrenciaGroup.Count()
+                     }).ToList();
+
+            var resultado = c.FirstOrDefault(o => o.Sexo == _masculino);
+            return resultado == null ? 0 : resultado.Total;
+        }
+
+        private int BuscarOCorrenciasSexoFeminino()
+        {
+            var c = (from o in _unitOfWork.RepositorioOcorrencia.BuscarTodos()
+                     group o.SexoVitima by o.SexoVitima into ocorrenciaGroup
+                     select new
+                     {
+                         Sexo = ocorrenciaGroup.Key == 0 ? _masculino : _feminino,
+                         Total = ocorrenciaGroup.Count()
+                     }).ToList();
+
+
+            var resultado = c.FirstOrDefault(o => o.Sexo == _feminino);
+            return resultado == null ? 0 : resultado.Total;
+        }
+
+        private int BuscarOcorrenciaAnonimas()
+        {
+            var r = from o in _unitOfWork.RepositorioOcorrencia.BuscarTodos()
+                    group o by o.UsuarioId.HasValue into ocorrenciaGroup
+                    select new
+                    {
+                        Anonima = !ocorrenciaGroup.Key,
+                        Total = ocorrenciaGroup.Count()
+                    };
+
+            var resultado = r.FirstOrDefault(o => o.Anonima);
+            return resultado == null ? 0 : resultado.Total;
+        }
+
+        private int BuscarOcorrenciasNaoAnonimas()
+        {
+            var r = from o in _unitOfWork.RepositorioOcorrencia.BuscarTodos()
+                    group o by o.UsuarioId.HasValue into ocorrenciaGroup
+                    select new
+                    {
+                        Anonima = !ocorrenciaGroup.Key,
+                        Total = ocorrenciaGroup.Count()
+                    };
+
+            var resultado = r.FirstOrDefault(o => o.Anonima == false);
+            return resultado == null ? 0 : resultado.Total;
+        }
+
+        private ICollection<OcorrenciaMensalDTO> BuscarOcorrenciasRecentes(int meses)
+        {
+            var ocorrenciasRecentes = _unitOfWork.RepositorioOcorrencia.Buscar(o => o.DataAcontecimento > DateTime.UtcNow.AddMonths(-6));
+
+            var grupoOcorrencias = from o in ocorrenciasRecentes
+                                   group o by new { o.DataAcontecimento.Month, o.DataAcontecimento.Year } into oGroup
+                                   select new
+                                   {
+                                       Data = new DateTime(oGroup.Key.Year, oGroup.Key.Month, DateTime.Now.Day),
+                                       Ocorrencias = oGroup.ToList()
+                                   };
+
+            var ultimosMeses = new List<DateTime>();
+            for (int i = 0; i < meses; i++)
+            {
+                ultimosMeses.Add(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).AddMonths(-i));
+            }
+
+            var resultado = (from u in ultimosMeses
+                      join o in grupoOcorrencias on u equals o.Data into ocorrenciaGroup
+                      from o in ocorrenciaGroup.DefaultIfEmpty()
+                      select new OcorrenciaMensalDTO()
+                      {
+                          Mes = u.ToString("MMMM/yy").ToPrimeiraLetraUpper(),
+                          Quantidade = o == null ? 0 : o.Ocorrencias.Count()
+                      }).ToList();
+
+            return resultado;
         }
     }
 }

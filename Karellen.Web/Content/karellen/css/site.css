@@ -214,3 +214,13 @@ a:hover { color: #101010; }
 a, a:hover {
     color: #51843e;
 }
+
+.panel-primary {
+    border-color: #2e382a;
+}
+
+.panel-primary > .panel-heading {
+    background-color: #51843e;
+    border-color: #2e382a;
+    
+}
