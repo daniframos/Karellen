@@ -325,7 +325,7 @@
             _private.zoom = zoom;
 
             if (typeof tipo === "undefined") {
-                tipo = "mapbox.light";
+                tipo = "mapbox.streets";
             }
             
             L.mapbox.accessToken = 'pk.eyJ1Ijoia2tyaWNvIiwiYSI6ImNpc3l5bGtsNDBmcDQycGtoOTgwN3JtN3IifQ.Bc9quEp60HksbmydwEUJqw';
@@ -435,7 +435,7 @@
         };
 
         $public.Index = function() {
-            $public.IniciarMapa("mapa", [-15.64511, -47.78214], 14);
+            $public.IniciarMapa("mapa", [-15.65511, -47.79214], 14);
 
             $public.GetGeoJson("/ocorrencia/coordenadas", _private.index);
         };
