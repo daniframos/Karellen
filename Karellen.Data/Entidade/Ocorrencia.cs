@@ -11,6 +11,8 @@ namespace Karellen.Data.Entidade
         public DateTime DataAcontecimento { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime? DataResolucao { get; set; }
+        public string Resolucao { get; set; }
+
         public bool Excluida { get; set; }
         public Sexo SexoVitima { get; set; }
         public string Detalhes { get; set; }

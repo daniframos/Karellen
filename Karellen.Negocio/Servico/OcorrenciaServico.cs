@@ -100,10 +100,11 @@ namespace Karellen.Negocio.Servico
             return resultado;
         }
 
-        public void SolucionarOcorrencia(int id)
+        public void SolucionarOcorrencia(int id, string solucao)
         {
             var ocorrencia = _unitOfWork.RepositorioOcorrencia.BuscarPorId(id);
             ocorrencia.DataResolucao = DateTime.Now;
+            ocorrencia.Resolucao = solucao;
 
             _unitOfWork.SaveChanges();
         }

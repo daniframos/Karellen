@@ -38,7 +38,8 @@
         _private.configurarDateTimePicker = function () {
            $(function() {
                $("#datetimepicker1").datetimepicker({
-                   locale: 'pt-br'
+                   locale: 'pt-br',
+                   maxDate: (moment().format('MM/DD/YYYY h:mm:ss'))
                });
            });
         };
