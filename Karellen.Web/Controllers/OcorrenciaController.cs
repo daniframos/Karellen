@@ -171,7 +171,7 @@ namespace Karellen.Web.Controllers
             return RedirectToAction("index", "app", new { mensagem = EnumMensagem.Alterado });
         }
         [HttpPost]
-        public ActionResult Solucionar(int id)
+        public ActionResult Solucionar(int id, string solucao)
         {
             var o = _servico.BuscarOcorrencia(id);
             if (o.UsuarioId != User.Identity.GetUserId<int>())
@@ -179,7 +179,7 @@ namespace Karellen.Web.Controllers
                 return View();
             }
 
-            _servico.SolucionarOcorrencia(id);
+            _servico.SolucionarOcorrencia(id, solucao);
 
             return RedirectToAction("index", "app", new {mensagem = EnumMensagem.Alterado});
         }
