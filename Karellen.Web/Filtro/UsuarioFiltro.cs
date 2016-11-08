@@ -17,14 +17,7 @@ namespace Karellen.Web.Filtro
         public void OnAuthentication(AuthenticationContext filterContext)
         {
             if (!filterContext.Principal.Identity.IsAuthenticated) return;
-
-            if (filterContext.HttpContext.Session != null)
-            {
-                var nome = filterContext.HttpContext.Session[NomeUsuario] as string;
-
-                if (!string.IsNullOrEmpty(nome)) return;
-            }
-
+            
             var userName = filterContext.Principal.Identity.Name;
             var u = _manager.FindByName(userName);
 

@@ -51,6 +51,7 @@ namespace Karellen.Data.Migrations
                         DataAcontecimento = c.DateTime(nullable: false),
                         DataCriacao = c.DateTime(nullable: false),
                         DataResolucao = c.DateTime(),
+                        Resolucao = c.String(),
                         Excluida = c.Boolean(nullable: false),
                         SexoVitima = c.Int(nullable: false),
                         Detalhes = c.String(),

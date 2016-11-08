@@ -7,13 +7,13 @@ namespace Karellen.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CampoSolucao : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CampoSolucao));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611011243422_CampoSolucao"; }
+            get { return "201611082116323_Initial"; }
         }
         
         string IMigrationMetadata.Source

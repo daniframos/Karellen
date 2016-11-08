@@ -80,13 +80,9 @@
     <Compile Include="Mapeamento\OcorrenciaEntityMapping.cs" />
     <Compile Include="Mapeamento\TipoOcorrenciaEntityMapping.cs" />
     <Compile Include="Mapeamento\UsuarioEntityMapping.cs" />
-    <Compile Include="Migrations\201610191258229_Initial.cs" />
-    <Compile Include="Migrations\201610191258229_Initial.Designer.cs">
-      <DependentUpon>201610191258229_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611011243422_CampoSolucao.cs" />
-    <Compile Include="Migrations\201611011243422_CampoSolucao.Designer.cs">
-      <DependentUpon>201611011243422_CampoSolucao.cs</DependentUpon>
+    <Compile Include="Migrations\201611082116323_Initial.cs" />
+    <Compile Include="Migrations\201611082116323_Initial.Designer.cs">
+      <DependentUpon>201611082116323_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,11 +91,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610191258229_Initial.resx">
-      <DependentUpon>201610191258229_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611011243422_CampoSolucao.resx">
-      <DependentUpon>201611011243422_CampoSolucao.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611082116323_Initial.resx">
+      <DependentUpon>201611082116323_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

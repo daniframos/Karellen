@@ -47,6 +47,8 @@ namespace Karellen.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginVM model, string returnUrl)
         {
+            Session["NomeUsuario"] = null;
+
             if (!ModelState.IsValid) return View(model);
             if (User.Identity.IsAuthenticated) return RedirectToAction("index", "app");
 
