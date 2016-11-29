@@ -11,6 +11,15 @@ namespace Karellen.Data.Mapeamento
 
             Property(o => o.UsuarioId)
                 .HasColumnName("UsuarioId");
+
+            Property(o => o.Titulo)
+                .IsRequired();
+
+            Property(o => o.Latitude)
+                .IsRequired();
+
+            Property(o => o.Longitude)
+                .IsRequired();
         }
     }
 }
