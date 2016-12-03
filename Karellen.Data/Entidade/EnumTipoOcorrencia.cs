@@ -10,25 +10,31 @@ namespace Karellen.Data.Entidade
     }
     public enum EnumTipoOcorrencia
     {
-        [Description("Furto em veículo")]
-        FurtoVeiculo,
-        [Description("Roubo de veículo")]
-        RouboVeiculo,
-        [Description("Roubo a transeunte")]
-        RouboTRanseunte,
-        [Description("Roubo em coletivo")]
-        RouboColetivo,
-        [Description("Roubo em comércio")]
-        RouboComercio,
-        [Description("CCP agregado")]
-        CcpAgregado,
+        [Description("Desacato")]
+        Desacato,
+        [Description("Furto")]
+        Furto,
+        [Description("Roubo")]
+        Roubo,
         [Description("Homicidio")]
         Homicidio,
-        [Description("Latrocínio")]
-        Latrocinio,
-        [Description("Lesão seguida de morte")]
-        LesaoSeguidaPorMorte,
-        [Description("CVLI agregado")]
-        Cvli
+        [Description("Lesão Corporal")]
+        LesaoCorporal,
+        [Description("Tentativa de Homicidio")]
+        TentativaHomicidio,
+        [Description("Violência Doméstica")]
+        ViolênciaDoméstica,
+        [Description("Atentado Violento ao Pudor")]
+        AtentadoViolento,
+        [Description("Corrupção de Menor")]
+        CorrupçãoMenor,
+        [Description("Estupro")]
+        Estupro,
+        [Description("Embriaguez")]
+        Embriaguez,
+        [Description("Porte Ilegal de arma")]
+        PorteIlegal,
+        [Description("Acidente de Trânsito")]
+        AcidenteTransito
     }
 }
