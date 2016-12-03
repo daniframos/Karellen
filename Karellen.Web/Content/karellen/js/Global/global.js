@@ -211,7 +211,7 @@
             geoJson.eachLayer(function(layer) {
                 var prop = layer.feature.properties;
                 var popup = '<h3>' + prop.Nome + '</h3>';
-                popup += '<div>' + prop.Detalhes + '</div>';
+                popup += '<div>' + prop.Detalhes.substring(0, 150)+ ' ...' + '</div>';
 
                 var listing = listings.appendChild(document.createElement('div'));
                 listing.className = 'item';
@@ -391,7 +391,7 @@
                     var prop = layer.feature.properties;
 
                     var popup = '<h3>' + prop.Nome + '</h3>';
-                    popup += '<div>' + prop.Detalhes + '</div>';
+                    popup += '<div>' + prop.Detalhes.substring(0, 150) + ' ... <b>(veja mais ao lado)</b>' + '</div>';
 
                     if (prop.Data) {
                         // Cria 
