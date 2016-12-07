@@ -212,6 +212,7 @@ namespace Karellen.Web.Controllers
             Session["NomeUsuario"] = model.Nome;
 
             var updateAsync = _userManager.UpdateAsync(usuario);
+            updateAsync.Wait();
             return RedirectToAction("gerenciar", new {mensagem = EnumMensagem.Alterado });
         }
 

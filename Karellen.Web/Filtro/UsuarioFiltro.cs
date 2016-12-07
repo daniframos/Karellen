@@ -1,32 +1,34 @@
 ﻿using Karellen.Web.Identity.Manager;
 using Microsoft.AspNet.Identity;
 using System.Web.Mvc.Filters;
+using Karellen.Data.Interface.UnitOfWork;
+using Microsoft.Practices.Unity;
 
 namespace Karellen.Web.Filtro
 {
     public class UsuarioFiltro : IAuthenticationFilter
     {
-        private readonly UsuarioIdentityManager _manager;
+        
         private const string NomeUsuario = "NomeUsuario";
 
-        public UsuarioFiltro(UsuarioIdentityManager manager)
+        public UsuarioFiltro()
         {
-            _manager = manager;
+          
         }
 
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            if (!filterContext.Principal.Identity.IsAuthenticated) return;
-            
             var userName = filterContext.Principal.Identity.Name;
-            var u = _manager.FindByName(userName);
+            var container = UnityConfig.GetConfiguredContainer() as UnityContainer;
+            var unitOfWork = container.Resolve<IUnitOfWork>();
 
-            filterContext.HttpContext.Session[NomeUsuario] = u.Nome;
+            var u = unitOfWork.RepositorioUsuario.BuscarPorUserName(userName);
+            if (u != null)
+                filterContext.HttpContext.Session[NomeUsuario] = u.Nome;
         }
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
-            
         }
     }
 }

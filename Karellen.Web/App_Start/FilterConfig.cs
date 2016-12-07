@@ -9,8 +9,7 @@ namespace Karellen.Web
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            var container = UnityConfig.GetConfiguredContainer() as UnityContainer;
-            filters.Add(new UsuarioFiltro(container.Resolve<UsuarioIdentityManager>()));
+            filters.Add(new UsuarioFiltro());
         }
     }
 }
