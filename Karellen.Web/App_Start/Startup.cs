@@ -36,8 +36,8 @@ namespace Karellen.Web
 
             var google = new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "547697380884-n7ck4aep6937ldgelmuoopk0s0spgr4m.apps.googleusercontent.com",
-                ClientSecret = "n2UIqelKNlSOcDBmVpVi54c0",
+                ClientId = ConfigurationManager.AppSettings["googleappid"],
+                ClientSecret = ConfigurationManager.AppSettings["googleappkey"],
                 Provider = new GoogleOAuth2AuthenticationProvider()
             };
             google.Scope.Add("email");
