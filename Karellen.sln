@@ -14,8 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0578CE7F-AB4F-40B2-9641-C9FB6DF76D7F}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\Base inicial e carga.sql = Scripts\Base inicial e carga.sql
-		CampoSolucao.sql = CampoSolucao.sql
-		Regerar a base.sql = Regerar a base.sql
+		Deletar todas as tabelas.sql = Deletar todas as tabelas.sql
 	EndProjectSection
 EndProject
 Global
