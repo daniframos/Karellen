@@ -25,5 +25,6 @@ Karellen é o projeto de conclusão de curso de [Daniel Ramos](https://www.faceboo
 ### Ultimas considerações
 
 * A chave usada é inserida via build. Mesmo a chave que está no histórico dos commits está desativada
+* A chave do sendgrid está desativada
 * TODO: Fazer uma api
 Qualquer dúvida, abrir issue :)
