@@ -2,6 +2,8 @@
 
 Karellen é o projeto de conclusão de curso de [Daniel Ramos](https://www.facebook.com/profile.php?id=100013298985823) e Lucas Coelho
 
+Disponível aqui: http://karellen.azurewebsites.net
+
 > O Karellen é o sistema web para gerenciamento de ocorrências criminais, em que o cidadão pode colocar no mapa crimes que ocorreram no seu bairro
 
 [![N|Solid](http://i.imgur.com/4Jvx6Ul.png)](http://karellen.azurewebsites.net)
@@ -27,4 +29,5 @@ Karellen é o projeto de conclusão de curso de [Daniel Ramos](https://www.faceboo
 * A chave usada é inserida via build. Mesmo a chave que está no histórico dos commits está desativada
 * A chave do sendgrid está desativada
 * TODO: Fazer uma api
+
 Qualquer dúvida, abrir issue :)
