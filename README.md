@@ -22,4 +22,8 @@ Karellen é o projeto de conclusão de curso de [Daniel Ramos](https://www.faceboo
  * Rodar Base inicial e carga.sql
  * Salsa :dancer:
 
+### Ultimas considerações
+
+* A chave usada é inserida via build. Mesmo a chave que está no histórico dos commits está desativada
+* TODO: Fazer uma api
 Qualquer dúvida, abrir issue :)
