@@ -1,21 +1,19 @@
 # Karellen
 
-Karellen é o projeto de conclusão de curso de [Daniel Ramos](https://www.facebook.com/profile.php?id=100013298985823) e Lucas Coelho
+[![Build status](https://ci.appveyor.com/api/projects/status/r9emjt57e70fyog1?svg=true)](https://ci.appveyor.com/project/kkrico/karellen)
 
+Karellen Ã© o projeto de conclusÃ£o de curso de [Daniel Ramos](https://www.facebook.com/profile.php?id=100013298985823) e Lucas Coelho
 
-Disponível aqui: [karellen.azurewebsites.net](http://karellen.azurewebsites.net)
+> O Karellen Ã© o sistema web para gerenciamento de ocorrÃªncias criminais, em que o cidadÃ£o pode colocar no mapa crimes que ocorreram no seu bairro
 
+[![N|Solid](http://i.imgur.com/4Jvx6Ul.png)]
 
-> O Karellen é o sistema web para gerenciamento de ocorrências criminais, em que o cidadão pode colocar no mapa crimes que ocorreram no seu bairro
-
-[![N|Solid](http://i.imgur.com/4Jvx6Ul.png)](http://karellen.azurewebsites.net)
-
-## Dependências
+## DependÃªncias
 
 * .NetFramework 4.5
 * Visual Studio 2013+
 * O banco aponta para sql server 2016+. Alterar se precisar rodar no sql server 2014
-* As depedências de front end são gerenciadas com Bower. Não obrigatório, mas se quiser adiciona algo, precisa usar o bower, npm e node
+* As depedÃªncias de front end sÃ£o gerenciadas com Bower. NÃ£o obrigatÃ³rio, mas se quiser adiciona algo, precisa usar o bower, npm e node
 
 ## Build
 
@@ -26,10 +24,10 @@ Disponível aqui: [karellen.azurewebsites.net](http://karellen.azurewebsites.net)
  * Rodar Base inicial e carga.sql
  * Salsa :dancer:
 
-### Ultimas considerações
+### Ultimas consideraÃ§Ãµes
 
-* A chave usada é inserida via build. Mesmo a chave que está no histórico dos commits está desativada
-* A chave do sendgrid está desativada
+* A chave usada Ã© inserida via build. Mesmo a chave que estÃ¡ no histÃ³rico dos commits estÃ¡ desativada
+* A chave do sendgrid estÃ¡ desativada
 * TODO: Fazer uma api
 
-Qualquer dúvida, abrir issue :)
+Qualquer dÃºvida, abrir issue :)
